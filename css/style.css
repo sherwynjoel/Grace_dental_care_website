@@ -2148,8 +2148,8 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); line-height: 1.75; color: var(--
   pointer-events: none;
   z-index: 0;
 }
-.section--light { position: relative; overflow: hidden; }
-.section--light-alt { position: relative; overflow: hidden; }
+.section--light { position: relative; }
+.section--light-alt { position: relative; }
 
 /* Testimonial card stagger (grid-3 inside dark sections) */
 .testimonials-grid .testimonial-card:nth-child(2) { margin-top: 40px; }
@@ -2161,6 +2161,45 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); line-height: 1.75; color: var(--
 .grid-4.why-grid > *:nth-child(3) { margin-top: 0; }
 .grid-4.why-grid > *:nth-child(4) { margin-top: 28px; }
 
+/* ============================================================
+   SECTION 29 — DENTIQ-STYLE ROUNDED SECTION EDGES
+   Every section ends/starts with a smooth organic curve
+   ============================================================ */
+
+/* Hero: flat top (starts at viewport top), curved bottom */
+.hero {
+  border-radius: 0 0 60px 60px;
+}
+
+/* All content sections: curved on all 4 corners → "floating card" look */
+.section {
+  border-radius: 60px;
+}
+
+/* CTA section (no .section class) */
+.cta-section {
+  border-radius: 60px;
+}
+
+/* Marquee stays flat — it's a thin utility strip */
+.marquee-section {
+  border-radius: 0 !important;
+}
+
+/* Footer: curved top, flat bottom (sits at the very bottom of the page) */
+.footer {
+  border-radius: 60px 60px 0 0;
+}
+
+/* Contact strip at the bottom of index.html is a plain <section> with section--light */
+/* border-radius: 60px already applied via .section rule above */
+
+/* Page-hero banners on inner pages: flat top, curved bottom */
+.page-hero {
+  border-radius: 0 0 60px 60px;
+}
+
+/* ── Responsive radius ──────────────────────────────────── */
 /* ── Responsive — new layout breakpoints ───────────────── */
 @media (max-width: 1024px) {
   .hero > .container { grid-template-columns: 1fr 0.8fr; gap: 36px; }
@@ -2200,10 +2239,14 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); line-height: 1.75; color: var(--
   .blog-featured-grid { grid-template-columns: 1fr; }
 }
 
-/* ============ 29. RESPONSIVE ============ */
+/* ============ 30. RESPONSIVE ============ */
 @media (max-width: 1024px) {
   .footer__top { grid-template-columns: 1fr 1fr; gap: 36px; }
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  /* Slightly smaller radius on tablet */
+  .section, .cta-section { border-radius: 48px; }
+  .hero, .page-hero { border-radius: 0 0 48px 48px; }
+  .footer { border-radius: 48px 48px 0 0; }
 }
 
 @media (max-width: 820px) {
@@ -2218,6 +2261,10 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); line-height: 1.75; color: var(--
   .about-preview__badge { right: 16px; bottom: 16px; }
   .form-grid { grid-template-columns: 1fr; }
   .footer__top { grid-template-columns: 1fr; }
+  /* Compact radius on mobile */
+  .section, .cta-section { border-radius: 32px; }
+  .hero, .page-hero { border-radius: 0 0 32px 32px; }
+  .footer { border-radius: 32px 32px 0 0; }
 }
 
 @media (max-width: 540px) {
@@ -2230,4 +2277,7 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); line-height: 1.75; color: var(--
   .fab-wa { bottom: 20px; right: 20px; }
   .scroll-top { bottom: 20px; left: 20px; }
   .footer__bottom { flex-direction: column; text-align: center; }
+  .section, .cta-section { border-radius: 24px; }
+  .hero, .page-hero { border-radius: 0 0 24px 24px; }
+  .footer { border-radius: 24px 24px 0 0; }
 }
