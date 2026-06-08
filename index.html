@@ -47,9 +47,7 @@
 <header class="navbar" id="navbar">
   <div class="container navbar__inner">
     <a href="index.html" class="navbar__logo">
-      <svg class="navbar__logo-icon" viewBox="0 0 32 36" fill="none" aria-hidden="true">
-        <path d="M16 2C11.8 2 8 5.2 8 9.5C8 12 8.8 13.8 9.5 15.5C10.6 18.6 11 23 11.8 27C12.2 28.8 13.5 30 15 28.8C15.6 27.8 15.8 24 16 21.5C16.2 24 16.4 27.8 17 28.8C18.5 30 19.8 28.8 20.2 27C21 23 21.4 18.6 22.5 15.5C23.2 13.8 24 12 24 9.5C24 5.2 20.2 2 16 2Z" fill="currentColor"/>
-      </svg>
+      <img src="assets/logo.png" alt="Grace Dental Care" class="navbar__logo-img">
       <div class="navbar__logo-text">
         <span class="navbar__logo-name"><span>Grace</span> Dental Care</span>
         <span class="navbar__logo-sub">Kovaipudur · Coimbatore</span>
@@ -133,6 +131,36 @@
         </div>
       </div>
     </div>
+
+    <!-- Right-side visual element -->
+    <div class="hero__visual" aria-hidden="true">
+      <div class="hero__visual-orbit"></div>
+      <div class="hero__visual-blob">
+        <div class="hero__visual-inner">
+          <img src="assets/logo.png" alt="Grace Dental Care" class="hero__visual-logo">
+        </div>
+      </div>
+      <!-- Floating badge: patients -->
+      <div class="hero__float hero__float--1">
+        <div class="hero__float-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div>
+          <span class="hero__float-num">5000+</span>
+          <span class="hero__float-label">Happy Patients</span>
+        </div>
+      </div>
+      <!-- Floating badge: years -->
+      <div class="hero__float hero__float--2">
+        <div class="hero__float-icon" style="background:var(--black);color:var(--gold);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div>
+          <span class="hero__float-num">10+</span>
+          <span class="hero__float-label">Years of Excellence</span>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="hero__scroll" aria-hidden="true">
     <div class="hero__scroll-line"></div>
@@ -179,78 +207,88 @@
       <h2 class="section-heading" id="treat-heading">Treatments Designed for<br><em>Every Smile</em></h2>
       <p class="section-sub">From a simple cleaning to a complete smile transformation — our specialist doctors handle every procedure under one roof.</p>
     </div>
-    <div class="grid-3">
+    <div class="bento-grid">
 
+      <!-- Card 1: spans 2 cols, horizontal -->
       <div class="treatment-card" data-reveal data-delay="1">
         <div class="treatment-card__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
         </div>
-        <h3>Dental Implants</h3>
-        <p>Permanent, natural-looking teeth replacements that restore your confidence and chewing function completely.</p>
-        <a href="treatments.html#implants" class="treatment-card__link">
-          Learn More
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+        <div class="treatment-card-body">
+          <h3>Dental Implants</h3>
+          <p>Permanent, natural-looking teeth replacements that restore your confidence and chewing function completely. Our specialist surgeons deliver precise, long-lasting results.</p>
+          <a href="treatments.html#implants" class="treatment-card__link">
+            Learn More
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
       </div>
 
+      <!-- Card 2: col 3, row 1 -->
       <div class="treatment-card" data-reveal data-delay="2">
         <div class="treatment-card__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 12s1 3 4 3 4-3 4-3"/><path d="M9 9h.01M15 9h.01"/></svg>
         </div>
         <h3>Smile Makeover</h3>
-        <p>A custom combination of veneers, whitening, and reshaping to design the smile you've always dreamed of.</p>
+        <p>A custom combination of veneers, whitening, and reshaping to design your dream smile.</p>
         <a href="treatments.html#smile" class="treatment-card__link">
           Learn More
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
       </div>
 
+      <!-- Card 3: col 1, row 2 -->
       <div class="treatment-card" data-reveal data-delay="3">
         <div class="treatment-card__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9S3 16.97 3 12 7.03 3 12 3s9 4.03 9 9z"/></svg>
         </div>
-        <h3>Root Canal Treatment</h3>
-        <p>Modern, virtually painless endodontic therapy to save your natural tooth and eliminate infection completely.</p>
+        <h3>Root Canal</h3>
+        <p>Modern, virtually painless therapy to save your natural tooth and eliminate infection.</p>
         <a href="treatments.html#rct" class="treatment-card__link">
           Learn More
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
       </div>
 
+      <!-- Card 4: col 2, row 2 (staggered down) -->
       <div class="treatment-card" data-reveal data-delay="4">
         <div class="treatment-card__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="4"/></svg>
         </div>
         <h3>Laser Gum Therapy</h3>
-        <p>Painless, precision laser treatment for gum disease — faster healing, minimal discomfort, superior results.</p>
+        <p>Precision laser treatment for gum disease — faster healing, minimal discomfort.</p>
         <a href="treatments.html#laser" class="treatment-card__link">
           Learn More
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
       </div>
 
+      <!-- Card 5: col 3, row 2 -->
       <div class="treatment-card" data-reveal data-delay="5">
         <div class="treatment-card__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
         </div>
-        <h3>Braces & Aligners</h3>
-        <p>Metal braces, ceramic braces, or clear aligners — we find the perfect solution for your teeth alignment needs.</p>
+        <h3>Braces &amp; Aligners</h3>
+        <p>Metal, ceramic, or clear aligners — the perfect alignment solution for every patient.</p>
         <a href="treatments.html#ortho" class="treatment-card__link">
           Learn More
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
       </div>
 
+      <!-- Card 6: full-width horizontal, row 3 -->
       <div class="treatment-card" data-reveal data-delay="6">
         <div class="treatment-card__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
         </div>
-        <h3>Full Mouth Rehabilitation</h3>
-        <p>Complete smile restoration combining multiple treatments — for patients who want a total dental transformation.</p>
-        <a href="treatments.html#fmr" class="treatment-card__link">
-          Learn More
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+        <div class="treatment-card-body">
+          <h3>Full Mouth Rehabilitation</h3>
+          <p>Complete smile restoration combining implants, crowns, and aesthetic treatments — for patients who want a total dental transformation that goes beyond a single procedure.</p>
+          <a href="treatments.html#fmr" class="treatment-card__link">
+            Learn More
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
       </div>
 
     </div>
@@ -321,42 +359,34 @@
       <h2 class="section-heading" id="why-heading">What Sets <em>Grace Dental Care</em> Apart</h2>
       <p class="section-sub">We combine specialist expertise, advanced technology, and genuine warmth to deliver dental care that exceeds expectations — every time.</p>
     </div>
-    <div class="grid-4" style="gap:20px;">
-      <div class="why-card" data-reveal data-delay="1">
+    <div class="grid-4 why-grid" style="gap:20px;align-items:start;">
+      <div class="why-card numbered" data-num="01" data-reveal data-delay="1">
         <div class="why-card__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
-        <div>
-          <h4>Specialist for Every Procedure</h4>
-          <p style="font-size:0.85rem;">Each treatment is performed by the right specialist, not a general dentist doing everything.</p>
-        </div>
+        <h4>Specialist for Every Procedure</h4>
+        <p>Each treatment is performed by the right specialist, not a general dentist doing everything.</p>
       </div>
-      <div class="why-card" data-reveal data-delay="2">
+      <div class="why-card numbered" data-num="02" data-reveal data-delay="2">
         <div class="why-card__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
         </div>
-        <div>
-          <h4>Latest Technology</h4>
-          <p style="font-size:0.85rem;">Digital X-rays, laser dentistry, 3D scanning — precision tools for superior outcomes.</p>
-        </div>
+        <h4>Latest Technology</h4>
+        <p>Digital X-rays, laser dentistry, 3D scanning — precision tools for superior outcomes.</p>
       </div>
-      <div class="why-card" data-reveal data-delay="3">
+      <div class="why-card numbered" data-num="03" data-reveal data-delay="3">
         <div class="why-card__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         </div>
-        <div>
-          <h4>Compassionate Care</h4>
-          <p style="font-size:0.85rem;">We understand dental anxiety. Our team ensures every visit feels calm, comfortable, and stress-free.</p>
-        </div>
+        <h4>Compassionate Care</h4>
+        <p>We understand dental anxiety. Every visit feels calm, comfortable, and stress-free.</p>
       </div>
-      <div class="why-card" data-reveal data-delay="4">
+      <div class="why-card numbered" data-num="04" data-reveal data-delay="4">
         <div class="why-card__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
-        <div>
-          <h4>Convenient Timings</h4>
-          <p style="font-size:0.85rem;">Mon–Sat, 9 AM–8 PM. Ample parking. Fully accessible ground-floor clinic for senior patients.</p>
-        </div>
+        <h4>Convenient Timings</h4>
+        <p>Mon–Sat, 9 AM–8 PM. Ample parking. Fully accessible ground-floor clinic.</p>
       </div>
     </div>
   </div>
@@ -428,7 +458,7 @@
       <h2 class="section-heading" id="doctors-heading">Meet the Hands<br>Behind <em>Your Smile</em></h2>
       <p class="section-sub">Our dentists bring decades of combined expertise and a genuine passion for transforming smiles — one patient at a time.</p>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;max-width:700px;margin:0 auto;">
+    <div class="doctors-split">
       <div class="doctor-card" data-reveal data-delay="1">
         <div class="doctor-card__photo">
           <svg width="64" height="72" viewBox="0 0 32 36" fill="none" aria-hidden="true">
@@ -494,7 +524,7 @@
       <h2 class="section-heading" id="test-heading">Words From<br><em>Our Patients</em></h2>
       <p class="section-sub">Real experiences from the patients who trust us with their smiles.</p>
     </div>
-    <div class="grid-3">
+    <div class="grid-3 testimonials-grid" style="align-items:start;">
       <div class="testimonial-card" data-reveal data-delay="1">
         <span class="testimonial-card__quote">&ldquo;</span>
         <div class="testimonial-card__stars">★★★★★</div>
@@ -545,10 +575,11 @@
       </div>
       <a href="blog.html" class="btn btn--outline">All Articles</a>
     </div>
-    <div class="grid-3">
-      <div class="blog-card" data-reveal data-delay="1">
+    <div class="blog-featured-grid">
+      <!-- Featured (spans full left column, 2 rows tall) -->
+      <div class="blog-card blog-card--featured" data-reveal data-delay="1">
         <div class="blog-card__thumb">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+          <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
           <span class="blog-card__cat">Implants</span>
         </div>
         <div class="blog-card__body">
@@ -558,13 +589,14 @@
             <span>5 min read</span>
           </div>
           <h3><a href="blog.html">Dental Implants vs Bridges: Which Is Right for You?</a></h3>
-          <p>A detailed comparison of two popular tooth replacement options — helping you make the right choice for your smile and budget.</p>
+          <p>A detailed comparison of two popular tooth replacement options — helping you make the right choice for your smile, lifestyle, and budget. We break down costs, durability, and long-term outcomes so you can decide with confidence.</p>
           <a href="blog.html" class="blog-card__link">Read Article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
         </div>
       </div>
+      <!-- Smaller card 2 -->
       <div class="blog-card" data-reveal data-delay="2">
         <div class="blog-card__thumb">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
           <span class="blog-card__cat">Orthodontics</span>
         </div>
         <div class="blog-card__body">
@@ -574,13 +606,14 @@
             <span>4 min read</span>
           </div>
           <h3><a href="blog.html">Clear Aligners vs Metal Braces: The Complete Guide</a></h3>
-          <p>Everything you need to know to choose between invisible aligners and traditional braces for your smile correction journey.</p>
+          <p>Everything you need to choose between invisible aligners and traditional braces.</p>
           <a href="blog.html" class="blog-card__link">Read Article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
         </div>
       </div>
+      <!-- Smaller card 3 -->
       <div class="blog-card" data-reveal data-delay="3">
         <div class="blog-card__thumb">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
           <span class="blog-card__cat">Oral Health</span>
         </div>
         <div class="blog-card__body">
@@ -590,7 +623,7 @@
             <span>3 min read</span>
           </div>
           <h3><a href="blog.html">5 Warning Signs You Need a Root Canal</a></h3>
-          <p>Persistent pain? Sensitivity to heat? These early signs could mean your tooth needs immediate attention. Learn what to watch for.</p>
+          <p>Persistent pain or sensitivity to heat? These early signs need immediate attention.</p>
           <a href="blog.html" class="blog-card__link">Read Article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
         </div>
       </div>
@@ -659,9 +692,7 @@
     <div class="footer__top">
       <div class="footer__brand">
         <div class="footer__logo">
-          <svg class="navbar__logo-icon" width="28" height="32" viewBox="0 0 32 36" fill="currentColor" aria-hidden="true" style="color:var(--gold);">
-            <path d="M16 2C11.8 2 8 5.2 8 9.5C8 12 8.8 13.8 9.5 15.5C10.6 18.6 11 23 11.8 27C12.2 28.8 13.5 30 15 28.8C15.6 27.8 15.8 24 16 21.5C16.2 24 16.4 27.8 17 28.8C18.5 30 19.8 28.8 20.2 27C21 23 21.4 18.6 22.5 15.5C23.2 13.8 24 12 24 9.5C24 5.2 20.2 2 16 2Z"/>
-          </svg>
+          <img src="assets/logo.png" alt="Grace Dental Care" class="navbar__logo-img" style="width:36px;height:36px;border-radius:4px;">
           <span class="footer__logo-name"><span>Grace</span> Dental Care</span>
         </div>
         <p class="footer__desc">Coimbatore's trusted dental clinic delivering specialist care with compassion and cutting-edge technology since over a decade.</p>
