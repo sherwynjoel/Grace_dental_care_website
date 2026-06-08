@@ -56,6 +56,7 @@
       <a href="blog.html" class="navbar__link">Blog</a>
       <a href="contact.html" class="navbar__link">Contact</a>
     </nav>
+    <a href="emergency.html" class="navbar__emergency-pill" aria-label="Emergency dental care"><span class="navbar__emergency-dot"></span>Emergency</a>
     <a href="contact.html" class="btn btn--gold btn--sm navbar__cta">Book Appointment</a>
     <button class="navbar__hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
   </div>
@@ -69,6 +70,8 @@
   <a href="results.html" class="navbar__mobile-link">Results</a>
   <a href="blog.html" class="navbar__mobile-link">Blog</a>
   <a href="contact.html" class="navbar__mobile-link">Contact</a>
+  <a href="emergency.html" class="navbar__mobile-link" style="color:#ef4444;font-weight:600;">Emergency Care</a>
+  <a href="offers.html" class="navbar__mobile-link" style="color:var(--gold);font-weight:600;">Offers &amp; Deals</a>
   <div class="navbar__mobile-cta"><a href="contact.html" class="btn btn--gold" style="width:100%;justify-content:center;">Book Appointment</a></div>
 </nav>
 
@@ -321,6 +324,153 @@
     </div>
     <div class="center compare-cta" data-reveal>
       <a href="contact.html" class="btn btn--gold btn--lg">Find Out Which Is Right for You</a>
+    </div>
+  </div>
+</section>
+
+<!-- TREATMENT COST ESTIMATOR -->
+<section class="section section--dark" aria-labelledby="estimator-heading">
+  <div class="container">
+    <div class="center" data-reveal>
+      <span class="section-label">Instant Estimate</span>
+      <h2 class="section-heading" id="estimator-heading">Treatment<br><em>Cost Estimator</em></h2>
+      <p class="section-sub">Get a ballpark cost range in seconds. Select a treatment below — then book a free consultation for your precise, personalised quote.</p>
+    </div>
+    <div class="cost-estimator" data-reveal data-delay="1">
+      <label class="cost-estimator__label" for="treatmentSelect">Select a Treatment</label>
+      <select class="cost-estimator__select" id="treatmentSelect">
+        <option value="">— Choose a treatment —</option>
+        <option value="implant">Dental Implant (Single)</option>
+        <option value="smile">Smile Makeover (Veneers)</option>
+        <option value="whitening">Teeth Whitening</option>
+        <option value="rct">Root Canal Treatment</option>
+        <option value="braces">Braces (Metal)</option>
+        <option value="aligners">Clear Aligners</option>
+        <option value="crown">Dental Crown (Zirconia)</option>
+        <option value="scaling">Scaling &amp; Polishing</option>
+        <option value="extraction">Tooth Extraction</option>
+        <option value="filling">Composite Filling</option>
+        <option value="laser">Laser Gum Therapy</option>
+        <option value="fmr">Full Mouth Rehabilitation</option>
+      </select>
+      <div class="cost-estimator__result" id="estimatorResult">
+        <span class="cost-estimator__range" id="estimatorRange"></span>
+        <p class="cost-estimator__duration" id="estimatorDuration"></p>
+        <div class="cost-estimator__features" id="estimatorFeatures"></div>
+        <a href="contact.html" class="btn btn--gold btn--sm">Get Exact Quote — Free</a>
+        <p class="cost-estimator__note">Prices are indicative ranges. Your final cost depends on clinical assessment, materials chosen, and number of teeth involved. First consultation is complimentary.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TREATMENT TIMELINE -->
+<section class="section section--dark-2" aria-labelledby="timeline-heading">
+  <div class="container">
+    <div class="center" data-reveal>
+      <span class="section-label">Know What to Expect</span>
+      <h2 class="section-heading" id="timeline-heading">Dental Implant<br><em>Journey Timeline</em></h2>
+      <p class="section-sub">From consultation to your permanent smile — here is exactly what the implant process looks like, step by step.</p>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item" data-reveal>
+        <div class="timeline-item__content">
+          <p class="timeline-step">Step 01</p>
+          <h4>Consultation &amp; Scanning</h4>
+          <p>Comprehensive oral exam, digital X-rays, and 3D CBCT scan to assess bone density and plan implant placement precisely.</p>
+          <p class="timeline-duration">Duration: <strong>1 visit · 45–60 mins</strong></p>
+        </div>
+        <div class="timeline-item__node">01</div>
+        <div></div>
+      </div>
+      <div class="timeline-item" data-reveal>
+        <div></div>
+        <div class="timeline-item__node">02</div>
+        <div class="timeline-item__content">
+          <p class="timeline-step">Step 02</p>
+          <h4>Implant Placement Surgery</h4>
+          <p>The titanium implant post is placed into the jawbone under local anaesthesia. Most patients report minimal discomfort — just pressure.</p>
+          <p class="timeline-duration">Duration: <strong>1–2 hours · Under local anaesthesia</strong></p>
+        </div>
+      </div>
+      <div class="timeline-item" data-reveal>
+        <div class="timeline-item__content">
+          <p class="timeline-step">Step 03</p>
+          <h4>Osseointegration Healing</h4>
+          <p>The implant fuses with your jawbone over 8–12 weeks. You wear a temporary crown and continue daily activities normally.</p>
+          <p class="timeline-duration">Duration: <strong>8–12 weeks healing</strong></p>
+        </div>
+        <div class="timeline-item__node">03</div>
+        <div></div>
+      </div>
+      <div class="timeline-item" data-reveal>
+        <div></div>
+        <div class="timeline-item__node">04</div>
+        <div class="timeline-item__content">
+          <p class="timeline-step">Step 04</p>
+          <h4>Abutment &amp; Crown Fitting</h4>
+          <p>The abutment connector is placed, impressions are taken, and your custom zirconia crown is fabricated and fitted permanently.</p>
+          <p class="timeline-duration">Duration: <strong>2 visits · 1 week apart</strong></p>
+        </div>
+      </div>
+      <div class="timeline-item" data-reveal>
+        <div class="timeline-item__content">
+          <p class="timeline-step">Step 05</p>
+          <h4>Review &amp; Lifetime Care</h4>
+          <p>A final review ensures perfect fit, bite, and aesthetics. With good oral hygiene, your implant can last a lifetime.</p>
+          <p class="timeline-duration">Duration: <strong>1 visit · 30 mins</strong></p>
+        </div>
+        <div class="timeline-item__node">✓</div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMI & PAYMENT OPTIONS -->
+<section class="section section--dark" aria-labelledby="emi-heading">
+  <div class="container">
+    <div class="center" data-reveal>
+      <span class="section-label">Flexible Payments</span>
+      <h2 class="section-heading" id="emi-heading">Quality Care,<br><em>Budget-Friendly Options</em></h2>
+      <p class="section-sub">We believe cost should never be a barrier to a healthy smile. Choose the payment option that works best for you.</p>
+    </div>
+    <div class="emi-grid">
+      <div class="emi-card" data-reveal data-delay="1">
+        <div class="emi-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        </div>
+        <span class="emi-highlight">0%</span>
+        <h4>Zero-Interest EMI</h4>
+        <p>Split your treatment cost into easy monthly instalments with 0% interest for up to 12 months.</p>
+      </div>
+      <div class="emi-card" data-reveal data-delay="2">
+        <div class="emi-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <span class="emi-highlight">Phase</span>
+        <h4>Treatment Phasing</h4>
+        <p>We can spread your treatment across multiple visits so you never have to pay a large amount all at once.</p>
+      </div>
+      <div class="emi-card" data-reveal data-delay="3">
+        <div class="emi-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3h18v18H3z" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <span class="emi-highlight">UPI</span>
+        <h4>All Payments Accepted</h4>
+        <p>UPI, credit/debit card, net banking, or cash — we accept every major mode of payment with no extra charges.</p>
+      </div>
+      <div class="emi-card" data-reveal data-delay="4">
+        <div class="emi-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+        </div>
+        <span class="emi-highlight">₹500</span>
+        <h4>Referral Discount</h4>
+        <p>Refer a friend who visits us and both of you receive ₹500 off your next treatment — unlimited referrals.</p>
+      </div>
+    </div>
+    <div class="center" style="margin-top:36px;" data-reveal>
+      <a href="contact.html" class="btn btn--gold btn--lg">Discuss Payment Options</a>
     </div>
   </div>
 </section>

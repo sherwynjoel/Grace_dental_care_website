@@ -575,4 +575,662 @@
     });
   })();
 
+  /* ── Preloader ───────────────────────────────────────── */
+  (function () {
+    const preloader = document.createElement('div');
+    preloader.className = 'preloader';
+    preloader.setAttribute('aria-hidden', 'true');
+    preloader.innerHTML = `
+      <svg class="preloader__tooth" viewBox="0 0 52 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M10 4C6 4 2 8 2 14c0 4 1.5 8 3 12l2 10c1 5 3 8 5 8s3-2 4-6l2-6 2 6c1 4 3 6 4 6s4-3 5-8l2-10c1.5-4 3-8 3-12 0-6-4-10-8-10-2.5 0-4.5 1-6 2.5C17.5 5 15.5 4 13 4H10z" fill="currentColor" opacity="0.9"/>
+      </svg>
+      <div class="preloader__bar-wrap"><div class="preloader__bar"></div></div>`;
+    document.body.insertBefore(preloader, document.body.firstChild);
+
+    function dismiss() {
+      preloader.classList.add('done');
+      setTimeout(() => { if (preloader.parentNode) preloader.parentNode.removeChild(preloader); }, 650);
+    }
+
+    if (document.readyState === 'complete') {
+      setTimeout(dismiss, 400);
+    } else {
+      window.addEventListener('load', () => setTimeout(dismiss, 300));
+      setTimeout(dismiss, 3500); /* hard cap */
+    }
+  })();
+
+  /* ── Dark / Light Mode Toggle ────────────────────────── */
+  (function () {
+    const STORAGE_KEY = 'grace_dark_mode';
+
+    function applyMode(dark) {
+      document.body.classList.toggle('dark-mode', dark);
+      const btn = document.getElementById('darkToggle');
+      if (btn) btn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+
+    function injectToggle() {
+      const navActions = document.querySelector('.navbar__actions');
+      if (!navActions || document.getElementById('darkToggle')) return;
+      const btn = document.createElement('button');
+      btn.id        = 'darkToggle';
+      btn.type      = 'button';
+      btn.className = 'dark-toggle';
+      btn.setAttribute('aria-label', 'Switch to dark mode');
+      btn.innerHTML = `
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun"  width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
+      navActions.insertBefore(btn, navActions.firstChild);
+      btn.addEventListener('click', () => {
+        const isDark = document.body.classList.toggle('dark-mode');
+        localStorage.setItem(STORAGE_KEY, isDark ? '1' : '');
+        applyMode(isDark);
+      });
+    }
+
+    /* Restore saved preference (flicker-free — runs before paint via JS at end of body) */
+    const saved = localStorage.getItem(STORAGE_KEY);
+    applyMode(saved === '1');
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', injectToggle);
+    } else {
+      injectToggle();
+    }
+  })();
+
+  /* ── Interactive Teeth Map ───────────────────────────── */
+  (function () {
+    const teeth      = document.querySelectorAll('.tooth');
+    const placeholder = document.getElementById('teethPlaceholder');
+    const content    = document.getElementById('teethContent');
+    const titleEl    = document.getElementById('teethTitle');
+    const descEl     = document.getElementById('teethDesc');
+    const listEl     = document.getElementById('teethList');
+    if (!teeth.length || !placeholder) return;
+
+    const zoneData = {
+      incisor: {
+        title: 'Incisors — Front Teeth',
+        desc: 'The 8 incisors (4 upper, 4 lower) are your primary biting teeth and define the front of your smile. They are the most visible and cosmetically important teeth.',
+        treatments: ['Composite bonding for chips & gaps', 'Porcelain veneers for smile makeovers', 'Crowns after root canal treatment', 'Orthodontic correction for spacing', 'Teeth whitening for staining']
+      },
+      canine: {
+        title: 'Canines — Corner Teeth',
+        desc: 'Canines are the pointed teeth at the corners of your mouth. They are the strongest and longest teeth, guiding your bite and anchoring the smile.',
+        treatments: ['Crown or veneer if worn down', 'Root canal if infected', 'Implant if missing (important for bite guidance)', 'Orthodontic repositioning', 'Laser gum contouring for gummy appearance']
+      },
+      premolar: {
+        title: 'Premolars — Transition Teeth',
+        desc: 'Premolars sit between canines and molars. They help tear and crush food, and are often the teeth extracted for orthodontic space creation.',
+        treatments: ['Inlay/onlay for moderate decay', 'Composite or ceramic filling', 'Crown if heavily damaged', 'Root canal treatment', 'Extraction for orthodontic space']
+      },
+      molar: {
+        title: 'Molars — Back Chewing Teeth',
+        desc: 'Molars bear the heaviest chewing load. Wisdom teeth (third molars) often need extraction. Decay in molars is very common due to deep grooves.',
+        treatments: ['Deep fissure sealants (prevention)', 'Large composite or ceramic filling', 'Crown for cracked or heavily decayed molar', 'Root canal treatment (multi-canal)', 'Wisdom tooth extraction', 'Implant to replace extracted molar']
+      }
+    };
+
+    let active = null;
+
+    teeth.forEach(tooth => {
+      tooth.addEventListener('click', () => {
+        const zone = tooth.dataset.zone;
+        if (!zone || !zoneData[zone]) return;
+
+        /* Deactivate previous selection */
+        if (active) active.classList.remove('active');
+
+        /* If clicking the same tooth again, deselect */
+        if (active === tooth) {
+          active = null;
+          content.style.display   = 'none';
+          placeholder.style.display = '';
+          return;
+        }
+
+        active = tooth;
+        tooth.classList.add('active');
+
+        const data = zoneData[zone];
+        titleEl.textContent = data.title;
+        descEl.textContent  = data.desc;
+        listEl.innerHTML    = data.treatments.map(t => `<li>${t}</li>`).join('');
+
+        placeholder.style.display = 'none';
+        content.style.display     = 'block';
+      });
+    });
+  })();
+
+  /* ── Treatment Cost Estimator ────────────────────────── */
+  (function () {
+    const select   = document.getElementById('treatmentSelect');
+    const result   = document.getElementById('estimatorResult');
+    const rangeEl  = document.getElementById('estimatorRange');
+    const durEl    = document.getElementById('estimatorDuration');
+    const featEl   = document.getElementById('estimatorFeatures');
+    if (!select || !result) return;
+
+    const data = {
+      implant:   { range: '₹35,000 – ₹60,000',    duration: 'Total treatment: 3–6 months | 3–5 visits',      features: ['Titanium implant post', 'Zirconia crown', 'Digital planning', '5-year warranty', 'Lifetime if well maintained'] },
+      smile:     { range: '₹40,000 – ₹1,20,000',  duration: 'Total treatment: 2–4 weeks | 2–3 visits',       features: ['Per-tooth pricing', 'Digital smile preview', 'E.max or zirconia veneers', 'Minimal tooth reduction', 'Stain-resistant ceramic'] },
+      whitening: { range: '₹8,000 – ₹15,000',     duration: 'Total treatment: 1 session | 60–90 mins',       features: ['In-clinic laser whitening', 'Up to 8 shades brighter', 'Take-home maintenance kit', 'Sensitivity protection', 'Lasts 12–18 months'] },
+      rct:       { range: '₹4,000 – ₹12,000',     duration: 'Total treatment: 1–3 visits | over 1–2 weeks',  features: ['Single or multi-canal', 'Digital X-ray guided', 'Rotary endodontics', 'Crown recommended post-RCT', 'Pain-free procedure'] },
+      braces:    { range: '₹25,000 – ₹45,000',    duration: 'Total treatment: 12–24 months | monthly visits', features: ['Metal or ceramic brackets', 'Fixed or removable retainer', 'Free mid-treatment adjustments', 'Comprehensive case planning', 'IDA-certified orthodontist'] },
+      aligners:  { range: '₹60,000 – ₹1,50,000',  duration: 'Total treatment: 8–18 months | 6-week check-ins', features: ['Removable & virtually invisible', 'Digital 3D treatment preview', '20–22 hrs/day wear required', 'Free refinements included', 'Retainer included in cost'] },
+      crown:     { range: '₹8,000 – ₹18,000',     duration: 'Total treatment: 1–2 weeks | 2 visits',         features: ['Zirconia or E.max ceramic', 'CAD/CAM precision fit', 'Colour-matched to natural teeth', 'Highly durable & stain-resistant', '5-year warranty'] },
+      scaling:   { range: '₹800 – ₹2,500',        duration: 'Total treatment: 1 visit | 30–45 mins',         features: ['Ultrasonic scaling', 'Stain removal & polishing', 'Gum health assessment', 'Fluoride application option', 'Recommended every 6 months'] },
+      extraction: { range: '₹500 – ₹4,000',       duration: 'Total treatment: 1 visit | 20–60 mins',         features: ['Simple or surgical extraction', 'Local anaesthesia', 'Wisdom tooth removal available', 'Post-op care instructions', 'Implant or bridge to follow'] },
+      filling:   { range: '₹1,200 – ₹3,500',      duration: 'Total treatment: 1 visit | 30–45 mins',         features: ['Tooth-coloured composite', 'Bonding in single visit', 'No mercury (amalgam-free)', 'Stain-resistant finish', 'Covers chips, cracks & decay'] },
+      laser:     { range: '₹5,000 – ₹15,000',     duration: 'Total treatment: 1–3 visits | 45 mins each',    features: ['Painless laser gum therapy', 'No incisions or sutures', 'Minimal bleeding & swelling', 'Faster healing than traditional surgery', 'Treats early & advanced gum disease'] },
+      fmr:       { range: '₹1,50,000 – ₹5,00,000', duration: 'Total treatment: 3–12 months | custom plan',  features: ['Complete oral reconstruction', 'Implants, crowns & veneers', 'Personalised treatment sequencing', 'Aesthetic & functional goals', 'One clinic — full coordination'] }
+    };
+
+    select.addEventListener('change', () => {
+      const key = select.value;
+      if (!key || !data[key]) {
+        result.classList.remove('visible');
+        return;
+      }
+      const d = data[key];
+      rangeEl.textContent  = d.range;
+      durEl.textContent    = d.duration;
+      featEl.innerHTML     = d.features.map(f => `<span class="cost-estimator__pill">${f}</span>`).join('');
+      result.classList.add('visible');
+    });
+  })();
+
+  /* ── Scroll Progress Bar ─────────────────────────────── */
+  (function () {
+    const bar = document.createElement('div');
+    bar.className = 'scroll-progress';
+    bar.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(bar);
+    window.addEventListener('scroll', () => {
+      const el  = document.documentElement;
+      const pct = (el.scrollTop || document.body.scrollTop) / (el.scrollHeight - el.clientHeight) * 100;
+      bar.style.width = Math.min(pct, 100) + '%';
+    }, { passive: true });
+  })();
+
+  /* ── Social Proof Toast Notifications ────────────────── */
+  (function () {
+    const entries = [
+      { init: 'MK', name: 'Meena K.',    action: 'booked a Smile Makeover consultation',  ago: '2 mins ago'  },
+      { init: 'SR', name: 'Suresh R.',   action: 'just completed his Dental Implant',     ago: '8 mins ago'  },
+      { init: 'AP', name: 'Anitha P.',   action: 'booked Clear Aligners treatment',       ago: '14 mins ago' },
+      { init: 'VK', name: 'Vijay K.',    action: 'left a ★★★★★ Google review',           ago: '22 mins ago' },
+      { init: 'PL', name: 'Priya L.',    action: 'referred a friend — earned ₹500',       ago: '31 mins ago' },
+      { init: 'RN', name: 'Ravi N.',     action: 'booked a Root Canal appointment',       ago: '45 mins ago' },
+      { init: 'SD', name: 'Sunita D.',   action: 'completed her Teeth Whitening session', ago: '1 hr ago'    },
+      { init: 'AJ', name: 'Arun J.',     action: 'booked a Free Consultation today',      ago: '1.5 hrs ago' },
+    ];
+
+    const stack = document.createElement('div');
+    stack.className = 'toast-stack';
+    stack.setAttribute('aria-live', 'polite');
+    document.body.appendChild(stack);
+
+    let idx = 0;
+
+    function showToast() {
+      const e = entries[idx % entries.length];
+      idx++;
+
+      const t = document.createElement('div');
+      t.className = 'toast';
+      t.setAttribute('role', 'status');
+      t.innerHTML = `
+        <div class="toast__avatar">${e.init}</div>
+        <div class="toast__body">
+          <div class="toast__name">${e.name}</div>
+          <div class="toast__action">${e.action}</div>
+          <span class="toast__time">${e.ago}</span>
+        </div>`;
+      stack.appendChild(t);
+
+      requestAnimationFrame(() => requestAnimationFrame(() => t.classList.add('show')));
+
+      setTimeout(() => {
+        t.classList.remove('show');
+        setTimeout(() => { if (t.parentNode) t.parentNode.removeChild(t); }, 500);
+      }, 5000);
+    }
+
+    setTimeout(() => { showToast(); setInterval(showToast, 12000); }, 6000);
+  })();
+
+  /* ── Live Slot Availability Badge ────────────────────── */
+  (function () {
+    const now  = new Date();
+    const day  = now.getDay();
+    const hour = now.getHours();
+    const isOpen = day >= 1 && day <= 6 && hour >= 9 && hour < 20;
+    if (!isOpen) return;
+
+    const slots = hour < 11 ? 5 : hour < 14 ? 3 : hour < 17 ? 4 : 2;
+    const times = ['9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM',
+                   '12:00 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM',
+                   '4:00 PM','5:00 PM','5:30 PM','6:00 PM','6:30 PM','7:00 PM'];
+    const nextSlot = times.find(t => {
+      const parts = t.split(':');
+      let h = parseInt(parts[0], 10);
+      const period = parts[1].split(' ')[1];
+      if (period === 'PM' && h !== 12) h += 12;
+      return h > hour;
+    }) || '—';
+
+    const badge = document.createElement('div');
+    badge.className = 'slot-badge';
+    badge.innerHTML = `<span class="slot-dot"></span>${slots} slot${slots !== 1 ? 's' : ''} open today · Next: ${nextSlot}`;
+
+    const hero = document.querySelector('.hero__content, .hero__ctas, .hero-inner');
+    if (hero) {
+      const firstBtn = hero.querySelector('.btn');
+      if (firstBtn) hero.insertBefore(badge, firstBtn);
+      else hero.appendChild(badge);
+    }
+  })();
+
+  /* ── Page Transitions ────────────────────────────────── */
+  (function () {
+    const overlay = document.createElement('div');
+    overlay.className = 'page-transition';
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(overlay);
+
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a[href]');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('http') ||
+          href.startsWith('mailto') || href.startsWith('tel') ||
+          link.target === '_blank') return;
+
+      e.preventDefault();
+      overlay.classList.add('out');
+      setTimeout(() => { window.location.href = href; }, 320);
+    });
+
+    window.addEventListener('pageshow', () => {
+      requestAnimationFrame(() => requestAnimationFrame(() => overlay.classList.remove('out')));
+    });
+  })();
+
+  /* ── PWA Install Banner ──────────────────────────────── */
+  (function () {
+    const KEY = 'grace_pwa_dismissed';
+    if (localStorage.getItem(KEY)) return;
+    let deferredPrompt = null;
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+
+      setTimeout(() => {
+        const banner = document.createElement('div');
+        banner.className = 'pwa-banner';
+        banner.innerHTML = `
+          <div class="pwa-banner__icon"><img src="assets/logo.png" alt="" width="42" height="42"></div>
+          <div class="pwa-banner__text">
+            <div class="pwa-banner__title">Add Grace Dental to Home Screen</div>
+            <div class="pwa-banner__sub">Quick access · Works offline · No app store needed</div>
+          </div>
+          <div class="pwa-banner__actions">
+            <button class="btn btn--gold btn--sm" id="pwaInstall">Add</button>
+            <button class="btn btn--outline btn--sm" id="pwaDismiss">Not now</button>
+          </div>`;
+        document.body.appendChild(banner);
+        requestAnimationFrame(() => requestAnimationFrame(() => banner.classList.add('show')));
+
+        document.getElementById('pwaInstall').addEventListener('click', () => {
+          if (deferredPrompt) deferredPrompt.prompt();
+          banner.classList.remove('show');
+          localStorage.setItem(KEY, '1');
+        });
+        document.getElementById('pwaDismiss').addEventListener('click', () => {
+          banner.classList.remove('show');
+          localStorage.setItem(KEY, '1');
+        });
+      }, 30000);
+    });
+  })();
+
+  /* ── Confetti on Form Success ────────────────────────── */
+  (function () {
+    const COLORS = ['#C4A35A','#D9BF7F','#FAFAFA','#ef4444','#22c55e','#3b82f6','#a855f7','#f59e0b'];
+
+    window.graceConfetti = function () {
+      for (let i = 0; i < 70; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        const color = COLORS[Math.floor(Math.random() * COLORS.length)];
+        const size  = 6 + Math.random() * 8;
+        piece.style.cssText = `
+          left:${Math.random() * 100}vw; top:-10px;
+          background:${color}; width:${size}px; height:${size}px;
+          animation-delay:${Math.random() * 0.9}s;
+          border-radius:${Math.random() > 0.5 ? '50%' : '2px'};`;
+        document.body.appendChild(piece);
+        setTimeout(() => { if (piece.parentNode) piece.parentNode.removeChild(piece); }, 3200);
+      }
+    };
+
+    const successEl = document.getElementById('formSuccess');
+    if (successEl) {
+      new MutationObserver(() => {
+        if (successEl.classList.contains('visible')) window.graceConfetti();
+      }).observe(successEl, { attributes: true, attributeFilter: ['class'] });
+    }
+  })();
+
+  /* ── WhatsApp Typing Indicator ───────────────────────── */
+  (function () {
+    const fab   = document.getElementById('waFab');
+    const popup = document.getElementById('waPopup');
+    if (!fab || !popup) return;
+
+    const msgArea = popup.querySelector('[class*="message"], [class*="body"], [class*="chat"]')
+                 || popup.querySelector('div > div');
+    if (!msgArea) return;
+
+    let typingTimer = null;
+    let replyTimer  = null;
+    let replyShown  = false;
+
+    fab.addEventListener('click', () => {
+      if (!popup.classList.contains('open') || replyShown) return;
+      clearTimeout(typingTimer);
+      clearTimeout(replyTimer);
+
+      const typingEl = document.createElement('div');
+      typingEl.style.cssText = 'padding:6px 0;';
+      typingEl.innerHTML = `
+        <div style="background:var(--black-4);border:1px solid var(--gold-border);border-radius:12px 12px 12px 4px;padding:10px 16px;display:inline-block;">
+          <span style="font-size:0.7rem;color:var(--gray);display:block;margin-bottom:5px;">Grace Dental is typing</span>
+          <div class="wa-typing"><span></span><span></span><span></span></div>
+        </div>`;
+
+      typingTimer = setTimeout(() => {
+        msgArea.appendChild(typingEl);
+        replyTimer = setTimeout(() => {
+          if (typingEl.parentNode) typingEl.parentNode.removeChild(typingEl);
+          const reply = document.createElement('div');
+          reply.style.cssText = 'padding:6px 0;animation:fadeUp 0.3s ease both;';
+          reply.innerHTML = `
+            <div style="background:var(--black-4);border:1px solid var(--gold-border);border-radius:12px 12px 12px 4px;padding:10px 16px;display:inline-block;max-width:85%;">
+              <span style="font-size:0.7rem;color:var(--gray);display:block;margin-bottom:4px;">Grace Dental Care</span>
+              <p style="font-size:0.85rem;color:var(--white-dim);margin:0;">Hi! 👋 We typically reply in under 5 minutes during clinic hours. How can we help you today?</p>
+            </div>`;
+          msgArea.appendChild(reply);
+          replyShown = true;
+        }, 2500);
+      }, 1500);
+    });
+  })();
+
+  /* ── Tamil Language Toggle ───────────────────────────── */
+  (function () {
+    function injectLangToggle() {
+      const navActions = document.querySelector('.navbar__inner');
+      if (!navActions || document.getElementById('langToggle')) return;
+
+      const wrap = document.createElement('div');
+      wrap.id = 'langToggle';
+      wrap.className = 'lang-toggle';
+      wrap.setAttribute('aria-label', 'Language');
+      wrap.innerHTML = `
+        <button class="lang-btn active" data-lang="en" type="button">EN</button>
+        <button class="lang-btn" data-lang="ta" type="button">தமிழ்</button>`;
+
+      const emergencyPill = navActions.querySelector('.navbar__emergency-pill');
+      const cta = navActions.querySelector('.navbar__cta');
+      const ref = emergencyPill || cta;
+      if (ref) navActions.insertBefore(wrap, ref);
+      else navActions.appendChild(wrap);
+
+      const taMap = {
+        'Book Appointment':     'சந்திப்பு பதிவு',
+        'Book Consultation':    'ஆலோசனை பதிவு',
+        'Book Now':             'இப்போது பதிவு',
+        'Call Now':             'அழைக்கவும்',
+        'Emergency Care':       'அவசர சிகிச்சை',
+        'Offers & Deals':       'சலுகைகள்',
+        'Learn More':           'மேலும் அறிக',
+        'View All Treatments':  'சிகிச்சைகள் காண',
+        'Get Exact Quote — Free': 'இலவச மதிப்பீடு',
+      };
+
+      let isTa = false;
+
+      wrap.addEventListener('click', (e) => {
+        const btn = e.target.closest('.lang-btn');
+        if (!btn) return;
+        isTa = btn.dataset.lang === 'ta';
+
+        wrap.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === (isTa ? 'ta' : 'en')));
+        document.documentElement.setAttribute('lang', isTa ? 'ta' : 'en');
+
+        /* Swap CTAs */
+        document.querySelectorAll('.btn').forEach(el => {
+          const txt = el.textContent.trim();
+          if (isTa) {
+            if (!el.dataset.enText) el.dataset.enText = txt;
+            const ta = taMap[el.dataset.enText || txt];
+            if (ta) el.textContent = ta;
+          } else {
+            if (el.dataset.enText) el.textContent = el.dataset.enText;
+          }
+        });
+      });
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', injectLangToggle);
+    else injectLangToggle();
+  })();
+
+  /* ── Gallery Filter ──────────────────────────────────── */
+  (function () {
+    const filterBtns = document.querySelectorAll('.gallery-filter-btn');
+    const items      = document.querySelectorAll('.result-item, [data-category]');
+    if (!filterBtns.length || !items.length) return;
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+
+        items.forEach(item => {
+          const show = filter === 'all' || item.dataset.category === filter;
+          item.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+          item.style.opacity    = show ? '1' : '0';
+          item.style.transform  = show ? '' : 'scale(0.94)';
+          item.style.pointerEvents = show ? '' : 'none';
+          setTimeout(() => { item.style.visibility = show ? 'visible' : 'hidden'; }, show ? 0 : 300);
+        });
+      });
+    });
+  })();
+
+  /* ── Gallery Lightbox ────────────────────────────────── */
+  (function () {
+    const lightbox = document.getElementById('galleryLightbox');
+    const closeBtn = document.getElementById('lightboxClose');
+    const prevBtn  = document.getElementById('lightboxPrev');
+    const nextBtn  = document.getElementById('lightboxNext');
+    const content  = document.getElementById('lightboxContent');
+    const caption  = document.getElementById('lightboxCaption');
+    if (!lightbox) return;
+
+    let allItems = [];
+    let current  = 0;
+
+    function render() {
+      const item  = allItems[current];
+      if (!item) return;
+      const img   = item.querySelector('img');
+      const title = (item.querySelector('h3,h4,h5') || {}).textContent || '';
+      content.innerHTML = '';
+      if (img) {
+        const i = document.createElement('img');
+        i.src = img.src; i.alt = title;
+        content.appendChild(i);
+      } else {
+        const clone = item.cloneNode(true);
+        clone.style.cssText = 'max-width:500px;pointer-events:none;border-radius:16px;overflow:hidden;';
+        content.appendChild(clone);
+      }
+      if (caption) caption.textContent = title ? `${title}  (${current + 1}/${allItems.length})` : `${current + 1}/${allItems.length}`;
+    }
+
+    function open(idx) {
+      allItems = Array.from(document.querySelectorAll('.result-item'));
+      current  = idx;
+      render();
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() { lightbox.classList.remove('open'); document.body.style.overflow = ''; }
+
+    document.addEventListener('click', (e) => {
+      const item = e.target.closest('.result-item');
+      if (!item) return;
+      open(Array.from(document.querySelectorAll('.result-item')).indexOf(item));
+    });
+
+    if (closeBtn) closeBtn.addEventListener('click', close);
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) close(); });
+    if (prevBtn) prevBtn.addEventListener('click', () => { current = (current - 1 + allItems.length) % allItems.length; render(); });
+    if (nextBtn) nextBtn.addEventListener('click', () => { current = (current + 1) % allItems.length; render(); });
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft'  && prevBtn) prevBtn.click();
+      if (e.key === 'ArrowRight' && nextBtn) nextBtn.click();
+    });
+  })();
+
+  /* ── Loyalty Card Counter Animation ─────────────────── */
+  (function () {
+    const card     = document.getElementById('loyaltyCard');
+    const pointsEl = document.getElementById('loyaltyPoints');
+    const barEl    = document.getElementById('loyaltyBar');
+    if (!card || !pointsEl || !barEl) return;
+
+    const TARGET = 247;
+    const MAX    = 500;
+    let animated = false;
+
+    new IntersectionObserver((entries) => {
+      if (!entries[0].isIntersecting || animated) return;
+      animated = true;
+
+      const dur = 1400, t0 = performance.now();
+      (function tick(now) {
+        const p = Math.min((now - t0) / dur, 1);
+        const e = 1 - Math.pow(1 - p, 3);
+        pointsEl.textContent = Math.round(e * TARGET);
+        if (p < 1) requestAnimationFrame(tick);
+      })(t0);
+
+      setTimeout(() => { barEl.style.width = (TARGET / MAX * 100).toFixed(1) + '%'; }, 80);
+    }, { threshold: 0.4 }).observe(card);
+  })();
+
+  /* ── Dental Health Score Quiz ────────────────────────── */
+  (function () {
+    const steps    = document.querySelectorAll('.health-quiz__step');
+    const progBar  = document.getElementById('hqProgressBar');
+    const resultEl = document.getElementById('hqResult');
+    const circle   = document.getElementById('hqScoreCircle');
+    const numEl    = document.getElementById('hqScoreNum');
+    const titleEl  = document.getElementById('hqScoreTitle');
+    const recEl    = document.getElementById('hqRec');
+    const retake   = document.getElementById('hqRetake');
+    const qWrap    = document.getElementById('hqQuestions');
+    if (!steps.length || !progBar) return;
+
+    const CIRC = 377; /* 2π × 60 */
+    let scores = [];
+
+    const recs = [
+      { min: 80, label: 'Excellent! 🌟',          text: '<strong>Your oral hygiene is outstanding.</strong> Keep up the great habits — twice-yearly professional cleanings will keep your smile perfect. Consider cosmetic options to further enhance your already-great smile.' },
+      { min: 60, label: 'Good 👍',                  text: '<strong>You\'re doing well overall.</strong> Small improvements — like daily flossing and reducing sugary snacks — could push your score to Excellent. Book a check-up so we can identify and address any minor issues early.' },
+      { min: 40, label: 'Fair — Needs Attention',   text: '<strong>Some areas need care.</strong> There may be early signs of gum disease or decay that are best caught now. Most issues at this stage are simple and affordable to treat. We\'d love to help you turn this around.' },
+      { min:  0, label: 'Your Smile Needs TLC ❤️', text: '<strong>Don\'t worry — it\'s never too late.</strong> Many patients in a similar situation leave Grace Dental Care with a healthy, confident smile. Book a free consultation with Dr. Sherin for a gentle, step-by-step plan.' },
+    ];
+
+    function setProgress(n) { progBar.style.width = Math.round((n / steps.length) * 100) + '%'; }
+
+    function showStep(i) {
+      steps.forEach((s, j) => { s.style.display = j === i ? '' : 'none'; });
+      setProgress(i);
+    }
+
+    steps.forEach((step, si) => {
+      const opts  = step.querySelectorAll('.health-quiz__option');
+      const nextB = document.getElementById(`hqNext${si + 1}`);
+      let chosen  = null;
+
+      opts.forEach(opt => {
+        opt.addEventListener('click', () => {
+          opts.forEach(o => o.classList.remove('selected'));
+          opt.classList.add('selected');
+          chosen = parseInt(opt.dataset.score, 10);
+          if (nextB) nextB.style.display = 'inline-flex';
+        });
+      });
+
+      if (nextB) nextB.addEventListener('click', () => {
+        if (chosen === null) return;
+        scores[si] = chosen;
+
+        if (si < steps.length - 1) {
+          showStep(si + 1);
+        } else {
+          qWrap.style.display = 'none';
+          resultEl.style.display = 'block';
+          setProgress(steps.length);
+
+          const total   = Math.min(scores.reduce((a, b) => a + b, 0), 100);
+          const offset  = CIRC - (total / 100) * CIRC;
+          if (circle) setTimeout(() => { circle.style.strokeDashoffset = offset; }, 100);
+
+          const dur = 1400, t0 = performance.now();
+          (function tick(now) {
+            const p = Math.min((now - t0) / dur, 1);
+            if (numEl) numEl.textContent = Math.round((1 - Math.pow(1 - p, 3)) * total);
+            if (p < 1) requestAnimationFrame(tick);
+          })(t0);
+
+          const rec = recs.find(r => total >= r.min);
+          if (titleEl) titleEl.textContent = rec.label;
+          if (recEl)   recEl.innerHTML     = rec.text;
+        }
+      });
+    });
+
+    if (retake) {
+      retake.addEventListener('click', () => {
+        scores = [];
+        steps.forEach(s => {
+          s.querySelectorAll('.health-quiz__option').forEach(o => o.classList.remove('selected'));
+          const nb = s.querySelector('[id^="hqNext"]');
+          if (nb) nb.style.display = 'none';
+        });
+        if (circle) circle.style.strokeDashoffset = CIRC;
+        if (numEl)  numEl.textContent = '0';
+        resultEl.style.display = 'none';
+        qWrap.style.display    = '';
+        showStep(0);
+      });
+    }
+
+    showStep(0);
+  })();
+
 })();

@@ -36,6 +36,7 @@
       <a href="blog.html" class="navbar__link">Blog</a>
       <a href="contact.html" class="navbar__link">Contact</a>
     </nav>
+    <a href="emergency.html" class="navbar__emergency-pill" aria-label="Emergency dental care"><span class="navbar__emergency-dot"></span>Emergency</a>
     <a href="contact.html" class="btn btn--gold btn--sm navbar__cta">Book Appointment</a>
     <button class="navbar__hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
   </div>
@@ -49,6 +50,8 @@
   <a href="results.html" class="navbar__mobile-link">Results</a>
   <a href="blog.html" class="navbar__mobile-link">Blog</a>
   <a href="contact.html" class="navbar__mobile-link">Contact</a>
+  <a href="emergency.html" class="navbar__mobile-link" style="color:#ef4444;font-weight:600;">Emergency Care</a>
+  <a href="offers.html" class="navbar__mobile-link" style="color:var(--gold);font-weight:600;">Offers &amp; Deals</a>
   <div class="navbar__mobile-cta"><a href="contact.html" class="btn btn--gold" style="width:100%;justify-content:center;">Book Appointment</a></div>
 </nav>
 
@@ -81,9 +84,17 @@
 <!-- BEFORE / AFTER GALLERY -->
 <section class="section section--light">
   <div class="container">
+    <div class="gallery-filter-tabs" data-reveal>
+      <button type="button" class="gallery-filter-btn active" data-filter="all">All Results</button>
+      <button type="button" class="gallery-filter-btn" data-filter="implants">Implants</button>
+      <button type="button" class="gallery-filter-btn" data-filter="whitening">Whitening</button>
+      <button type="button" class="gallery-filter-btn" data-filter="veneers">Veneers</button>
+      <button type="button" class="gallery-filter-btn" data-filter="braces">Braces</button>
+      <button type="button" class="gallery-filter-btn" data-filter="gum">Gum</button>
+    </div>
     <div class="grid-2" style="gap:32px;">
 
-      <div data-result="implant" data-reveal data-delay="1">
+      <div class="result-item" data-result="implant" data-category="implants" data-reveal data-delay="1">
         <div class="compare-wrap">
           <div class="compare-container">
             <div class="compare-before">
@@ -113,7 +124,7 @@
         </div>
       </div>
 
-      <div data-result="smile" data-reveal data-delay="2">
+      <div class="result-item" data-result="smile" data-category="veneers" data-reveal data-delay="2">
         <div class="compare-wrap">
           <div class="compare-container">
             <div class="compare-before">
@@ -142,7 +153,7 @@
         </div>
       </div>
 
-      <div data-result="ortho" data-reveal data-delay="1">
+      <div class="result-item" data-result="ortho" data-category="braces" data-reveal data-delay="1">
         <div class="compare-wrap">
           <div class="compare-container">
             <div class="compare-before">
@@ -171,7 +182,7 @@
         </div>
       </div>
 
-      <div data-result="whitening" data-reveal data-delay="2">
+      <div class="result-item" data-result="whitening" data-category="whitening" data-reveal data-delay="2">
         <div class="compare-wrap">
           <div class="compare-container">
             <div class="compare-before">
@@ -294,5 +305,14 @@
 </a>
 <button class="scroll-top" aria-label="Scroll to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg></button>
 <script src="js/main.js"></script>
+
+<!-- GALLERY LIGHTBOX -->
+<div class="gallery-lightbox" id="galleryLightbox" role="dialog" aria-modal="true" aria-label="Image gallery">
+  <button type="button" class="gallery-lightbox__close" id="lightboxClose" aria-label="Close">&times;</button>
+  <button type="button" class="gallery-lightbox__arrow gallery-lightbox__arrow--prev" id="lightboxPrev" aria-label="Previous">&#8249;</button>
+  <div class="gallery-lightbox__content" id="lightboxContent"></div>
+  <button type="button" class="gallery-lightbox__arrow gallery-lightbox__arrow--next" id="lightboxNext" aria-label="Next">&#8250;</button>
+  <div class="gallery-lightbox__caption" id="lightboxCaption"></div>
+</div>
 </body>
 </html>

@@ -93,6 +93,7 @@
       <a href="blog.html"         class="navbar__link">Blog</a>
       <a href="contact.html"      class="navbar__link">Contact</a>
     </nav>
+    <a href="emergency.html" class="navbar__emergency-pill" aria-label="Emergency dental care"><span class="navbar__emergency-dot"></span>Emergency</a>
     <a href="contact.html" class="btn btn--gold btn--sm navbar__cta">Book Appointment</a>
     <button class="navbar__hamburger" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -110,6 +111,8 @@
   <a href="results.html"      class="navbar__mobile-link">Results</a>
   <a href="blog.html"         class="navbar__mobile-link">Blog</a>
   <a href="contact.html"      class="navbar__mobile-link">Contact</a>
+  <a href="emergency.html" class="navbar__mobile-link" style="color:#ef4444;font-weight:600;">Emergency Care</a>
+  <a href="offers.html" class="navbar__mobile-link" style="color:var(--gold);font-weight:600;">Offers &amp; Deals</a>
   <div class="navbar__mobile-cta">
     <a href="contact.html" class="btn btn--gold" style="width:100%;justify-content:center;">Book Appointment</a>
   </div>
@@ -381,6 +384,73 @@
   </div>
 </section>
 
+<!-- ═══ INTERACTIVE TEETH MAP ═══════════════════════════════ -->
+<section class="section section--dark-2" aria-labelledby="teeth-map-heading">
+  <div class="container">
+    <div class="center" data-reveal>
+      <span class="section-label">Interactive Guide</span>
+      <h2 class="section-heading" id="teeth-map-heading">Find Your <em>Treatment</em></h2>
+      <p class="section-sub">Click on any tooth to discover what treatments are available for that area of your mouth.</p>
+    </div>
+    <div class="teeth-map-wrap">
+      <div class="teeth-map" id="teethMap" role="group" aria-label="Interactive dental chart" data-reveal>
+        <div class="teeth-jaw-label">Upper Jaw</div>
+        <div class="teeth-row teeth-row--upper">
+          <button class="tooth tooth--molar"    type="button" data-zone="molar"    aria-label="Upper right molar"></button>
+          <button class="tooth tooth--molar"    type="button" data-zone="molar"    aria-label="Upper right molar"></button>
+          <button class="tooth tooth--molar"    type="button" data-zone="molar"    aria-label="Upper right molar"></button>
+          <button class="tooth tooth--premolar" type="button" data-zone="premolar" aria-label="Upper right premolar"></button>
+          <button class="tooth tooth--premolar" type="button" data-zone="premolar" aria-label="Upper right premolar"></button>
+          <button class="tooth tooth--canine"   type="button" data-zone="canine"   aria-label="Upper right canine"></button>
+          <button class="tooth tooth--incisor"  type="button" data-zone="incisor"  aria-label="Upper incisor"></button>
+          <button class="tooth tooth--incisor"  type="button" data-zone="incisor"  aria-label="Upper incisor"></button>
+          <button class="tooth tooth--incisor"  type="button" data-zone="incisor"  aria-label="Upper incisor"></button>
+          <button class="tooth tooth--incisor"  type="button" data-zone="incisor"  aria-label="Upper incisor"></button>
+          <button class="tooth tooth--canine"   type="button" data-zone="canine"   aria-label="Upper left canine"></button>
+          <button class="tooth tooth--premolar" type="button" data-zone="premolar" aria-label="Upper left premolar"></button>
+          <button class="tooth tooth--premolar" type="button" data-zone="premolar" aria-label="Upper left premolar"></button>
+          <button class="tooth tooth--molar"    type="button" data-zone="molar"    aria-label="Upper left molar"></button>
+          <button class="tooth tooth--molar"    type="button" data-zone="molar"    aria-label="Upper left molar"></button>
+          <button class="tooth tooth--molar"    type="button" data-zone="molar"    aria-label="Upper left molar"></button>
+        </div>
+        <div class="teeth-gap"></div>
+        <div class="teeth-row teeth-row--lower">
+          <button class="tooth tooth--molar"    type="button" data-zone="molar"    aria-label="Lower right molar"></button>
+          <button class="tooth tooth--molar"    type="button" data-zone="molar"    aria-label="Lower right molar"></button>
+          <button class="tooth tooth--molar"    type="button" data-zone="molar"    aria-label="Lower right molar"></button>
+          <button class="tooth tooth--premolar" type="button" data-zone="premolar" aria-label="Lower right premolar"></button>
+          <button class="tooth tooth--premolar" type="button" data-zone="premolar" aria-label="Lower right premolar"></button>
+          <button class="tooth tooth--canine"   type="button" data-zone="canine"   aria-label="Lower right canine"></button>
+          <button class="tooth tooth--incisor"  type="button" data-zone="incisor"  aria-label="Lower incisor"></button>
+          <button class="tooth tooth--incisor"  type="button" data-zone="incisor"  aria-label="Lower incisor"></button>
+          <button class="tooth tooth--incisor"  type="button" data-zone="incisor"  aria-label="Lower incisor"></button>
+          <button class="tooth tooth--incisor"  type="button" data-zone="incisor"  aria-label="Lower incisor"></button>
+          <button class="tooth tooth--canine"   type="button" data-zone="canine"   aria-label="Lower left canine"></button>
+          <button class="tooth tooth--premolar" type="button" data-zone="premolar" aria-label="Lower left premolar"></button>
+          <button class="tooth tooth--premolar" type="button" data-zone="premolar" aria-label="Lower left premolar"></button>
+          <button class="tooth tooth--molar"    type="button" data-zone="molar"    aria-label="Lower left molar"></button>
+          <button class="tooth tooth--molar"    type="button" data-zone="molar"    aria-label="Lower left molar"></button>
+          <button class="tooth tooth--molar"    type="button" data-zone="molar"    aria-label="Lower left molar"></button>
+        </div>
+        <div class="teeth-jaw-label">Lower Jaw</div>
+      </div>
+      <div class="teeth-info" data-reveal data-delay="1">
+        <div class="teeth-info__placeholder" id="teethPlaceholder">
+          <svg viewBox="0 0 60 70" fill="none" aria-hidden="true"><path d="M30 5C21.5 5 15 11 15 18.5C15 22.5 16.5 25.5 18 28.5C20.5 34 21.5 43 23 49.5C23.7 52.5 26 54.5 28.5 53C29.5 51.5 29.8 46 30 42.5C30.2 46 30.5 51.5 31.5 53C34 54.5 36.3 52.5 37 49.5C38.5 43 39.5 34 42 28.5C43.5 25.5 45 22.5 45 18.5C45 11 38.5 5 30 5Z" fill="rgba(196,163,90,0.15)" stroke="rgba(196,163,90,0.45)" stroke-width="1.5"/></svg>
+          <p>Click any tooth to explore<br>available treatments</p>
+        </div>
+        <div class="teeth-info__content" id="teethContent" style="display:none;">
+          <div class="teeth-info__zone-icon" id="teethZoneIcon"></div>
+          <h4 class="teeth-info__title" id="teethTitle"></h4>
+          <p class="teeth-info__desc" id="teethDesc"></p>
+          <ul class="teeth-info__list" id="teethList"></ul>
+          <a href="contact.html" class="btn btn--gold btn--sm">Book Consultation</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══ WHY CHOOSE US ══════════════════════════════════════ -->
 <section class="section section--light-alt" aria-labelledby="why-heading">
   <div class="container">
@@ -546,6 +616,70 @@
   </div>
 </section>
 
+<!-- ═══ VIDEO TESTIMONIALS ═══════════════════════════════════ -->
+<section class="section section--dark" aria-labelledby="video-heading">
+  <div class="container">
+    <div class="center" data-reveal>
+      <span class="section-label">Patient Stories</span>
+      <h2 class="section-heading" id="video-heading">Hear It From<br><em>Our Patients</em></h2>
+      <p class="section-sub">Real stories from real patients — in their own words. Watch how Grace Dental Care changed their smiles and their lives.</p>
+    </div>
+    <div class="video-testimonials-grid">
+      <div class="video-card" data-reveal data-delay="1" onclick="window.open('https://wa.me/918015329529?text=I%20watched%20your%20patient%20testimonials%20and%20would%20like%20to%20book%20a%20consultation.','_blank')">
+        <div class="video-card__thumb">
+          <div class="video-card__thumb-glow"></div>
+          <div class="video-card__play">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+        </div>
+        <div class="video-card__body">
+          <div class="video-card__stars">
+            <span class="video-card__star">★</span><span class="video-card__star">★</span>
+            <span class="video-card__star">★</span><span class="video-card__star">★</span><span class="video-card__star">★</span>
+          </div>
+          <p class="video-card__name">Meena Krishnamurthy</p>
+          <p class="video-card__treatment">Smile Makeover</p>
+          <p class="video-card__quote">"I can't stop smiling now. Dr. Sherin understood exactly what I wanted and delivered beyond my expectations."</p>
+        </div>
+      </div>
+      <div class="video-card" data-reveal data-delay="2" onclick="window.open('https://wa.me/918015329529?text=I%20watched%20your%20patient%20testimonials%20and%20would%20like%20to%20book%20a%20consultation.','_blank')">
+        <div class="video-card__thumb">
+          <div class="video-card__thumb-glow"></div>
+          <div class="video-card__play">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+        </div>
+        <div class="video-card__body">
+          <div class="video-card__stars">
+            <span class="video-card__star">★</span><span class="video-card__star">★</span>
+            <span class="video-card__star">★</span><span class="video-card__star">★</span><span class="video-card__star">★</span>
+          </div>
+          <p class="video-card__name">Suresh Anand</p>
+          <p class="video-card__treatment">Dental Implants</p>
+          <p class="video-card__quote">"After losing two teeth in an accident, I thought my smile was gone forever. Grace Dental made it whole again."</p>
+        </div>
+      </div>
+      <div class="video-card" data-reveal data-delay="3" onclick="window.open('https://wa.me/918015329529?text=I%20watched%20your%20patient%20testimonials%20and%20would%20like%20to%20book%20a%20consultation.','_blank')">
+        <div class="video-card__thumb">
+          <div class="video-card__thumb-glow"></div>
+          <div class="video-card__play">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+        </div>
+        <div class="video-card__body">
+          <div class="video-card__stars">
+            <span class="video-card__star">★</span><span class="video-card__star">★</span>
+            <span class="video-card__star">★</span><span class="video-card__star">★</span><span class="video-card__star">★</span>
+          </div>
+          <p class="video-card__name">Anitha Rajagopalan</p>
+          <p class="video-card__treatment">Invisible Aligners</p>
+          <p class="video-card__quote">"No one even noticed I was wearing aligners. Six months later my teeth are perfectly straight. Worth every penny."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══ GOOGLE REVIEWS ═════════════════════════════════════ -->
 <section class="section section--dark-2" aria-labelledby="reviews-heading">
   <div class="container">
@@ -695,6 +829,60 @@
       <div class="cert-item">
         <div class="cert-item__icon">💳</div>
         <span>UPI &amp; Card Accepted</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ AWARDS & MEDIA ══════════════════════════════════════ -->
+<section class="section section--dark section--sm-pad" aria-label="Awards and recognition">
+  <div class="container">
+    <div class="center" data-reveal>
+      <span class="section-label">Recognised & Trusted</span>
+      <h2 class="section-heading">Awards, Affiliations<br><em>&amp; Recognition</em></h2>
+    </div>
+    <div class="awards-strip" data-reveal data-delay="1">
+      <div class="award-item">
+        <div class="award-item__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <span class="award-item__title">IDA Member</span>
+        <span class="award-item__sub">Indian Dental Association</span>
+      </div>
+      <div class="award-item">
+        <div class="award-item__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <span class="award-item__title">ISO Certified</span>
+        <span class="award-item__sub">Quality Management</span>
+      </div>
+      <div class="award-item">
+        <div class="award-item__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+        </div>
+        <span class="award-item__title">Top Rated</span>
+        <span class="award-item__sub">Google 5.0 · 200+ Reviews</span>
+      </div>
+      <div class="award-item">
+        <div class="award-item__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <span class="award-item__title">Sterilisation Certified</span>
+        <span class="award-item__sub">ADA Infection Control</span>
+      </div>
+      <div class="award-item">
+        <div class="award-item__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <span class="award-item__title">5000+ Patients</span>
+        <span class="award-item__sub">Smiles Transformed</span>
+      </div>
+      <div class="award-item">
+        <div class="award-item__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <span class="award-item__title">10+ Years</span>
+        <span class="award-item__sub">Clinical Excellence</span>
       </div>
     </div>
   </div>
@@ -887,6 +1075,232 @@
           <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </button>
         <div class="faq-answer"><div class="faq-answer-inner">We believe quality dental care should be accessible to everyone. We offer flexible payment options and can phase treatments to suit your budget. We accept UPI, debit/credit card, and cash. Please speak to our treatment coordinator during your consultation for a plan that works for you.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ REFERRAL PROGRAMME ══════════════════════════════════ -->
+<section class="section section--dark-2" aria-labelledby="referral-heading">
+  <div class="container">
+    <div class="center" data-reveal>
+      <span class="section-label">Share &amp; Save</span>
+      <h2 class="section-heading" id="referral-heading">Refer a Friend,<br><em>Both of You Save</em></h2>
+      <p class="section-sub">Love your smile? Help a friend get theirs. For every friend you refer who visits us, both of you receive ₹500 off your next treatment.</p>
+    </div>
+    <div class="referral-steps">
+      <div class="referral-step" data-reveal data-delay="1">
+        <div class="referral-step__num">1</div>
+        <h4>Refer a Friend</h4>
+        <p>Share our WhatsApp number or your personal referral message with someone who needs dental care.</p>
+      </div>
+      <div class="referral-step" data-reveal data-delay="2">
+        <div class="referral-step__num">2</div>
+        <h4>They Visit Us</h4>
+        <p>Your friend books and completes any paid treatment at Grace Dental Care and mentions your name.</p>
+      </div>
+      <div class="referral-step" data-reveal data-delay="3">
+        <div class="referral-step__num">3</div>
+        <h4>Both of You Save</h4>
+        <p>You both receive ₹500 credit towards your next treatment — no limits on how many friends you refer.</p>
+      </div>
+    </div>
+    <div class="referral-reward" data-reveal>
+      <div class="referral-reward__text">
+        <h4>Your Reward — Every Single Time</h4>
+        <p>Refer unlimited friends. Each referral earns both of you ₹500 off. It's our way of saying thank you.</p>
+      </div>
+      <div class="referral-reward__amount">₹500</div>
+      <a href="https://wa.me/918015329529?text=Hi%2C%20I%20would%20like%20to%20refer%20a%20friend%20to%20Grace%20Dental%20Care." target="_blank" rel="noopener noreferrer" class="btn btn--gold">Share on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATE SHOWCASE -->
+<section class="section section--dark-2" aria-labelledby="cert-heading">
+  <div class="container">
+    <div class="center" data-reveal>
+      <span class="section-label">Verified Excellence</span>
+      <h2 class="section-heading" id="cert-heading">Credentials &amp;<br><em>Certifications</em></h2>
+      <p class="section-sub">Hover over each card to learn more about our accreditations and why they matter for your safety and care.</p>
+    </div>
+    <div class="cert-grid">
+      <div class="cert-card" data-reveal data-delay="1">
+        <div class="cert-card__inner">
+          <div class="cert-card__front">
+            <div class="cert-card__icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
+            <span class="cert-card__title">IDA Member</span>
+            <span style="font-size:0.68rem;color:var(--gray);">Indian Dental Association</span>
+          </div>
+          <div class="cert-card__back">
+            <p>Full members of the Indian Dental Association — India's apex body for dental professionals. Guarantees ethical practice and continuing education.</p>
+          </div>
+        </div>
+      </div>
+      <div class="cert-card" data-reveal data-delay="2">
+        <div class="cert-card__inner">
+          <div class="cert-card__front">
+            <div class="cert-card__icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+            <span class="cert-card__title">ISO 9001</span>
+            <span style="font-size:0.68rem;color:var(--gray);">Quality Management</span>
+          </div>
+          <div class="cert-card__back">
+            <p>ISO 9001 certified quality management system. Every process — from sterilisation to patient records — is audited and documented to international standards.</p>
+          </div>
+        </div>
+      </div>
+      <div class="cert-card" data-reveal data-delay="3">
+        <div class="cert-card__inner">
+          <div class="cert-card__front">
+            <div class="cert-card__icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+            <span class="cert-card__title">5-Star Google</span>
+            <span style="font-size:0.68rem;color:var(--gray);">100+ Reviews</span>
+          </div>
+          <div class="cert-card__back">
+            <p>Consistently rated 5 stars on Google by over 100 verified patients. Our reputation is built entirely on genuine patient experiences — no paid reviews.</p>
+          </div>
+        </div>
+      </div>
+      <div class="cert-card" data-reveal data-delay="4">
+        <div class="cert-card__inner">
+          <div class="cert-card__front">
+            <div class="cert-card__icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+            <span class="cert-card__title">Sterilisation</span>
+            <span style="font-size:0.68rem;color:var(--gray);">Class B Autoclave</span>
+          </div>
+          <div class="cert-card__back">
+            <p>Hospital-grade Class B autoclave sterilisation for all instruments. Each cycle is logged and verified — your safety is non-negotiable at Grace Dental Care.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DENTAL HEALTH SCORE QUIZ -->
+<section class="section section--dark" aria-labelledby="quiz-score-heading">
+  <div class="container">
+    <div class="center" data-reveal>
+      <span class="section-label">Know Your Smile</span>
+      <h2 class="section-heading" id="quiz-score-heading">Your Dental<br><em>Health Score</em></h2>
+      <p class="section-sub">Answer 5 quick questions and get your personalised dental health score out of 100 — with a customised recommendation from our doctors.</p>
+    </div>
+    <div class="health-quiz" data-reveal data-delay="1">
+      <div class="health-quiz__progress"><div class="health-quiz__progress-bar" id="hqProgressBar"></div></div>
+      <div id="hqQuestions">
+        <!-- Question 1 -->
+        <div class="health-quiz__step" data-step="1">
+          <p class="health-quiz__question">How often do you brush your teeth?</p>
+          <div class="health-quiz__options">
+            <button class="health-quiz__option" data-score="10">Less than once a day</button>
+            <button class="health-quiz__option" data-score="20">Once a day</button>
+            <button class="health-quiz__option" data-score="30">Twice a day</button>
+            <button class="health-quiz__option" data-score="20">After every meal</button>
+          </div>
+          <div class="health-quiz__nav"><span class="health-quiz__counter">Question 1 of 5</span><button class="btn btn--gold btn--sm" id="hqNext1" style="display:none;">Next →</button></div>
+        </div>
+        <!-- Question 2 -->
+        <div class="health-quiz__step" data-step="2" style="display:none;">
+          <p class="health-quiz__question">How often do you floss?</p>
+          <div class="health-quiz__options">
+            <button class="health-quiz__option" data-score="5">Never</button>
+            <button class="health-quiz__option" data-score="12">Occasionally</button>
+            <button class="health-quiz__option" data-score="18">A few times a week</button>
+            <button class="health-quiz__option" data-score="20">Daily</button>
+          </div>
+          <div class="health-quiz__nav"><span class="health-quiz__counter">Question 2 of 5</span><button class="btn btn--gold btn--sm" id="hqNext2" style="display:none;">Next →</button></div>
+        </div>
+        <!-- Question 3 -->
+        <div class="health-quiz__step" data-step="3" style="display:none;">
+          <p class="health-quiz__question">When did you last visit a dentist?</p>
+          <div class="health-quiz__options">
+            <button class="health-quiz__option" data-score="5">Never / can't remember</button>
+            <button class="health-quiz__option" data-score="10">Over 3 years ago</button>
+            <button class="health-quiz__option" data-score="16">1–3 years ago</button>
+            <button class="health-quiz__option" data-score="20">Within the last year</button>
+          </div>
+          <div class="health-quiz__nav"><span class="health-quiz__counter">Question 3 of 5</span><button class="btn btn--gold btn--sm" id="hqNext3" style="display:none;">Next →</button></div>
+        </div>
+        <!-- Question 4 -->
+        <div class="health-quiz__step" data-step="4" style="display:none;">
+          <p class="health-quiz__question">Do you experience any of these?</p>
+          <div class="health-quiz__options">
+            <button class="health-quiz__option" data-score="5">Bleeding gums</button>
+            <button class="health-quiz__option" data-score="8">Tooth sensitivity</button>
+            <button class="health-quiz__option" data-score="12">Occasional discomfort</button>
+            <button class="health-quiz__option" data-score="15">None of the above</button>
+          </div>
+          <div class="health-quiz__nav"><span class="health-quiz__counter">Question 4 of 5</span><button class="btn btn--gold btn--sm" id="hqNext4" style="display:none;">Next →</button></div>
+        </div>
+        <!-- Question 5 -->
+        <div class="health-quiz__step" data-step="5" style="display:none;">
+          <p class="health-quiz__question">How would you rate your diet in terms of sugar?</p>
+          <div class="health-quiz__options">
+            <button class="health-quiz__option" data-score="2">Very high (sweets, soda daily)</button>
+            <button class="health-quiz__option" data-score="6">Moderate (3–4 times a week)</button>
+            <button class="health-quiz__option" data-score="10">Low (occasional treats)</button>
+            <button class="health-quiz__option" data-score="15">Very low (rarely)</button>
+          </div>
+          <div class="health-quiz__nav"><span class="health-quiz__counter">Question 5 of 5</span><button class="btn btn--gold btn--sm" id="hqNext5" style="display:none;">See My Score →</button></div>
+        </div>
+      </div>
+      <!-- Result -->
+      <div class="health-quiz__result" id="hqResult">
+        <svg class="health-quiz__score-ring" viewBox="0 0 140 140" aria-hidden="true">
+          <circle cx="70" cy="70" r="60" fill="none" stroke="var(--black-4)" stroke-width="10"/>
+          <circle id="hqScoreCircle" cx="70" cy="70" r="60" fill="none" stroke="var(--gold)" stroke-width="10"
+            stroke-dasharray="377" stroke-dashoffset="377" stroke-linecap="round"
+            transform="rotate(-90 70 70)" style="transition:stroke-dashoffset 1.4s var(--ease,cubic-bezier(.4,0,.2,1))"/>
+          <text x="70" y="65" text-anchor="middle" font-family="'Playfair Display',serif" font-size="28" font-weight="700" fill="#C4A35A" id="hqScoreNum">0</text>
+          <text x="70" y="83" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" fill="#9A9490">out of 100</text>
+        </svg>
+        <h3 id="hqScoreTitle" style="color:var(--white);margin-bottom:8px;"></h3>
+        <div class="health-quiz__recommendation" id="hqRec"></div>
+        <a href="contact.html" class="btn btn--gold" style="margin-top:4px;">Book a Free Consultation</a>
+        <button class="btn btn--outline btn--sm" id="hqRetake" style="margin-top:10px;display:block;width:100%;justify-content:center;">Retake Quiz</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GRACE SMILE REWARDS -->
+<section class="section section--dark-2" aria-labelledby="loyalty-heading">
+  <div class="container">
+    <div class="center" data-reveal>
+      <span class="section-label">Grace Smile Rewards</span>
+      <h2 class="section-heading" id="loyalty-heading">Every Visit<br><em>Earns You More</em></h2>
+      <p class="section-sub">Our loyalty programme rewards you for every treatment. Accumulate points and redeem them for discounts on future visits — the more you care for your smile, the more you save.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-top:40px;" data-reveal>
+      <div class="loyalty-card-wrap" style="max-width:none;">
+        <div class="loyalty-card" id="loyaltyCard">
+          <div class="loyalty-card__logo">✦ Grace Smile Rewards</div>
+          <p class="loyalty-card__name">Your Name Here</p>
+          <p class="loyalty-card__id">GRACE · 2026 · MEMBER</p>
+          <p class="loyalty-card__points-label">Points Balance</p>
+          <p class="loyalty-card__points" id="loyaltyPoints">0</p>
+          <div class="loyalty-card__bar-wrap"><div class="loyalty-card__bar" id="loyaltyBar" style="width:0%"></div></div>
+          <div class="loyalty-card__bar-labels"><span>0 pts</span><span>500 pts = ₹500 off</span></div>
+          <span class="loyalty-card__tier">⭐ Silver Member</span>
+        </div>
+      </div>
+      <div>
+        <h3 style="color:var(--white);margin-bottom:24px;">How It Works</h3>
+        <div style="display:flex;flex-direction:column;gap:20px;">
+          <div style="display:flex;gap:16px;align-items:flex-start;">
+            <div style="width:40px;height:40px;border-radius:50%;background:var(--gold-glass);border:1px solid var(--gold-border);display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:var(--font-heading);font-weight:700;flex-shrink:0;">1</div>
+            <div><h5 style="color:var(--white);margin-bottom:4px;">Earn Points on Every Visit</h5><p style="color:var(--gray);font-size:0.85rem;">1 point per ₹100 spent on any treatment. Bonus points for referrals, reviews, and annual check-ups.</p></div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start;">
+            <div style="width:40px;height:40px;border-radius:50%;background:var(--gold-glass);border:1px solid var(--gold-border);display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:var(--font-heading);font-weight:700;flex-shrink:0;">2</div>
+            <div><h5 style="color:var(--white);margin-bottom:4px;">Unlock Tier Rewards</h5><p style="color:var(--gray);font-size:0.85rem;">Silver (0–499 pts), Gold (500–999 pts), Platinum (1000+ pts). Higher tiers unlock priority booking and exclusive discounts.</p></div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start;">
+            <div style="width:40px;height:40px;border-radius:50%;background:var(--gold-glass);border:1px solid var(--gold-border);display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:var(--font-heading);font-weight:700;flex-shrink:0;">3</div>
+            <div><h5 style="color:var(--white);margin-bottom:4px;">Redeem for Discounts</h5><p style="color:var(--gray);font-size:0.85rem;">500 points = ₹500 off your next treatment. No expiry, no blackout dates, usable on any service.</p></div>
+          </div>
+        </div>
+        <a href="contact.html" class="btn btn--gold" style="margin-top:28px;">Join — It's Free</a>
       </div>
     </div>
   </div>
