@@ -860,44 +860,6 @@
     });
   })();
 
-  /* ── PWA Install Banner ──────────────────────────────── */
-  (function () {
-    const KEY = 'grace_pwa_dismissed';
-    if (localStorage.getItem(KEY)) return;
-    let deferredPrompt = null;
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-
-      setTimeout(() => {
-        const banner = document.createElement('div');
-        banner.className = 'pwa-banner';
-        banner.innerHTML = `
-          <div class="pwa-banner__icon"><img src="assets/logo.png" alt="" width="42" height="42"></div>
-          <div class="pwa-banner__text">
-            <div class="pwa-banner__title">Add Grace Dental to Home Screen</div>
-            <div class="pwa-banner__sub">Quick access · Works offline · No app store needed</div>
-          </div>
-          <div class="pwa-banner__actions">
-            <button class="btn btn--gold btn--sm" id="pwaInstall">Add</button>
-            <button class="btn btn--outline btn--sm" id="pwaDismiss">Not now</button>
-          </div>`;
-        document.body.appendChild(banner);
-        requestAnimationFrame(() => requestAnimationFrame(() => banner.classList.add('show')));
-
-        document.getElementById('pwaInstall').addEventListener('click', () => {
-          if (deferredPrompt) deferredPrompt.prompt();
-          banner.classList.remove('show');
-          localStorage.setItem(KEY, '1');
-        });
-        document.getElementById('pwaDismiss').addEventListener('click', () => {
-          banner.classList.remove('show');
-          localStorage.setItem(KEY, '1');
-        });
-      }, 30000);
-    });
-  })();
 
   /* ── Confetti on Form Success ────────────────────────── */
   (function () {
@@ -972,65 +934,6 @@
     });
   })();
 
-  /* ── Tamil Language Toggle ───────────────────────────── */
-  (function () {
-    function injectLangToggle() {
-      const navActions = document.querySelector('.navbar__inner');
-      if (!navActions || document.getElementById('langToggle')) return;
-
-      const wrap = document.createElement('div');
-      wrap.id = 'langToggle';
-      wrap.className = 'lang-toggle';
-      wrap.setAttribute('aria-label', 'Language');
-      wrap.innerHTML = `
-        <button class="lang-btn active" data-lang="en" type="button">EN</button>
-        <button class="lang-btn" data-lang="ta" type="button">தமிழ்</button>`;
-
-      const emergencyPill = navActions.querySelector('.navbar__emergency-pill');
-      const cta = navActions.querySelector('.navbar__cta');
-      const ref = emergencyPill || cta;
-      if (ref) navActions.insertBefore(wrap, ref);
-      else navActions.appendChild(wrap);
-
-      const taMap = {
-        'Book Appointment':     'சந்திப்பு பதிவு',
-        'Book Consultation':    'ஆலோசனை பதிவு',
-        'Book Now':             'இப்போது பதிவு',
-        'Call Now':             'அழைக்கவும்',
-        'Emergency Care':       'அவசர சிகிச்சை',
-        'Offers & Deals':       'சலுகைகள்',
-        'Learn More':           'மேலும் அறிக',
-        'View All Treatments':  'சிகிச்சைகள் காண',
-        'Get Exact Quote — Free': 'இலவச மதிப்பீடு',
-      };
-
-      let isTa = false;
-
-      wrap.addEventListener('click', (e) => {
-        const btn = e.target.closest('.lang-btn');
-        if (!btn) return;
-        isTa = btn.dataset.lang === 'ta';
-
-        wrap.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === (isTa ? 'ta' : 'en')));
-        document.documentElement.setAttribute('lang', isTa ? 'ta' : 'en');
-
-        /* Swap CTAs */
-        document.querySelectorAll('.btn').forEach(el => {
-          const txt = el.textContent.trim();
-          if (isTa) {
-            if (!el.dataset.enText) el.dataset.enText = txt;
-            const ta = taMap[el.dataset.enText || txt];
-            if (ta) el.textContent = ta;
-          } else {
-            if (el.dataset.enText) el.textContent = el.dataset.enText;
-          }
-        });
-      });
-    }
-
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', injectLangToggle);
-    else injectLangToggle();
-  })();
 
   /* ── Gallery Filter ──────────────────────────────────── */
   (function () {
