@@ -642,34 +642,39 @@
 
   /* ── Interactive Teeth Map ───────────────────────────── */
   (function () {
-    const teeth      = document.querySelectorAll('.tooth');
+    const teeth       = document.querySelectorAll('.tooth');
     const placeholder = document.getElementById('teethPlaceholder');
-    const content    = document.getElementById('teethContent');
-    const titleEl    = document.getElementById('teethTitle');
-    const descEl     = document.getElementById('teethDesc');
-    const listEl     = document.getElementById('teethList');
+    const content     = document.getElementById('teethContent');
+    const iconEl      = document.getElementById('teethZoneIcon');
+    const titleEl     = document.getElementById('teethTitle');
+    const descEl      = document.getElementById('teethDesc');
+    const listEl      = document.getElementById('teethList');
     if (!teeth.length || !placeholder) return;
 
     const zoneData = {
       incisor: {
+        icon: '🦷',
         title: 'Incisors — Front Teeth',
         desc: 'The 8 incisors (4 upper, 4 lower) are your primary biting teeth and define the front of your smile. They are the most visible and cosmetically important teeth.',
-        treatments: ['Composite bonding for chips & gaps', 'Porcelain veneers for smile makeovers', 'Crowns after root canal treatment', 'Orthodontic correction for spacing', 'Teeth whitening for staining']
+        treatments: ['Composite bonding for chips & gaps', 'Porcelain veneers for smile makeovers', 'Crown after root canal treatment', 'Orthodontic correction for spacing', 'Teeth whitening for staining']
       },
       canine: {
+        icon: '⚡',
         title: 'Canines — Corner Teeth',
         desc: 'Canines are the pointed teeth at the corners of your mouth. They are the strongest and longest teeth, guiding your bite and anchoring the smile.',
-        treatments: ['Crown or veneer if worn down', 'Root canal if infected', 'Implant if missing (important for bite guidance)', 'Orthodontic repositioning', 'Laser gum contouring for gummy appearance']
+        treatments: ['Crown or veneer if worn down', 'Root canal if infected', 'Implant if missing (critical for bite guidance)', 'Orthodontic repositioning', 'Laser gum contouring for gummy appearance']
       },
       premolar: {
+        icon: '🔹',
         title: 'Premolars — Transition Teeth',
         desc: 'Premolars sit between canines and molars. They help tear and crush food, and are often the teeth extracted for orthodontic space creation.',
-        treatments: ['Inlay/onlay for moderate decay', 'Composite or ceramic filling', 'Crown if heavily damaged', 'Root canal treatment', 'Extraction for orthodontic space']
+        treatments: ['Inlay / onlay for moderate decay', 'Composite or ceramic filling', 'Crown if heavily damaged', 'Root canal treatment', 'Extraction for orthodontic space']
       },
       molar: {
+        icon: '💪',
         title: 'Molars — Back Chewing Teeth',
         desc: 'Molars bear the heaviest chewing load. Wisdom teeth (third molars) often need extraction. Decay in molars is very common due to deep grooves.',
-        treatments: ['Deep fissure sealants (prevention)', 'Large composite or ceramic filling', 'Crown for cracked or heavily decayed molar', 'Root canal treatment (multi-canal)', 'Wisdom tooth extraction', 'Implant to replace extracted molar']
+        treatments: ['Deep fissure sealants (prevention)', 'Large composite or ceramic filling', 'Crown for cracked or decayed molar', 'Root canal treatment (multi-canal)', 'Wisdom tooth extraction', 'Implant to replace extracted molar']
       }
     };
 
@@ -680,21 +685,21 @@
         const zone = tooth.dataset.zone;
         if (!zone || !zoneData[zone]) return;
 
-        /* Deactivate previous selection */
-        if (active) active.classList.remove('active');
-
-        /* If clicking the same tooth again, deselect */
+        /* Clicking the same tooth again — deselect */
         if (active === tooth) {
+          active.classList.remove('active');
           active = null;
-          content.style.display   = 'none';
+          content.style.display     = 'none';
           placeholder.style.display = '';
           return;
         }
 
+        if (active) active.classList.remove('active');
         active = tooth;
         tooth.classList.add('active');
 
         const data = zoneData[zone];
+        if (iconEl) iconEl.textContent = data.icon;
         titleEl.textContent = data.title;
         descEl.textContent  = data.desc;
         listEl.innerHTML    = data.treatments.map(t => `<li>${t}</li>`).join('');
