@@ -483,20 +483,20 @@
       {
         text: "What's your main dental concern?",
         options: [
-          { icon: '⚡', label: 'Pain or toothache',            tag: 'emergency' },
-          { icon: '✨', label: 'I want a better smile',         tag: 'cosmetic'  },
-          { icon: '🦷', label: 'Missing teeth',                 tag: 'implants'  },
-          { icon: '📐', label: 'Crooked or misaligned teeth',   tag: 'ortho'     },
-          { icon: '🌿', label: 'Gum problems or sensitivity',   tag: 'gum'       },
-          { icon: '✓',  label: 'Routine check-up / cleaning',   tag: 'general'   }
+          { icon: '', label: 'Pain or toothache',            tag: 'emergency' },
+          { icon: '', label: 'I want a better smile',         tag: 'cosmetic'  },
+          { icon: '', label: 'Missing teeth',                 tag: 'implants'  },
+          { icon: '', label: 'Crooked or misaligned teeth',   tag: 'ortho'     },
+          { icon: '', label: 'Gum problems or sensitivity',   tag: 'gum'       },
+          { icon: '', label: 'Routine check-up / cleaning',   tag: 'general'   }
         ]
       },
       {
         text: 'How soon are you looking to get treated?',
         options: [
-          { icon: '🚨', label: 'Urgently — within days',        tag: 'urgent'    },
-          { icon: '📅', label: 'Within the next few weeks',     tag: 'soon'      },
-          { icon: '🔍', label: 'Just exploring my options',     tag: 'exploring' }
+          { icon: '', label: 'Urgently — within days',        tag: 'urgent'    },
+          { icon: '', label: 'Within the next few weeks',     tag: 'soon'      },
+          { icon: '', label: 'Just exploring my options',     tag: 'exploring' }
         ]
       }
     ];
@@ -525,7 +525,7 @@
         '<div class="quiz-options">' +
           q.options.map(o =>
             '<button type="button" class="quiz-option" data-tag="' + o.tag + '">' +
-              '<span class="quiz-option-icon">' + o.icon + '</span>' +
+              (o.icon ? '<span class="quiz-option-icon">' + o.icon + '</span>' : '') +
               '<span>' + o.label + '</span>' +
             '</button>'
           ).join('') +
@@ -653,25 +653,25 @@
 
     const zoneData = {
       incisor: {
-        icon: '🦷',
+        icon: '',
         title: 'Incisors — Front Teeth',
         desc: 'The 8 incisors (4 upper, 4 lower) are your primary biting teeth and define the front of your smile. They are the most visible and cosmetically important teeth.',
         treatments: ['Composite bonding for chips & gaps', 'Porcelain veneers for smile makeovers', 'Crown after root canal treatment', 'Orthodontic correction for spacing', 'Teeth whitening for staining']
       },
       canine: {
-        icon: '⚡',
+        icon: '',
         title: 'Canines — Corner Teeth',
         desc: 'Canines are the pointed teeth at the corners of your mouth. They are the strongest and longest teeth, guiding your bite and anchoring the smile.',
         treatments: ['Crown or veneer if worn down', 'Root canal if infected', 'Implant if missing (critical for bite guidance)', 'Orthodontic repositioning', 'Laser gum contouring for gummy appearance']
       },
       premolar: {
-        icon: '🔹',
+        icon: '',
         title: 'Premolars — Transition Teeth',
         desc: 'Premolars sit between canines and molars. They help tear and crush food, and are often the teeth extracted for orthodontic space creation.',
         treatments: ['Inlay / onlay for moderate decay', 'Composite or ceramic filling', 'Crown if heavily damaged', 'Root canal treatment', 'Extraction for orthodontic space']
       },
       molar: {
-        icon: '💪',
+        icon: '',
         title: 'Molars — Back Chewing Teeth',
         desc: 'Molars bear the heaviest chewing load. Wisdom teeth (third molars) often need extraction. Decay in molars is very common due to deep grooves.',
         treatments: ['Deep fissure sealants (prevention)', 'Large composite or ceramic filling', 'Crown for cracked or decayed molar', 'Root canal treatment (multi-canal)', 'Wisdom tooth extraction', 'Implant to replace extracted molar']
@@ -699,7 +699,7 @@
         tooth.classList.add('active');
 
         const data = zoneData[zone];
-        if (iconEl) iconEl.textContent = data.icon;
+        if (iconEl) { iconEl.textContent = data.icon; iconEl.style.display = data.icon ? '' : 'none'; }
         titleEl.textContent = data.title;
         descEl.textContent  = data.desc;
         listEl.innerHTML    = data.treatments.map(t => `<li>${t}</li>`).join('');
