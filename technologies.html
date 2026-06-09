@@ -123,9 +123,63 @@
 
     <!-- Tech 1 -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-bottom:60px;" data-reveal>
-      <div style="background:var(--black-3);border:1px solid var(--gold-border);border-radius:var(--radius-xl);aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;color:var(--gold);">
-        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <span style="font-size:0.75rem;color:var(--gray);letter-spacing:0.1em;text-transform:uppercase;">Technology Image</span>
+      <div style="background:var(--black-4);border:1px solid var(--gold-border);border-radius:var(--radius-xl);aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:24px;">
+        <!-- Digital RVG X-Ray Illustration -->
+        <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg" class="tech-illus-svg">
+          <defs>
+            <radialGradient id="rv1" cx="50%" cy="50%" r="55%">
+              <stop offset="0%" stop-color="#C4A35A" stop-opacity="0.08"/>
+              <stop offset="100%" stop-color="#C4A35A" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <rect width="400" height="300" fill="url(#rv1)"/>
+          <!-- Sensor body -->
+          <rect x="44" y="80" width="78" height="128" rx="9" fill="rgba(196,163,90,0.07)" stroke="#C4A35A" stroke-width="1.8"/>
+          <!-- Active sensor area -->
+          <rect x="56" y="94" width="54" height="86" rx="4" fill="rgba(0,0,0,0.45)" stroke="rgba(196,163,90,0.22)" stroke-width="1"/>
+          <!-- Scan grid lines -->
+          <line x1="61" y1="106" x2="105" y2="106" stroke="rgba(196,163,90,0.16)" stroke-width="0.8"/>
+          <line x1="61" y1="116" x2="105" y2="116" stroke="rgba(196,163,90,0.16)" stroke-width="0.8"/>
+          <line x1="61" y1="126" x2="105" y2="126" stroke="rgba(196,163,90,0.16)" stroke-width="0.8"/>
+          <line x1="61" y1="136" x2="105" y2="136" stroke="rgba(196,163,90,0.16)" stroke-width="0.8"/>
+          <line x1="61" y1="146" x2="105" y2="146" stroke="rgba(196,163,90,0.16)" stroke-width="0.8"/>
+          <line x1="61" y1="156" x2="105" y2="156" stroke="rgba(196,163,90,0.16)" stroke-width="0.8"/>
+          <line x1="61" y1="166" x2="105" y2="166" stroke="rgba(196,163,90,0.16)" stroke-width="0.8"/>
+          <line x1="61" y1="176" x2="105" y2="176" stroke="rgba(196,163,90,0.16)" stroke-width="0.8"/>
+          <!-- Active LED -->
+          <circle cx="83" cy="208" r="5" fill="#C4A35A" opacity="0.85"/>
+          <circle cx="83" cy="208" r="9" fill="rgba(196,163,90,0.15)"/>
+          <!-- Bite tab -->
+          <rect x="62" y="216" width="42" height="13" rx="5" fill="rgba(196,163,90,0.08)" stroke="#C4A35A" stroke-width="1.4"/>
+          <text x="83" y="70" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(196,163,90,0.6)" letter-spacing="1.5">SENSOR</text>
+          <!-- Cable -->
+          <path d="M122 144 C145 144 155 128 178 122 C198 117 215 128 240 136" stroke="#C4A35A" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="5 4" opacity="0.5"/>
+          <!-- RVG Unit body -->
+          <rect x="240" y="54" width="122" height="168" rx="12" fill="rgba(196,163,90,0.06)" stroke="#C4A35A" stroke-width="1.8"/>
+          <!-- Screen bezel -->
+          <rect x="254" y="68" width="94" height="76" rx="6" fill="rgba(0,0,0,0.55)" stroke="#C4A35A" stroke-width="1"/>
+          <!-- X-ray tooth on screen -->
+          <ellipse cx="284" cy="102" rx="16" ry="22" fill="rgba(196,163,90,0.07)" stroke="rgba(196,163,90,0.6)" stroke-width="1.4"/>
+          <line x1="277" y1="88" x2="273" y2="118" stroke="rgba(196,163,90,0.4)" stroke-width="1"/>
+          <line x1="291" y1="88" x2="295" y2="118" stroke="rgba(196,163,90,0.4)" stroke-width="1"/>
+          <ellipse cx="322" cy="106" rx="18" ry="24" fill="rgba(196,163,90,0.05)" stroke="rgba(196,163,90,0.5)" stroke-width="1.4"/>
+          <line x1="314" y1="90" x2="310" y2="124" stroke="rgba(196,163,90,0.35)" stroke-width="1"/>
+          <line x1="330" y1="90" x2="334" y2="124" stroke="rgba(196,163,90,0.35)" stroke-width="1"/>
+          <line x1="322" y1="90" x2="322" y2="130" stroke="rgba(196,163,90,0.25)" stroke-width="0.8"/>
+          <!-- Progress bar -->
+          <rect x="254" y="152" width="94" height="5" rx="2" fill="rgba(196,163,90,0.12)"/>
+          <rect x="254" y="152" width="58" height="5" rx="2" fill="#C4A35A" opacity="0.65"/>
+          <!-- Control buttons -->
+          <circle cx="268" cy="176" r="8" fill="rgba(196,163,90,0.08)" stroke="#C4A35A" stroke-width="1"/>
+          <circle cx="290" cy="176" r="8" fill="rgba(196,163,90,0.08)" stroke="#C4A35A" stroke-width="1"/>
+          <circle cx="312" cy="176" r="8" fill="#C4A35A" opacity="0.75"/>
+          <!-- USB slot -->
+          <rect x="322" y="170" width="26" height="12" rx="3" fill="rgba(196,163,90,0.07)" stroke="#C4A35A" stroke-width="1"/>
+          <!-- Brand strip -->
+          <rect x="254" y="200" width="94" height="14" rx="4" fill="rgba(196,163,90,0.05)" stroke="rgba(196,163,90,0.18)" stroke-width="1"/>
+          <text x="301" y="211" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7.5" fill="rgba(196,163,90,0.55)" letter-spacing="1.2">CARESTREAM RVG 6200</text>
+          <text x="301" y="46" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(196,163,90,0.6)" letter-spacing="1.5">CONTROL UNIT</text>
+        </svg>
       </div>
       <div>
         <span class="section-label">Technology 01</span>
@@ -169,17 +223,124 @@
           </div>
         </div>
       </div>
-      <div style="background:var(--black-3);border:1px solid var(--gold-border);border-radius:var(--radius-xl);aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;color:var(--gold);">
-        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-        <span style="font-size:0.75rem;color:var(--gray);letter-spacing:0.1em;text-transform:uppercase;">Technology Image</span>
+      <div class="tech-illus-wrap">
+        <!-- Intraoral 3D Scanner Illustration -->
+        <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg" class="tech-illus-svg">
+          <defs>
+            <radialGradient id="sc1" cx="50%" cy="50%" r="55%">
+              <stop offset="0%" stop-color="#C4A35A" stop-opacity="0.09"/>
+              <stop offset="100%" stop-color="#C4A35A" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="sc2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#C4A35A" stop-opacity="0.18"/>
+              <stop offset="100%" stop-color="#C4A35A" stop-opacity="0.04"/>
+            </linearGradient>
+          </defs>
+          <rect width="400" height="300" fill="url(#sc1)"/>
+          <!-- Wand body -->
+          <rect x="50" y="100" width="220" height="58" rx="29" fill="url(#sc2)" stroke="#C4A35A" stroke-width="2"/>
+          <!-- Grip ridges -->
+          <line x1="100" y1="110" x2="100" y2="148" stroke="rgba(196,163,90,0.25)" stroke-width="1.2"/>
+          <line x1="115" y1="108" x2="115" y2="150" stroke="rgba(196,163,90,0.25)" stroke-width="1.2"/>
+          <line x1="130" y1="107" x2="130" y2="151" stroke="rgba(196,163,90,0.25)" stroke-width="1.2"/>
+          <line x1="145" y1="108" x2="145" y2="150" stroke="rgba(196,163,90,0.25)" stroke-width="1.2"/>
+          <!-- Scan window tip -->
+          <rect x="255" y="112" width="36" height="34" rx="10" fill="rgba(196,163,90,0.12)" stroke="#C4A35A" stroke-width="1.6"/>
+          <!-- LED array inside tip -->
+          <circle cx="265" cy="125" r="3.5" fill="#C4A35A" opacity="0.6"/>
+          <circle cx="275" cy="125" r="3.5" fill="#C4A35A" opacity="0.8"/>
+          <circle cx="285" cy="125" r="3.5" fill="#C4A35A" opacity="0.6"/>
+          <circle cx="265" cy="135" r="3.5" fill="#C4A35A" opacity="0.5"/>
+          <circle cx="275" cy="135" r="3.5" fill="#C4A35A" opacity="0.7"/>
+          <circle cx="285" cy="135" r="3.5" fill="#C4A35A" opacity="0.5"/>
+          <!-- Scan beam lines projecting from tip -->
+          <path d="M291 115 L340 80" stroke="#C4A35A" stroke-width="0.9" stroke-dasharray="4 3" opacity="0.45"/>
+          <path d="M291 129 L350 129" stroke="#C4A35A" stroke-width="0.9" stroke-dasharray="4 3" opacity="0.55"/>
+          <path d="M291 143 L340 178" stroke="#C4A35A" stroke-width="0.9" stroke-dasharray="4 3" opacity="0.45"/>
+          <!-- 3D mesh wireframe of scanned arch -->
+          <ellipse cx="350" cy="129" rx="34" ry="48" fill="rgba(196,163,90,0.04)" stroke="rgba(196,163,90,0.35)" stroke-width="1.2"/>
+          <!-- Mesh vertical lines -->
+          <line x1="325" y1="87" x2="325" y2="171" stroke="rgba(196,163,90,0.15)" stroke-width="0.8"/>
+          <line x1="338" y1="82" x2="338" y2="176" stroke="rgba(196,163,90,0.15)" stroke-width="0.8"/>
+          <line x1="350" y1="81" x2="350" y2="177" stroke="rgba(196,163,90,0.15)" stroke-width="0.8"/>
+          <line x1="362" y1="82" x2="362" y2="176" stroke="rgba(196,163,90,0.15)" stroke-width="0.8"/>
+          <line x1="375" y1="87" x2="375" y2="171" stroke="rgba(196,163,90,0.15)" stroke-width="0.8"/>
+          <!-- Mesh horizontal lines -->
+          <line x1="317" y1="100" x2="383" y2="100" stroke="rgba(196,163,90,0.15)" stroke-width="0.8"/>
+          <line x1="316" y1="115" x2="384" y2="115" stroke="rgba(196,163,90,0.15)" stroke-width="0.8"/>
+          <line x1="316" y1="129" x2="384" y2="129" stroke="rgba(196,163,90,0.22)" stroke-width="1"/>
+          <line x1="316" y1="143" x2="384" y2="143" stroke="rgba(196,163,90,0.15)" stroke-width="0.8"/>
+          <line x1="317" y1="158" x2="383" y2="158" stroke="rgba(196,163,90,0.15)" stroke-width="0.8"/>
+          <!-- Active scan cursor -->
+          <circle cx="350" cy="129" r="6" fill="rgba(196,163,90,0.2)" stroke="#C4A35A" stroke-width="1.4"/>
+          <circle cx="350" cy="129" r="2.5" fill="#C4A35A" opacity="0.9"/>
+          <!-- Button on wand -->
+          <rect x="82" y="117" width="30" height="14" rx="7" fill="rgba(196,163,90,0.1)" stroke="#C4A35A" stroke-width="1.2"/>
+          <!-- USB / connector at base -->
+          <rect x="50" y="119" width="16" height="20" rx="4" fill="rgba(196,163,90,0.06)" stroke="#C4A35A" stroke-width="1.2"/>
+          <text x="160" y="188" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(196,163,90,0.55)" letter-spacing="1.4">INTRAORAL 3D SCANNER</text>
+        </svg>
       </div>
     </div>
 
     <!-- Tech 3 -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-bottom:60px;" data-reveal>
-      <div style="background:var(--black-3);border:1px solid var(--gold-border);border-radius:var(--radius-xl);aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;color:var(--gold);">
-        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>
-        <span style="font-size:0.75rem;color:var(--gray);letter-spacing:0.1em;text-transform:uppercase;">Technology Image</span>
+      <div class="tech-illus-wrap">
+        <!-- Diode Laser Unit Illustration -->
+        <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg" class="tech-illus-svg">
+          <defs>
+            <radialGradient id="ls1" cx="50%" cy="50%" r="55%">
+              <stop offset="0%" stop-color="#C4A35A" stop-opacity="0.09"/>
+              <stop offset="100%" stop-color="#C4A35A" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="ls2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="rgba(196,163,90,0.14)"/>
+              <stop offset="100%" stop-color="rgba(196,163,90,0.04)"/>
+            </linearGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="2.5" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <rect width="400" height="300" fill="url(#ls1)"/>
+          <!-- Laser unit main body -->
+          <rect x="36" y="60" width="148" height="178" rx="14" fill="url(#ls2)" stroke="#C4A35A" stroke-width="2"/>
+          <!-- Display panel -->
+          <rect x="52" y="76" width="116" height="72" rx="8" fill="rgba(0,0,0,0.5)" stroke="#C4A35A" stroke-width="1"/>
+          <!-- Waveform on display -->
+          <polyline points="60,112 70,112 76,92 84,132 92,92 100,132 108,112 116,112 122,100 130,122 138,112 158,112" stroke="#C4A35A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7" fill="none"/>
+          <!-- Power level bar -->
+          <rect x="60" y="136" width="96" height="6" rx="3" fill="rgba(196,163,90,0.12)"/>
+          <rect x="60" y="136" width="64" height="6" rx="3" fill="#C4A35A" opacity="0.7"/>
+          <text x="110" y="68" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7.5" fill="rgba(196,163,90,0.5)" letter-spacing="1.2">DIODE LASER 980nm</text>
+          <!-- Control knob -->
+          <circle cx="74" cy="166" r="16" fill="rgba(196,163,90,0.07)" stroke="#C4A35A" stroke-width="1.4"/>
+          <circle cx="74" cy="166" r="6" fill="rgba(196,163,90,0.15)" stroke="#C4A35A" stroke-width="1"/>
+          <line x1="74" y1="154" x2="74" y2="160" stroke="#C4A35A" stroke-width="1.6" stroke-linecap="round"/>
+          <!-- Power button -->
+          <circle cx="120" cy="166" r="14" fill="rgba(196,163,90,0.06)" stroke="#C4A35A" stroke-width="1.4"/>
+          <path d="M120 155 L120 161" stroke="#C4A35A" stroke-width="2" stroke-linecap="round"/>
+          <path d="M113 159 a9 9 0 1 0 14 0" stroke="#C4A35A" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+          <!-- Port at base -->
+          <rect x="70" y="214" width="80" height="10" rx="4" fill="rgba(196,163,90,0.07)" stroke="#C4A35A" stroke-width="1"/>
+          <!-- Cable/fiber going to handpiece -->
+          <path d="M184 138 C210 138 220 155 244 162 C260 168 270 160 290 152" stroke="#C4A35A" stroke-width="2.2" stroke-linecap="round" opacity="0.55"/>
+          <!-- Handpiece -->
+          <rect x="290" y="134" width="66" height="36" rx="18" fill="url(#ls2)" stroke="#C4A35A" stroke-width="1.8"/>
+          <!-- Fiber tip -->
+          <rect x="354" y="145" width="22" height="14" rx="6" fill="rgba(196,163,90,0.1)" stroke="#C4A35A" stroke-width="1.4"/>
+          <!-- Laser beam -->
+          <line x1="376" y1="150" x2="395" y2="140" stroke="#C4A35A" stroke-width="1.6" stroke-dasharray="3 3" filter="url(#glow)" opacity="0.9"/>
+          <line x1="376" y1="152" x2="398" y2="152" stroke="#C4A35A" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.65"/>
+          <line x1="376" y1="154" x2="395" y2="163" stroke="#C4A35A" stroke-width="1.6" stroke-dasharray="3 3" filter="url(#glow)" opacity="0.9"/>
+          <!-- Beam scatter dot -->
+          <circle cx="393" cy="152" r="4" fill="rgba(196,163,90,0.35)" filter="url(#glow)"/>
+          <!-- Handpiece button -->
+          <rect x="308" y="142" width="22" height="10" rx="5" fill="rgba(196,163,90,0.1)" stroke="rgba(196,163,90,0.4)" stroke-width="1"/>
+          <!-- Safety key -->
+          <rect x="52" y="228" width="30" height="6" rx="3" fill="rgba(196,163,90,0.07)" stroke="rgba(196,163,90,0.3)" stroke-width="1"/>
+          <text x="110" y="248" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="rgba(196,163,90,0.45)" letter-spacing="1">LASER UNIT + FIBER HANDPIECE</text>
+        </svg>
       </div>
       <div>
         <span class="section-label">Technology 03</span>
@@ -223,10 +384,291 @@
           </div>
         </div>
       </div>
-      <div style="background:var(--black-3);border:1px solid var(--gold-border);border-radius:var(--radius-xl);aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;color:var(--gold);">
-        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
-        <span style="font-size:0.75rem;color:var(--gray);letter-spacing:0.1em;text-transform:uppercase;">Technology Image</span>
+      <div class="tech-illus-wrap">
+        <!-- Digital Smile Design Monitor Illustration -->
+        <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg" class="tech-illus-svg">
+          <defs>
+            <radialGradient id="dsd1" cx="50%" cy="50%" r="55%">
+              <stop offset="0%" stop-color="#C4A35A" stop-opacity="0.09"/>
+              <stop offset="100%" stop-color="#C4A35A" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <rect width="400" height="300" fill="url(#dsd1)"/>
+          <!-- Monitor body -->
+          <rect x="44" y="34" width="312" height="198" rx="12" fill="rgba(196,163,90,0.06)" stroke="#C4A35A" stroke-width="2"/>
+          <!-- Screen -->
+          <rect x="58" y="48" width="284" height="170" rx="6" fill="rgba(0,0,0,0.55)" stroke="rgba(196,163,90,0.2)" stroke-width="1"/>
+          <!-- Face outline on screen -->
+          <ellipse cx="200" cy="118" rx="70" ry="80" fill="none" stroke="rgba(196,163,90,0.18)" stroke-width="1.2" stroke-dasharray="5 4"/>
+          <!-- Facial guideline - horizontal -->
+          <line x1="100" y1="118" x2="300" y2="118" stroke="rgba(196,163,90,0.12)" stroke-width="0.8" stroke-dasharray="4 4"/>
+          <!-- Facial guideline - vertical -->
+          <line x1="200" y1="55" x2="200" y2="210" stroke="rgba(196,163,90,0.12)" stroke-width="0.8" stroke-dasharray="4 4"/>
+          <!-- Smile arch – the centerpiece -->
+          <path d="M148 148 Q168 172 200 176 Q232 172 252 148" stroke="#C4A35A" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.9"/>
+          <!-- Upper teeth row -->
+          <rect x="156" y="133" width="15" height="18" rx="4" fill="rgba(196,163,90,0.08)" stroke="#C4A35A" stroke-width="1.3"/>
+          <rect x="173" y="130" width="17" height="22" rx="4" fill="rgba(196,163,90,0.1)" stroke="#C4A35A" stroke-width="1.5"/>
+          <rect x="192" y="129" width="16" height="23" rx="4" fill="rgba(196,163,90,0.12)" stroke="#C4A35A" stroke-width="1.6"/>
+          <rect x="210" y="129" width="16" height="23" rx="4" fill="rgba(196,163,90,0.12)" stroke="#C4A35A" stroke-width="1.6"/>
+          <rect x="228" y="130" width="17" height="22" rx="4" fill="rgba(196,163,90,0.1)" stroke="#C4A35A" stroke-width="1.5"/>
+          <!-- Measurement tick on tooth -->
+          <line x1="192" y1="140" x2="226" y2="140" stroke="rgba(196,163,90,0.5)" stroke-width="0.8" stroke-dasharray="2 2"/>
+          <line x1="192" y1="128" x2="192" y2="134" stroke="#C4A35A" stroke-width="1"/>
+          <line x1="226" y1="128" x2="226" y2="134" stroke="#C4A35A" stroke-width="1"/>
+          <!-- Lip lines -->
+          <path d="M155 148 Q175 155 200 157 Q225 155 245 148" stroke="rgba(196,163,90,0.3)" stroke-width="1.2" fill="none"/>
+          <!-- Eye placeholders -->
+          <ellipse cx="170" cy="95" rx="12" ry="8" fill="none" stroke="rgba(196,163,90,0.3)" stroke-width="1"/>
+          <ellipse cx="230" cy="95" rx="12" ry="8" fill="none" stroke="rgba(196,163,90,0.3)" stroke-width="1"/>
+          <!-- DSD measurement annotations -->
+          <line x1="80" y1="133" x2="148" y2="133" stroke="rgba(196,163,90,0.3)" stroke-width="0.8"/>
+          <circle cx="80" cy="133" r="2.5" fill="rgba(196,163,90,0.5)"/>
+          <text x="82" y="127" font-family="DM Sans,sans-serif" font-size="7" fill="rgba(196,163,90,0.6)">MIDLINE</text>
+          <line x1="252" y1="151" x2="316" y2="151" stroke="rgba(196,163,90,0.3)" stroke-width="0.8"/>
+          <circle cx="316" cy="151" r="2.5" fill="rgba(196,163,90,0.5)"/>
+          <text x="255" y="145" font-family="DM Sans,sans-serif" font-size="7" fill="rgba(196,163,90,0.6)">SMILE ARC</text>
+          <!-- Colour palette strip -->
+          <rect x="68" y="185" width="12" height="24" rx="3" fill="rgba(196,163,90,0.65)"/>
+          <rect x="84" y="185" width="12" height="24" rx="3" fill="rgba(196,163,90,0.4)"/>
+          <rect x="100" y="185" width="12" height="24" rx="3" fill="rgba(196,163,90,0.2)"/>
+          <rect x="116" y="185" width="12" height="24" rx="3" fill="rgba(255,255,255,0.15)"/>
+          <!-- Status bar -->
+          <rect x="146" y="190" width="92" height="14" rx="4" fill="rgba(196,163,90,0.08)" stroke="rgba(196,163,90,0.2)" stroke-width="0.8"/>
+          <text x="192" y="201" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7" fill="rgba(196,163,90,0.65)" letter-spacing="0.8">SMILE SIMULATION v3.2</text>
+          <!-- Monitor stand -->
+          <rect x="186" y="232" width="28" height="14" rx="3" fill="rgba(196,163,90,0.06)" stroke="#C4A35A" stroke-width="1.2"/>
+          <rect x="166" y="244" width="68" height="8" rx="4" fill="rgba(196,163,90,0.07)" stroke="#C4A35A" stroke-width="1.2"/>
+          <text x="200" y="268" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(196,163,90,0.5)" letter-spacing="1.2">DIGITAL SMILE DESIGN</text>
+        </svg>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPMENT ARSENAL -->
+<section class="section section--light">
+  <div class="container">
+    <div class="center" data-reveal>
+      <span class="section-label">Our Equipment</span>
+      <h2 class="section-heading">The Arsenal Behind<br><em>Precision Dentistry</em></h2>
+      <p>Every procedure at Grace Dental Care is backed by professional-grade equipment used in top clinics worldwide.</p>
+    </div>
+    <div class="equip-grid" data-reveal>
+
+      <!-- OPG Panoramic X-Ray -->
+      <div class="equip-card">
+        <div class="equip-card__visual">
+          <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="150" fill="rgba(196,163,90,0.04)"/>
+            <!-- Column -->
+            <rect x="88" y="10" width="24" height="130" rx="6" fill="rgba(196,163,90,0.08)" stroke="#C4A35A" stroke-width="1.4"/>
+            <!-- Rotating arm -->
+            <rect x="36" y="44" width="128" height="16" rx="8" fill="rgba(196,163,90,0.1)" stroke="#C4A35A" stroke-width="1.4"/>
+            <!-- X-ray source end -->
+            <rect x="28" y="38" width="22" height="28" rx="5" fill="rgba(196,163,90,0.07)" stroke="#C4A35A" stroke-width="1.2"/>
+            <circle cx="39" cy="52" r="5" fill="rgba(196,163,90,0.2)" stroke="#C4A35A" stroke-width="1"/>
+            <!-- Detector end -->
+            <rect x="150" y="38" width="22" height="28" rx="5" fill="rgba(196,163,90,0.07)" stroke="#C4A35A" stroke-width="1.2"/>
+            <!-- Chin rest -->
+            <rect x="84" y="76" width="32" height="14" rx="5" fill="rgba(196,163,90,0.08)" stroke="#C4A35A" stroke-width="1.2"/>
+            <!-- Panoramic arc hint -->
+            <path d="M52 95 Q100 118 148 95" stroke="#C4A35A" stroke-width="1" stroke-dasharray="4 3" opacity="0.45" fill="none"/>
+            <text x="100" y="138" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7.5" fill="rgba(196,163,90,0.55)" letter-spacing="1">OPG / PANORAMIC</text>
+          </svg>
+        </div>
+        <div class="equip-card__body">
+          <span class="equip-card__tag">Diagnostic Imaging</span>
+          <p class="equip-card__name">Panoramic OPG X-Ray</p>
+          <p class="equip-card__brand">Planmeca ProMax Series</p>
+          <p class="equip-card__desc">Single-shot full-jaw panoramic image for implant planning, wisdom tooth assessment, and jaw structure evaluation — minimal radiation, maximum detail.</p>
+        </div>
+      </div>
+
+      <!-- Dental Operating Microscope -->
+      <div class="equip-card">
+        <div class="equip-card__visual">
+          <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="150" fill="rgba(196,163,90,0.04)"/>
+            <!-- Stand arm -->
+            <rect x="94" y="100" width="12" height="46" rx="4" fill="rgba(196,163,90,0.08)" stroke="#C4A35A" stroke-width="1.3"/>
+            <rect x="72" y="138" width="56" height="8" rx="4" fill="rgba(196,163,90,0.07)" stroke="#C4A35A" stroke-width="1.2"/>
+            <!-- Horizontal arm -->
+            <rect x="62" y="64" width="76" height="10" rx="5" fill="rgba(196,163,90,0.09)" stroke="#C4A35A" stroke-width="1.3"/>
+            <!-- Scope body -->
+            <rect x="82" y="16" width="36" height="56" rx="8" fill="rgba(196,163,90,0.1)" stroke="#C4A35A" stroke-width="1.5"/>
+            <!-- Eye pieces -->
+            <ellipse cx="90" cy="20" rx="7" ry="5" fill="rgba(0,0,0,0.5)" stroke="#C4A35A" stroke-width="1.2"/>
+            <ellipse cx="110" cy="20" rx="7" ry="5" fill="rgba(0,0,0,0.5)" stroke="#C4A35A" stroke-width="1.2"/>
+            <!-- Objective lens -->
+            <circle cx="100" cy="66" r="13" fill="rgba(196,163,90,0.06)" stroke="#C4A35A" stroke-width="1.4"/>
+            <circle cx="100" cy="66" r="7" fill="rgba(196,163,90,0.12)" stroke="#C4A35A" stroke-width="1"/>
+            <!-- Focus ring -->
+            <rect x="78" y="44" width="44" height="8" rx="4" fill="rgba(196,163,90,0.06)" stroke="rgba(196,163,90,0.35)" stroke-width="1"/>
+            <!-- Light halo -->
+            <circle cx="100" cy="66" r="20" fill="none" stroke="rgba(196,163,90,0.1)" stroke-width="4"/>
+            <text x="100" y="142" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7.5" fill="rgba(196,163,90,0.55)" letter-spacing="1">OPERATING MICROSCOPE</text>
+          </svg>
+        </div>
+        <div class="equip-card__body">
+          <span class="equip-card__tag">Precision Surgery</span>
+          <p class="equip-card__name">Dental Operating Microscope</p>
+          <p class="equip-card__brand">Carl Zeiss OPMI</p>
+          <p class="equip-card__desc">Up to 25× magnification for root canal treatments, microsurgeries, and restorations. Enables procedures impossible with the naked eye.</p>
+        </div>
+      </div>
+
+      <!-- Ultrasonic Scaler -->
+      <div class="equip-card">
+        <div class="equip-card__visual">
+          <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="150" fill="rgba(196,163,90,0.04)"/>
+            <!-- Unit body -->
+            <rect x="30" y="30" width="90" height="90" rx="10" fill="rgba(196,163,90,0.07)" stroke="#C4A35A" stroke-width="1.5"/>
+            <!-- Screen -->
+            <rect x="42" y="42" width="66" height="40" rx="5" fill="rgba(0,0,0,0.45)" stroke="rgba(196,163,90,0.25)" stroke-width="1"/>
+            <!-- Waveform on screen -->
+            <polyline points="48,62 56,54 64,70 72,54 80,70 88,54 96,62 100,62" stroke="#C4A35A" stroke-width="1.2" fill="none" opacity="0.65"/>
+            <!-- Mode buttons -->
+            <circle cx="50" cy="100" r="9" fill="rgba(196,163,90,0.08)" stroke="#C4A35A" stroke-width="1.1"/>
+            <circle cx="75" cy="100" r="9" fill="#C4A35A" opacity="0.7"/>
+            <circle cx="100" cy="100" r="9" fill="rgba(196,163,90,0.08)" stroke="#C4A35A" stroke-width="1.1"/>
+            <!-- Cable -->
+            <path d="M120 80 C145 80 150 65 168 60" stroke="#C4A35A" stroke-width="1.8" stroke-dasharray="4 3" opacity="0.5"/>
+            <!-- Handpiece -->
+            <rect x="148" y="44" width="36" height="30" rx="15" fill="rgba(196,163,90,0.1)" stroke="#C4A35A" stroke-width="1.5"/>
+            <!-- Scaling tip -->
+            <path d="M184 56 Q196 54 198 62 Q196 68 184 68" stroke="#C4A35A" stroke-width="1.3" fill="none" opacity="0.7"/>
+            <!-- Vibration marks -->
+            <line x1="192" y1="52" x2="198" y2="48" stroke="rgba(196,163,90,0.5)" stroke-width="0.9" stroke-dasharray="2 2"/>
+            <line x1="194" y1="58" x2="200" y2="56" stroke="rgba(196,163,90,0.5)" stroke-width="0.9" stroke-dasharray="2 2"/>
+            <line x1="192" y1="68" x2="198" y2="73" stroke="rgba(196,163,90,0.5)" stroke-width="0.9" stroke-dasharray="2 2"/>
+            <text x="100" y="138" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7.5" fill="rgba(196,163,90,0.55)" letter-spacing="1">ULTRASONIC SCALER</text>
+          </svg>
+        </div>
+        <div class="equip-card__body">
+          <span class="equip-card__tag">Periodontal Care</span>
+          <p class="equip-card__name">Ultrasonic Piezo Scaler</p>
+          <p class="equip-card__brand">EMS Piezon Master 700</p>
+          <p class="equip-card__desc">Piezoelectric ultrasonic scaling removes tartar, biofilm, and calculus with precision — gentle on enamel, highly effective on deep deposits.</p>
+        </div>
+      </div>
+
+      <!-- Rotary Endo System -->
+      <div class="equip-card">
+        <div class="equip-card__visual">
+          <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="150" fill="rgba(196,163,90,0.04)"/>
+            <!-- Motor unit -->
+            <rect x="20" y="30" width="86" height="88" rx="10" fill="rgba(196,163,90,0.07)" stroke="#C4A35A" stroke-width="1.5"/>
+            <!-- Display -->
+            <rect x="32" y="42" width="62" height="38" rx="5" fill="rgba(0,0,0,0.45)" stroke="rgba(196,163,90,0.25)" stroke-width="1"/>
+            <!-- RPM readout -->
+            <text x="63" y="60" text-anchor="middle" font-family="DM Sans,monospace" font-size="14" font-weight="700" fill="rgba(196,163,90,0.8)">300</text>
+            <text x="63" y="72" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="6.5" fill="rgba(196,163,90,0.45)" letter-spacing="1">RPM</text>
+            <!-- Torque bar -->
+            <rect x="32" y="86" width="62" height="5" rx="2" fill="rgba(196,163,90,0.12)"/>
+            <rect x="32" y="86" width="40" height="5" rx="2" fill="#C4A35A" opacity="0.65"/>
+            <text x="63" y="105" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="6.5" fill="rgba(196,163,90,0.45)" letter-spacing="0.8">TORQUE CONTROL</text>
+            <!-- Contra-angle handpiece -->
+            <path d="M106 74 L140 74 L148 58 L160 58" stroke="#C4A35A" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity="0.12"/>
+            <path d="M106 74 L140 74 L148 58 L160 58" stroke="#C4A35A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.7"/>
+            <!-- NiTi file -->
+            <line x1="160" y1="58" x2="196" y2="30" stroke="#C4A35A" stroke-width="1.8" stroke-linecap="round" opacity="0.8"/>
+            <!-- File spiral taper -->
+            <line x1="162" y1="56" x2="166" y2="61" stroke="rgba(196,163,90,0.4)" stroke-width="0.8"/>
+            <line x1="167" y1="52" x2="171" y2="57" stroke="rgba(196,163,90,0.4)" stroke-width="0.8"/>
+            <line x1="173" y1="47" x2="177" y2="52" stroke="rgba(196,163,90,0.4)" stroke-width="0.8"/>
+            <line x1="179" y1="43" x2="183" y2="48" stroke="rgba(196,163,90,0.4)" stroke-width="0.8"/>
+            <!-- Rotation arrows -->
+            <path d="M175 28 a6 6 0 1 1 0.1 0" stroke="rgba(196,163,90,0.4)" stroke-width="1" fill="none"/>
+            <text x="100" y="138" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7.5" fill="rgba(196,163,90,0.55)" letter-spacing="1">ROTARY ENDODONTICS</text>
+          </svg>
+        </div>
+        <div class="equip-card__body">
+          <span class="equip-card__tag">Root Canal</span>
+          <p class="equip-card__name">Rotary Endo System</p>
+          <p class="equip-card__brand">VDW Gold Reciproc</p>
+          <p class="equip-card__desc">Reciprocating NiTi file system with torque control completes root canals faster and more safely — reducing procedure time and post-op discomfort.</p>
+        </div>
+      </div>
+
+      <!-- B-Class Autoclave -->
+      <div class="equip-card">
+        <div class="equip-card__visual">
+          <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="150" fill="rgba(196,163,90,0.04)"/>
+            <!-- Main body -->
+            <rect x="22" y="28" width="156" height="94" rx="12" fill="rgba(196,163,90,0.07)" stroke="#C4A35A" stroke-width="1.6"/>
+            <!-- Door circle -->
+            <circle cx="74" cy="75" r="38" fill="rgba(196,163,90,0.05)" stroke="#C4A35A" stroke-width="1.4"/>
+            <circle cx="74" cy="75" r="28" fill="rgba(0,0,0,0.35)" stroke="rgba(196,163,90,0.2)" stroke-width="1"/>
+            <circle cx="74" cy="75" r="10" fill="rgba(196,163,90,0.08)" stroke="#C4A35A" stroke-width="1.2"/>
+            <!-- Door handle -->
+            <line x1="38" y1="75" x2="22" y2="75" stroke="#C4A35A" stroke-width="2" stroke-linecap="round"/>
+            <!-- Locking bolts -->
+            <circle cx="50" cy="46" r="4" fill="rgba(196,163,90,0.12)" stroke="#C4A35A" stroke-width="1"/>
+            <circle cx="50" cy="104" r="4" fill="rgba(196,163,90,0.12)" stroke="#C4A35A" stroke-width="1"/>
+            <circle cx="98" cy="46" r="4" fill="rgba(196,163,90,0.12)" stroke="#C4A35A" stroke-width="1"/>
+            <circle cx="98" cy="104" r="4" fill="rgba(196,163,90,0.12)" stroke="#C4A35A" stroke-width="1"/>
+            <!-- Control panel -->
+            <rect x="124" y="38" width="46" height="74" rx="6" fill="rgba(196,163,90,0.05)" stroke="rgba(196,163,90,0.2)" stroke-width="1"/>
+            <!-- Pressure gauge -->
+            <circle cx="147" cy="62" r="16" fill="rgba(0,0,0,0.3)" stroke="#C4A35A" stroke-width="1.2"/>
+            <path d="M140 70 a12 12 0 0 1 14 0" stroke="#C4A35A" stroke-width="1" fill="none" opacity="0.5"/>
+            <line x1="147" y1="62" x2="152" y2="53" stroke="#C4A35A" stroke-width="1.4" stroke-linecap="round" opacity="0.8"/>
+            <!-- Status LED -->
+            <circle cx="138" cy="90" r="5" fill="#C4A35A" opacity="0.75"/>
+            <circle cx="156" cy="90" r="5" fill="rgba(196,163,90,0.15)" stroke="rgba(196,163,90,0.3)" stroke-width="1"/>
+            <text x="100" y="140" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7.5" fill="rgba(196,163,90,0.55)" letter-spacing="1">B-CLASS AUTOCLAVE</text>
+          </svg>
+        </div>
+        <div class="equip-card__body">
+          <span class="equip-card__tag">Sterilisation</span>
+          <p class="equip-card__name">B-Class Autoclave</p>
+          <p class="equip-card__brand">Melag Vacuklav 31B+</p>
+          <p class="equip-card__desc">EU Class B steam sterilisation meets the strictest infection-control standards. Every instrument is fully sterilised, validated, and tracked for your safety.</p>
+        </div>
+      </div>
+
+      <!-- CAD/CAM Milling Unit -->
+      <div class="equip-card">
+        <div class="equip-card__visual">
+          <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="150" fill="rgba(196,163,90,0.04)"/>
+            <!-- Milling unit body -->
+            <rect x="18" y="22" width="108" height="106" rx="10" fill="rgba(196,163,90,0.07)" stroke="#C4A35A" stroke-width="1.6"/>
+            <!-- Mill chamber window -->
+            <rect x="30" y="34" width="84" height="66" rx="6" fill="rgba(0,0,0,0.45)" stroke="#C4A35A" stroke-width="1"/>
+            <!-- Ceramic block inside -->
+            <rect x="54" y="50" width="36" height="26" rx="4" fill="rgba(196,163,90,0.1)" stroke="#C4A35A" stroke-width="1.2"/>
+            <!-- Milling path arcs -->
+            <path d="M54 56 Q72 42 90 56" stroke="rgba(196,163,90,0.35)" stroke-width="0.9" fill="none" stroke-dasharray="3 3"/>
+            <path d="M54 63 Q72 50 90 63" stroke="rgba(196,163,90,0.3)" stroke-width="0.9" fill="none" stroke-dasharray="3 3"/>
+            <!-- Milling bur -->
+            <line x1="72" y1="34" x2="72" y2="52" stroke="#C4A35A" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M66 52 L72 62 L78 52 Z" fill="#C4A35A" opacity="0.7"/>
+            <!-- Axis marks -->
+            <text x="32" y="92" font-family="DM Sans,monospace" font-size="7.5" fill="rgba(196,163,90,0.5)">X: 18.4mm</text>
+            <text x="32" y="104" font-family="DM Sans,monospace" font-size="7.5" fill="rgba(196,163,90,0.5)">Y:  6.2mm</text>
+            <!-- Crown output -->
+            <rect x="140" y="44" width="46" height="62" rx="8" fill="rgba(196,163,90,0.06)" stroke="#C4A35A" stroke-width="1.4"/>
+            <!-- Crown shape -->
+            <path d="M150 88 Q154 64 163 60 Q172 64 176 88 Q168 96 163 96 Q158 96 150 88 Z" fill="rgba(196,163,90,0.1)" stroke="#C4A35A" stroke-width="1.3"/>
+            <!-- Crown detail lines -->
+            <path d="M153 80 Q163 72 173 80" stroke="rgba(196,163,90,0.35)" stroke-width="0.9" fill="none"/>
+            <text x="163" y="114" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="6.5" fill="rgba(196,163,90,0.45)" letter-spacing="0.5">CROWN</text>
+            <text x="100" y="142" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7.5" fill="rgba(196,163,90,0.55)" letter-spacing="1">CAD/CAM MILLING</text>
+          </svg>
+        </div>
+        <div class="equip-card__body">
+          <span class="equip-card__tag">Same-Day Restorations</span>
+          <p class="equip-card__name">CAD/CAM Milling Unit</p>
+          <p class="equip-card__brand">Sirona CEREC</p>
+          <p class="equip-card__desc">Design and mill ceramic crowns, inlays, and veneers in a single visit. No temporaries, no second appointments — just a perfectly fitted, tooth-coloured restoration.</p>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>

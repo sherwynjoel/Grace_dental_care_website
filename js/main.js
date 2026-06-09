@@ -577,15 +577,8 @@
 
   /* ── Preloader ───────────────────────────────────────── */
   (function () {
-    const preloader = document.createElement('div');
-    preloader.className = 'preloader';
-    preloader.setAttribute('aria-hidden', 'true');
-    preloader.innerHTML = `
-      <svg class="preloader__tooth" viewBox="0 0 52 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M10 4C6 4 2 8 2 14c0 4 1.5 8 3 12l2 10c1 5 3 8 5 8s3-2 4-6l2-6 2 6c1 4 3 6 4 6s4-3 5-8l2-10c1.5-4 3-8 3-12 0-6-4-10-8-10-2.5 0-4.5 1-6 2.5C17.5 5 15.5 4 13 4H10z" fill="currentColor" opacity="0.9"/>
-      </svg>
-      <div class="preloader__bar-wrap"><div class="preloader__bar"></div></div>`;
-    document.body.insertBefore(preloader, document.body.firstChild);
+    const preloader = document.getElementById('preloader');
+    if (!preloader) return;
 
     function dismiss() {
       preloader.classList.add('done');
@@ -1051,94 +1044,104 @@
 
   /* ── Dental Health Score Quiz ────────────────────────── */
   (function () {
-    const steps    = document.querySelectorAll('.health-quiz__step');
-    const progBar  = document.getElementById('hqProgressBar');
-    const resultEl = document.getElementById('hqResult');
-    const circle   = document.getElementById('hqScoreCircle');
-    const numEl    = document.getElementById('hqScoreNum');
-    const titleEl  = document.getElementById('hqScoreTitle');
-    const recEl    = document.getElementById('hqRec');
-    const retake   = document.getElementById('hqRetake');
-    const qWrap    = document.getElementById('hqQuestions');
-    if (!steps.length || !progBar) return;
+    var panel    = document.getElementById('dhsPanel');
+    var resultEl = document.getElementById('dhsResult');
+    var circle   = document.getElementById('dhsCircle');
+    var numEl    = document.getElementById('dhsNum');
+    var titleEl  = document.getElementById('dhsTitle');
+    var recEl    = document.getElementById('dhsRec');
+    var retake   = document.getElementById('dhsRetake');
+    if (!panel || !resultEl) return;
 
-    const CIRC = 377; /* 2π × 60 */
-    let scores = [];
+    var questions = Array.from(panel.querySelectorAll('.dhs__q'));
+    var dots      = Array.from(document.querySelectorAll('.dhs__dot'));
+    var lines     = Array.from(document.querySelectorAll('.dhs__line'));
+    if (!questions.length) return;
 
-    const recs = [
-      { min: 80, label: 'Excellent! 🌟',          text: '<strong>Your oral hygiene is outstanding.</strong> Keep up the great habits — twice-yearly professional cleanings will keep your smile perfect. Consider cosmetic options to further enhance your already-great smile.' },
-      { min: 60, label: 'Good 👍',                  text: '<strong>You\'re doing well overall.</strong> Small improvements — like daily flossing and reducing sugary snacks — could push your score to Excellent. Book a check-up so we can identify and address any minor issues early.' },
-      { min: 40, label: 'Fair — Needs Attention',   text: '<strong>Some areas need care.</strong> There may be early signs of gum disease or decay that are best caught now. Most issues at this stage are simple and affordable to treat. We\'d love to help you turn this around.' },
-      { min:  0, label: 'Your Smile Needs TLC ❤️', text: '<strong>Don\'t worry — it\'s never too late.</strong> Many patients in a similar situation leave Grace Dental Care with a healthy, confident smile. Book a free consultation with Dr. Sherin for a gentle, step-by-step plan.' },
+    var CIRC   = 364;
+    var scores = [];
+
+    var recs = [
+      { min: 80, label: 'Excellent!',
+        text: '<strong>Your oral hygiene is outstanding.</strong> Keep up the great habits — twice-yearly professional cleanings will keep your smile perfect. Consider cosmetic options to further enhance your already-great smile.' },
+      { min: 60, label: 'Good',
+        text: '<strong>You\'re doing well overall.</strong> Small improvements — like daily flossing and reducing sugary snacks — could push your score to Excellent. Book a check-up so we can identify any minor issues early.' },
+      { min: 40, label: 'Fair — Needs Attention',
+        text: '<strong>Some areas need care.</strong> There may be early signs of gum disease or decay that are best caught now. Most issues at this stage are simple to treat. We\'d love to help you turn this around.' },
+      { min:  0, label: 'Your Smile Needs TLC',
+        text: '<strong>Don\'t worry — it\'s never too late.</strong> Many patients in a similar situation leave Grace Dental Care with a healthy, confident smile. Book a free consultation with Dr. Sherin for a gentle step-by-step plan.' }
     ];
 
-    function setProgress(n) { progBar.style.width = Math.round((n / steps.length) * 100) + '%'; }
-
-    function showStep(i) {
-      steps.forEach((s, j) => { s.style.display = j === i ? '' : 'none'; });
-      setProgress(i);
+    function updateTracker(activeIndex) {
+      dots.forEach(function(dot, i) {
+        dot.classList.remove('active', 'done');
+        if (i < activeIndex)        dot.classList.add('done');
+        else if (i === activeIndex) dot.classList.add('active');
+      });
+      lines.forEach(function(line, i) {
+        line.classList.toggle('done', i < activeIndex);
+      });
     }
 
-    steps.forEach((step, si) => {
-      const opts  = step.querySelectorAll('.health-quiz__option');
-      const nextB = document.getElementById(`hqNext${si + 1}`);
-      let chosen  = null;
+    function showQuestion(i) {
+      questions.forEach(function(q, j) { q.classList.toggle('active', j === i); });
+      updateTracker(i);
+    }
 
-      opts.forEach(opt => {
-        opt.addEventListener('click', () => {
-          opts.forEach(o => o.classList.remove('selected'));
-          opt.classList.add('selected');
-          chosen = parseInt(opt.dataset.score, 10);
-          if (nextB) nextB.style.display = 'inline-flex';
-        });
-      });
+    function showResult() {
+      panel.style.display    = 'none';
+      resultEl.style.display = 'block';
+      updateTracker(questions.length);
 
-      if (nextB) nextB.addEventListener('click', () => {
-        if (chosen === null) return;
-        scores[si] = chosen;
+      var total  = Math.min(scores.reduce(function(a, b) { return a + b; }, 0), 100);
+      var offset = CIRC - (total / 100) * CIRC;
+      if (circle) setTimeout(function() { circle.style.strokeDashoffset = offset; }, 80);
 
-        if (si < steps.length - 1) {
-          showStep(si + 1);
-        } else {
-          qWrap.style.display = 'none';
-          resultEl.style.display = 'block';
-          setProgress(steps.length);
+      var dur = 1400, t0 = performance.now();
+      (function tick(now) {
+        var p = Math.min((now - t0) / dur, 1);
+        if (numEl) numEl.textContent = Math.round((1 - Math.pow(1 - p, 3)) * total);
+        if (p < 1) requestAnimationFrame(tick);
+      })(t0);
 
-          const total   = Math.min(scores.reduce((a, b) => a + b, 0), 100);
-          const offset  = CIRC - (total / 100) * CIRC;
-          if (circle) setTimeout(() => { circle.style.strokeDashoffset = offset; }, 100);
+      var rec = recs.find(function(r) { return total >= r.min; });
+      if (titleEl) titleEl.textContent = rec.label;
+      if (recEl)   recEl.innerHTML     = rec.text;
+    }
 
-          const dur = 1400, t0 = performance.now();
-          (function tick(now) {
-            const p = Math.min((now - t0) / dur, 1);
-            if (numEl) numEl.textContent = Math.round((1 - Math.pow(1 - p, 3)) * total);
-            if (p < 1) requestAnimationFrame(tick);
-          })(t0);
+    panel.addEventListener('click', function(e) {
+      var opt = e.target.closest('.dhs__opt');
+      if (!opt) return;
+      var q = opt.closest('.dhs__q');
+      if (!q) return;
+      var qi = questions.indexOf(q);
+      if (qi === -1) return;
 
-          const rec = recs.find(r => total >= r.min);
-          if (titleEl) titleEl.textContent = rec.label;
-          if (recEl)   recEl.innerHTML     = rec.text;
-        }
-      });
+      q.querySelectorAll('.dhs__opt').forEach(function(o) { o.classList.remove('selected'); });
+      opt.classList.add('selected');
+      scores[qi] = parseInt(opt.dataset.score, 10);
+
+      setTimeout(function() {
+        if (qi < questions.length - 1) showQuestion(qi + 1);
+        else showResult();
+      }, 280);
     });
 
     if (retake) {
-      retake.addEventListener('click', () => {
+      retake.addEventListener('click', function() {
         scores = [];
-        steps.forEach(s => {
-          s.querySelectorAll('.health-quiz__option').forEach(o => o.classList.remove('selected'));
-          const nb = s.querySelector('[id^="hqNext"]');
-          if (nb) nb.style.display = 'none';
+        questions.forEach(function(q) {
+          q.querySelectorAll('.dhs__opt').forEach(function(o) { o.classList.remove('selected'); });
         });
         if (circle) circle.style.strokeDashoffset = CIRC;
         if (numEl)  numEl.textContent = '0';
         resultEl.style.display = 'none';
-        qWrap.style.display    = '';
-        showStep(0);
+        panel.style.display    = '';
+        showQuestion(0);
       });
     }
 
-    showStep(0);
+    showQuestion(0);
   })();
 
 })();
