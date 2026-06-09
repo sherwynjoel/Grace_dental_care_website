@@ -3421,9 +3421,9 @@ body.dark-mode .insurance-card p  { color: var(--gray) !important; }
   font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.18em;
   color: rgba(196,163,90,0.45); font-weight: 600;
 }
-.teeth-row { display: flex; gap: 5px; align-items: flex-end; justify-content: center; }
-.teeth-row--upper { align-items: flex-end; margin-bottom: 0; margin-top: 10px; }
-.teeth-row--lower { align-items: flex-start; margin-top: 0; margin-bottom: 10px; }
+.teeth-row { display: flex; gap: 4px; align-items: flex-end; justify-content: center; flex-wrap: nowrap; }
+.teeth-row--upper { align-items: flex-end; }
+.teeth-row--lower { align-items: flex-start; }
 .teeth-gap {
   width: 85%; height: 18px;
   background: linear-gradient(to right, transparent, rgba(196,163,90,0.12) 20%, rgba(196,163,90,0.18) 50%, rgba(196,163,90,0.12) 80%, transparent);
@@ -3437,24 +3437,40 @@ body.dark-mode .insurance-card p  { color: var(--gray) !important; }
   width: 60%; height: 1px;
   background: linear-gradient(to right, transparent, rgba(196,163,90,0.35), transparent);
 }
+.teeth-gum {
+  width: 100%; display: flex; justify-content: center; position: relative;
+}
+.teeth-gum--upper {
+  background: linear-gradient(to bottom, #3a1420 0%, rgba(58,20,32,0.85) 55%, rgba(58,20,32,0) 100%);
+  border-radius: 10px 10px 0 0;
+  padding: 10px 12px 0;
+}
+.teeth-gum--lower {
+  background: linear-gradient(to top, #3a1420 0%, rgba(58,20,32,0.85) 55%, rgba(58,20,32,0) 100%);
+  border-radius: 0 0 10px 10px;
+  padding: 0 12px 10px;
+}
 .tooth {
   background: transparent;
-  border: none;
-  padding: 0;
+  border: none; padding: 0;
   cursor: pointer; outline: none; flex-shrink: 0;
-  transition: color 0.18s ease, transform 0.18s ease, filter 0.18s ease;
-  color: rgba(240, 237, 230, 0.85);
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.45));
+  transition: filter 0.2s ease, transform 0.2s ease;
+  filter: drop-shadow(0 3px 5px rgba(0,0,0,0.55));
   display: flex; align-items: center; justify-content: center;
-  position: relative;
 }
-.tooth:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 4px; }
-.tooth:hover  { color: rgba(196,163,90,0.9); transform: scale(1.14); filter: drop-shadow(0 0 7px rgba(196,163,90,0.45)); }
-.tooth.active { color: var(--gold); transform: scale(1.12); filter: drop-shadow(0 0 12px rgba(196,163,90,0.75)); }
-.tooth--incisor  { width: 22px; height: 34px; }
-.tooth--canine   { width: 20px; height: 40px; }
-.tooth--premolar { width: 28px; height: 32px; }
-.tooth--molar    { width: 36px; height: 28px; }
+.tooth:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 3px; }
+.tooth:hover {
+  filter: drop-shadow(0 0 8px rgba(196,163,90,0.55)) sepia(0.55) saturate(2.8) brightness(1.12);
+  transform: scale(1.1) translateY(-3px);
+}
+.tooth.active {
+  filter: drop-shadow(0 0 16px rgba(196,163,90,0.9)) sepia(1) saturate(4) brightness(1.22);
+  transform: scale(1.08) translateY(-2px);
+}
+.tooth--incisor  { width: 24px; height: 40px; }
+.tooth--canine   { width: 22px; height: 46px; }
+.tooth--premolar { width: 30px; height: 34px; }
+.tooth--molar    { width: 42px; height: 32px; }
 
 .teeth-info {
   background: var(--black-3); border: 1px solid var(--gold-border);
@@ -3478,13 +3494,21 @@ body.dark-mode .insurance-card p  { color: var(--gray) !important; }
 .teeth-info__list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 7px; margin-bottom: 20px; }
 .teeth-info__list li { display: flex; align-items: center; gap: 9px; font-size: 0.83rem; color: var(--white-dim); }
 .teeth-info__list li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
-@media (max-width: 860px) { .teeth-map-wrap { grid-template-columns: 1fr; } }
-@media (max-width: 440px) {
-  .teeth-map { padding: 20px 12px; }
-  .tooth--molar    { width: 28px; height: 22px; }
+@media (max-width: 860px)  { .teeth-map-wrap { grid-template-columns: 1fr; } }
+@media (max-width: 600px) {
+  .teeth-map { padding: 24px 10px; }
+  .teeth-row { gap: 3px; }
+  .tooth--molar    { width: 30px; height: 23px; }
   .tooth--premolar { width: 22px; height: 25px; }
-  .tooth--canine   { width: 16px; height: 32px; }
-  .tooth--incisor  { width: 17px; height: 27px; }
+  .tooth--canine   { width: 16px; height: 34px; }
+  .tooth--incisor  { width: 18px; height: 30px; }
+}
+@media (max-width: 400px) {
+  .teeth-row { gap: 2px; }
+  .tooth--molar    { width: 24px; height: 18px; }
+  .tooth--premolar { width: 18px; height: 20px; }
+  .tooth--canine   { width: 13px; height: 28px; }
+  .tooth--incisor  { width: 14px; height: 24px; }
 }
 
 /* ============ 44. VIDEO TESTIMONIALS ============ */
