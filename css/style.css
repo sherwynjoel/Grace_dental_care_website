@@ -368,8 +368,12 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); line-height: 1.75; color: var(--
   display: none;
   flex-direction: column;
   gap: 5px;
-  padding: 8px;
+  padding: 10px;
   cursor: pointer;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
 }
 .navbar__hamburger span {
   display: block;
@@ -3428,6 +3432,95 @@ body.emergency-active .page-hero { padding-top: calc(var(--nav-height) + 44px + 
   .exit-popup { padding: 36px 16px 24px; }
   .wa-popup { width: calc(100% - 24px); }
   .cookie-banner { width: calc(100% - 24px); }
+}
+
+/* ============================================================
+   SECTION 43 — COMPREHENSIVE MOBILE OPTIMISATION
+   ============================================================ */
+
+/* ── 820px — tablet / mobile ─────────────────────────────── */
+@media (max-width: 820px) {
+  /* Reduce section padding */
+  :root { --section-pad: clamp(40px, 7vw, 72px); }
+
+  /* Disable hero background photo on mobile — saves data, prevents clutter */
+  .hero { background-image: none; }
+  .hero__bg::before, .hero__bg::after { display: none; }
+
+  /* Hero trust signal — compact */
+  .hero__reviews { gap: 8px; margin-bottom: 10px; }
+  .hero__chips   { gap: 6px; margin-bottom: 12px; }
+
+  /* About: loosen aspect ratio when stacked single column */
+  .about-preview__img { aspect-ratio: 4 / 3; }
+
+  /* Mobile nav links — 44px tap target */
+  .navbar__mobile-link { padding: 14px 20px; }
+
+  /* Compare slider — smaller radius on mobile */
+  .compare-wrap { border-radius: var(--radius-lg); }
+
+  /* Technologies grid gap reduced */
+  .grid-2[style*="gap:64px"] { gap: 32px !important; }
+}
+
+/* ── 540px — small phones ─────────────────────────────────── */
+@media (max-width: 540px) {
+  /* Prevent iOS automatic input zoom (must be ≥ 16px) */
+  input, textarea, select { font-size: 16px !important; }
+
+  /* Typography */
+  h2 { line-height: 1.15; }
+  h3 { line-height: 1.2; }
+  .section-sub { font-size: 0.88rem; max-width: 100%; }
+
+  /* Hero content */
+  .hero__tag  { font-size: 0.62rem; padding: 5px 12px; }
+  .hero__sub  { font-size: 0.88rem; margin-bottom: 16px; }
+  .hero__chip { padding: 4px 11px; font-size: 0.72rem; }
+  .hero__chips-label { font-size: 0.65rem; }
+  .hero__reviews-text { font-size: 0.74rem; gap: 3px; }
+
+  /* About photo — 3:2 on small screens */
+  .about-preview__img { aspect-ratio: 3 / 2; }
+  .about-preview__photo { object-position: center 15%; }
+
+  /* Result caption — stack label and stars */
+  .result-caption-bar { flex-direction: column; gap: 6px; padding: 12px 16px; }
+  .result-caption-stars { align-self: flex-start; }
+  .result-caption-desc { font-size: 0.82rem; }
+
+  /* Tech illustrations — wider, less tall */
+  .tech-illus-wrap { aspect-ratio: 16 / 10; padding: 16px; }
+
+  /* Equipment cards — single column */
+  .equip-grid { grid-template-columns: 1fr !important; }
+  .equip-card { flex-direction: row; align-items: center; gap: 16px; }
+  .equip-card__visual { width: 64px; height: 64px; flex-shrink: 0; }
+
+  /* Compare slider — taller on narrow screens */
+  .compare-container { aspect-ratio: 3 / 2; }
+
+  /* Preloader */
+  .preloader__logo { width: 70px; height: 70px; }
+  .preloader__name { font-size: 0.88rem; letter-spacing: 0.1em; }
+
+  /* Inner-page hero */
+  .page-hero { padding: 60px 0 44px; }
+
+  /* Ensure all buttons meet 44px tap target */
+  .btn { min-height: 44px; }
+
+  /* Footer — smaller gaps */
+  .footer { padding: 48px 0 24px; }
+}
+
+/* ── 375px — tiny phones ──────────────────────────────────── */
+@media (max-width: 375px) {
+  /* Collapse pills — no room on 375px with reviews row */
+  .hero__chips { display: none; }
+  /* Shorten review line */
+  .hero__reviews-count { display: none; }
 }
 
 /* ── Safe-area insets (iPhone notch / home indicator) ───── */
