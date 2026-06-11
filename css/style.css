@@ -600,30 +600,6 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); line-height: 1.75; color: var(--
   margin-top: 4px;
   text-transform: uppercase;
 }
-.hero__scroll {
-  position: absolute;
-  bottom: 36px;
-  left: clamp(20px, 4vw, 48px);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  z-index: 2;
-  animation: fadeIn 1.2s var(--ease) 0.6s both;
-}
-.hero__scroll span {
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: #888;
-  writing-mode: vertical-lr;
-}
-.hero__scroll-line {
-  width: 1.5px;
-  height: 48px;
-  background: linear-gradient(to bottom, var(--gold), transparent);
-  border-radius: 2px;
-  animation: float 2s ease infinite;
-}
 
 /* ============ 9. MARQUEE / SERVICES STRIP ============ */
 .marquee-section {
@@ -3289,7 +3265,6 @@ body.emergency-active .page-hero { padding-top: calc(var(--nav-height) + 44px + 
   .hero__visual { display: none; }
   .hero__ring { width: 240px; right: -60px; opacity: 0.25; }
   .hero__content { max-width: 100%; }
-  .hero__scroll { display: none; }
 
   /* About section */
   .about-preview__badge { right: 16px; bottom: 16px; }

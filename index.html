@@ -69,6 +69,27 @@
   <p class="preloader__name">Grace Dental Care</p>
   <div class="preloader__bar-wrap"><div class="preloader__bar"></div></div>
 </div>
+<script>
+  // Dismiss preloader on DOMContentLoaded (doesn't wait for images/fonts)
+  // This fixes the issue on mobile where huge hero images block window.load
+  (function(){
+    var p = document.getElementById('preloader');
+    if (!p) return;
+    function dismiss() {
+      if (p._dismissed) return;
+      p._dismissed = true;
+      p.classList.add('done');
+      setTimeout(function(){ if (p.parentNode) p.parentNode.removeChild(p); }, 650);
+    }
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      setTimeout(dismiss, 300);
+    } else {
+      document.addEventListener('DOMContentLoaded', function(){ setTimeout(dismiss, 300); });
+    }
+    // Hard cap: dismiss after 2.5s no matter what
+    setTimeout(dismiss, 2500);
+  })();
+</script>
 
 <!-- ═══ COOKIE CONSENT ════════════════════════════════════ -->
 <div class="cookie-banner" id="cookieBanner" role="region" aria-label="Cookie consent">
@@ -100,7 +121,6 @@
       <a href="blog.html"         class="navbar__link">Blog</a>
       <a href="contact.html"      class="navbar__link">Contact</a>
     </nav>
-    <a href="emergency.html" class="navbar__emergency-pill" aria-label="Emergency dental care"><span class="navbar__emergency-dot"></span>Emergency</a>
     <a href="contact.html" class="btn btn--gold btn--sm navbar__cta">Book Appointment</a>
     <button class="navbar__hamburger" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -118,7 +138,6 @@
   <a href="results.html"      class="navbar__mobile-link">Results</a>
   <a href="blog.html"         class="navbar__mobile-link">Blog</a>
   <a href="contact.html"      class="navbar__mobile-link">Contact</a>
-  <a href="emergency.html" class="navbar__mobile-link" style="color:#ef4444;font-weight:600;">Emergency Care</a>
   <a href="offers.html" class="navbar__mobile-link" style="color:var(--gold);font-weight:600;">Offers &amp; Deals</a>
   <div class="navbar__mobile-cta">
     <a href="contact.html" class="btn btn--gold" style="width:100%;justify-content:center;">Book Appointment</a>
@@ -219,10 +238,6 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="hero__scroll" aria-hidden="true">
-    <div class="hero__scroll-line"></div>
-    <span>Scroll</span>
   </div>
 </section>
 
@@ -361,7 +376,7 @@
   <div class="container">
     <div class="grid-2" style="gap:60px;align-items:center;">
       <div class="about-preview__img" data-reveal="left">
-        <img src="assets/Gemini_Generated_Image_c7ct4ac7ct4ac7ct (1).png" alt="Dr. Sherin Grace Babu at Grace Dental Care" class="about-preview__photo" loading="lazy" decoding="async">
+        <img src="assets/about-photo.png" alt="Dr. Sherin Grace Babu at Grace Dental Care" class="about-preview__photo" loading="lazy" decoding="async">
         <div class="about-preview__badge">
           <span class="about-preview__badge-num">10+</span>
           <span class="about-preview__badge-label">Years of<br>Excellence</span>

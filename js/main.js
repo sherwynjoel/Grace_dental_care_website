@@ -575,22 +575,25 @@
     });
   })();
 
-  /* ── Preloader ───────────────────────────────────────── */
+  /* ── Preloader (fallback — primary dismiss is inline script in HTML) ── */
   (function () {
     const preloader = document.getElementById('preloader');
     if (!preloader) return;
 
     function dismiss() {
+      if (preloader._dismissed) return;
+      preloader._dismissed = true;
       preloader.classList.add('done');
       setTimeout(() => { if (preloader.parentNode) preloader.parentNode.removeChild(preloader); }, 650);
     }
 
-    if (document.readyState === 'complete') {
-      setTimeout(dismiss, 400);
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      setTimeout(dismiss, 300);
     } else {
-      window.addEventListener('load', () => setTimeout(dismiss, 300));
-      setTimeout(dismiss, 3500); /* hard cap */
+      document.addEventListener('DOMContentLoaded', () => setTimeout(dismiss, 300));
     }
+    // Hard cap fallback
+    setTimeout(dismiss, 2500);
   })();
 
   /* ── Dark / Light Mode Toggle ────────────────────────── */
