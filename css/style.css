@@ -2174,14 +2174,16 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); line-height: 1.75; color: var(--
 
 .treat-row__icon {
   width: 46px; height: 46px;
+  min-width: 46px; max-width: 46px;
   border-radius: 12px;
   background: rgba(196,163,90,0.07);
   border: 1px solid rgba(196,163,90,0.18);
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
+  overflow: hidden;
   transition: background 0.25s, border-color 0.25s;
 }
-.treat-row__icon svg { width: 20px; height: 20px; stroke: #8a6e2e; transition: stroke 0.25s; }
+.treat-row__icon svg { width: 20px; height: 20px; flex-shrink: 0; stroke: #8a6e2e; transition: stroke 0.25s; }
 .treat-row:hover .treat-row__icon { background: var(--gold); border-color: var(--gold); }
 .treat-row:hover .treat-row__icon svg { stroke: #fff; }
 
