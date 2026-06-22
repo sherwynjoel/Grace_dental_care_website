@@ -1,0 +1,354 @@
+/* ═══════════════════════════════════════════════════════════
+   GRACE DENTAL CARE — Individual Treatment Page Styles
+   Shared across all 18 treatment pages
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Hero ────────────────────────────────────────────────── */
+.treat-hero {
+  padding: clamp(110px, 15vw, 170px) 0 clamp(60px, 8vw, 100px);
+  background: radial-gradient(circle at 8% 20%, rgba(196,163,90,0.11) 0%, transparent 42%),
+              radial-gradient(circle at 92% 75%, rgba(196,163,90,0.07) 0%, transparent 46%),
+              var(--black-2);
+  position: relative;
+  overflow: hidden;
+}
+.treat-hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(196,163,90,0.3), transparent);
+}
+
+.treat-hero__breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: var(--gray);
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.treat-hero__breadcrumb a {
+  color: var(--gray);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.treat-hero__breadcrumb a:hover { color: var(--gold); }
+.treat-hero__breadcrumb-sep { color: rgba(196,163,90,0.35); }
+.treat-hero__breadcrumb-current { color: var(--gold); }
+
+.treat-hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  line-height: 1.12;
+  margin-bottom: 18px;
+  max-width: 700px;
+}
+.treat-hero h1 em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.treat-hero__sub {
+  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+  color: var(--gray);
+  max-width: 580px;
+  line-height: 1.75;
+  margin-bottom: 36px;
+}
+
+.treat-hero__pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.treat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(196,163,90,0.07);
+  border: 1px solid rgba(196,163,90,0.2);
+  border-radius: 100px;
+  padding: 8px 18px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--gold-light);
+}
+.treat-pill svg { width: 14px; height: 14px; color: var(--gold); }
+
+/* ── Overview 2-col ──────────────────────────────────────── */
+.treat-overview {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 56px;
+  align-items: start;
+}
+@media (max-width: 860px) {
+  .treat-overview { grid-template-columns: 1fr; gap: 36px; }
+}
+.treat-overview__text p {
+  font-size: 1rem;
+  color: var(--gray);
+  line-height: 1.82;
+  margin-bottom: 18px;
+}
+.treat-overview__text p:last-child { margin-bottom: 0; }
+
+.treat-highlights {
+  background: rgba(196,163,90,0.03);
+  border: 1px solid rgba(196,163,90,0.14);
+  border-radius: 20px;
+  padding: 32px;
+}
+.treat-highlights h4 {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+  color: var(--gold);
+  margin-bottom: 22px;
+}
+.treat-highlight-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.treat-highlight-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+.treat-highlight-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: rgba(196,163,90,0.09);
+  border: 1px solid rgba(196,163,90,0.18);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold); flex-shrink: 0;
+}
+.treat-highlight-text strong {
+  display: block; font-size: 0.83rem; color: var(--white); font-weight: 700; margin-bottom: 2px;
+}
+.treat-highlight-text span { font-size: 0.76rem; color: var(--gray); }
+
+/* ── Signs Grid ──────────────────────────────────────────── */
+.treat-signs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 44px;
+}
+@media (max-width: 860px) { .treat-signs { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 500px) { .treat-signs { grid-template-columns: 1fr; } }
+
+.treat-sign-card {
+  background: var(--black-3);
+  border: 1px solid rgba(196,163,90,0.09);
+  border-radius: 16px;
+  padding: 22px 18px;
+  display: flex; align-items: flex-start; gap: 14px;
+  transition: border-color 0.3s ease, transform 0.35s ease;
+}
+.treat-sign-card:hover { border-color: rgba(196,163,90,0.24); transform: translateY(-3px); }
+.treat-sign-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: rgba(196,163,90,0.07);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold); flex-shrink: 0;
+}
+.treat-sign-text strong {
+  display: block; font-size: 0.87rem; font-weight: 700; color: var(--white); margin-bottom: 4px;
+}
+.treat-sign-text span { font-size: 0.76rem; color: var(--gray); line-height: 1.5; }
+
+/* ── Procedure Steps ─────────────────────────────────────── */
+.treat-steps { margin-top: 44px; }
+.treat-step {
+  display: flex; gap: 24px; margin-bottom: 36px; position: relative;
+}
+.treat-step:last-child { margin-bottom: 0; }
+.treat-step__left { display: flex; flex-direction: column; align-items: center; }
+.treat-step__num {
+  width: 50px; height: 50px; border-radius: 50%;
+  background: rgba(196,163,90,0.09);
+  border: 2px solid rgba(196,163,90,0.28);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; font-weight: 800; color: var(--gold);
+  font-family: var(--font-heading); flex-shrink: 0;
+}
+.treat-step__line {
+  width: 2px; flex: 1; min-height: 24px;
+  background: linear-gradient(to bottom, rgba(196,163,90,0.25), transparent);
+  margin-top: 6px;
+}
+.treat-step:last-child .treat-step__line { display: none; }
+.treat-step__body { padding-top: 10px; padding-bottom: 10px; }
+.treat-step__title {
+  font-size: 1.05rem; font-weight: 700; color: var(--white);
+  font-family: var(--font-heading); margin-bottom: 6px;
+}
+.treat-step__desc { font-size: 0.875rem; color: var(--gray); line-height: 1.72; }
+.treat-step__time {
+  display: inline-block; font-size: 0.7rem; font-weight: 700;
+  color: var(--gold); background: rgba(196,163,90,0.08);
+  border: 1px solid rgba(196,163,90,0.18);
+  border-radius: 4px; padding: 3px 10px; margin-top: 10px;
+}
+
+/* ── Benefits Grid ───────────────────────────────────────── */
+.treat-benefits {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px; margin-top: 44px;
+}
+@media (max-width: 768px) { .treat-benefits { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .treat-benefits { grid-template-columns: 1fr; } }
+
+.treat-benefit-card {
+  background: var(--black-3);
+  border: 1px solid rgba(196,163,90,0.09);
+  border-radius: 16px; padding: 28px 20px; text-align: center;
+  transition: border-color 0.3s ease, transform 0.35s ease;
+}
+.treat-benefit-card:hover { border-color: rgba(196,163,90,0.26); transform: translateY(-4px); }
+.treat-benefit-icon {
+  width: 52px; height: 52px; border-radius: 14px;
+  background: rgba(196,163,90,0.07);
+  border: 1px solid rgba(196,163,90,0.15);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold); margin: 0 auto 16px;
+}
+.treat-benefit-card h4 { font-size: 0.95rem; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+.treat-benefit-card p { font-size: 0.79rem; color: var(--gray); line-height: 1.65; }
+
+/* ── Candidate Section ───────────────────────────────────── */
+.treat-candidate {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 28px; margin-top: 44px;
+}
+@media (max-width: 680px) { .treat-candidate { grid-template-columns: 1fr; } }
+
+.treat-candidate__col {
+  border-radius: 18px; padding: 28px 24px;
+}
+.treat-candidate__col--yes {
+  background: rgba(196,163,90,0.04);
+  border: 1px solid rgba(196,163,90,0.18);
+}
+.treat-candidate__col--no {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.treat-candidate__col h4 {
+  font-size: 0.85rem; font-weight: 800; margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px; text-transform: uppercase; letter-spacing: 0.07em;
+}
+.treat-candidate__col--yes h4 { color: var(--gold); }
+.treat-candidate__col--no h4 { color: rgba(255,255,255,0.45); }
+.treat-candidate__list { list-style: none; padding: 0; margin: 0; }
+.treat-candidate__list li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 0.85rem; color: var(--gray); margin-bottom: 14px; line-height: 1.55;
+}
+.treat-candidate__list li:last-child { margin-bottom: 0; }
+.check-y, .check-n {
+  width: 20px; height: 20px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+.check-y { background: rgba(196,163,90,0.12); border: 1.5px solid rgba(196,163,90,0.4); }
+.check-n { background: rgba(255,100,100,0.08); border: 1.5px solid rgba(255,100,100,0.25); }
+.check-y svg { width: 11px; height: 11px; color: var(--gold); }
+.check-n svg { width: 10px; height: 10px; color: #e07070; }
+
+/* ── Cost Grid ───────────────────────────────────────────── */
+.treat-cost-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 18px; margin-top: 44px;
+}
+@media (max-width: 860px) { .treat-cost-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 500px) { .treat-cost-grid { grid-template-columns: 1fr; } }
+
+.treat-cost-card {
+  background: var(--black-3); border: 1px solid rgba(196,163,90,0.12);
+  border-radius: 16px; padding: 28px 18px; text-align: center;
+  transition: border-color 0.3s ease;
+}
+.treat-cost-card:first-child { border-color: rgba(196,163,90,0.28); }
+.treat-cost-card__label {
+  font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--gray); margin-bottom: 10px;
+}
+.treat-cost-card__value {
+  font-size: 1.35rem; font-weight: 800; color: var(--gold);
+  font-family: var(--font-heading); line-height: 1.2;
+}
+.treat-cost-card__sub { font-size: 0.71rem; color: var(--gray); margin-top: 6px; line-height: 1.4; }
+
+/* ── Aftercare ───────────────────────────────────────────── */
+.treat-aftercare {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 14px; margin-top: 44px;
+}
+@media (max-width: 640px) { .treat-aftercare { grid-template-columns: 1fr; } }
+
+.treat-aftercare-item {
+  display: flex; align-items: flex-start; gap: 14px;
+  background: var(--black-3);
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 12px; padding: 18px;
+  transition: border-color 0.25s ease;
+}
+.treat-aftercare-item:hover { border-color: rgba(196,163,90,0.16); }
+.treat-aftercare-num {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: rgba(196,163,90,0.1);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.78rem; font-weight: 800; color: var(--gold); flex-shrink: 0;
+}
+.treat-aftercare-text strong {
+  display: block; font-size: 0.84rem; font-weight: 700; color: var(--white); margin-bottom: 3px;
+}
+.treat-aftercare-text span { font-size: 0.77rem; color: var(--gray); line-height: 1.5; }
+
+/* ── Related Treatments ──────────────────────────────────── */
+.treat-related {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 18px; margin-top: 40px;
+}
+@media (max-width: 700px) { .treat-related { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .treat-related { grid-template-columns: 1fr; } }
+
+.treat-related-card {
+  background: var(--black-3); border: 1px solid rgba(196,163,90,0.09);
+  border-radius: 16px; padding: 22px 18px;
+  text-decoration: none; display: block;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+.treat-related-card:hover { border-color: rgba(196,163,90,0.26); transform: translateY(-4px); }
+.treat-related-card h4 { font-size: 0.92rem; color: var(--white); margin-bottom: 6px; font-weight: 700; }
+.treat-related-card p { font-size: 0.76rem; color: var(--gray); line-height: 1.5; }
+.treat-related-arrow {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 0.7rem; font-weight: 700; color: var(--gold);
+  text-transform: uppercase; letter-spacing: 0.07em; margin-top: 14px;
+}
+
+/* ── Utility ─────────────────────────────────────────────── */
+.treat-section-label {
+  font-size: 0.7rem; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.12em; color: var(--gold);
+  display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+}
+.treat-section-label::before {
+  content: ''; width: 28px; height: 2px;
+  background: var(--gold); border-radius: 2px;
+}
+.treat-h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  line-height: 1.2; margin-bottom: 16px;
+}
+.treat-h2 em { font-style: italic; color: var(--gold); }
+.treat-sub {
+  font-size: 0.975rem; color: var(--gray);
+  max-width: 620px; line-height: 1.75;
+}

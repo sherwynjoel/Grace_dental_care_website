@@ -62,6 +62,16 @@ fs.writeFileSync(cssOut, cssMin);
 const cssSaving = Math.round((1 - cssMin.length / cssRaw.length) * 100);
 console.log(`✓  css/style.css   ${formatBytes(cssRaw.length)} → ${formatBytes(cssMin.length)}  (${cssSaving}% smaller)`);
 
+const cssIn2  = path.join(SRC, 'css', 'treatment-page.css');
+const cssOut2 = path.join(DIST, 'css', 'treatment-page.css');
+if (fs.existsSync(cssIn2)) {
+  const cssRaw2 = fs.readFileSync(cssIn2, 'utf8');
+  const cssMin2 = new CleanCSS({ level: 2 }).minify(cssRaw2).styles;
+  fs.writeFileSync(cssOut2, cssMin2);
+  const cssSaving2 = Math.round((1 - cssMin2.length / cssRaw2.length) * 100);
+  console.log(`✓  css/treatment-page.css   ${formatBytes(cssRaw2.length)} → ${formatBytes(cssMin2.length)}  (${cssSaving2}% smaller)`);
+}
+
 // ── JS ─────────────────────────────────────────────────────
 ensureDir(path.join(DIST, 'js'));
 (async () => {
@@ -91,15 +101,34 @@ ensureDir(path.join(DIST, 'js'));
   };
 
   let totalHtmlRaw = 0, totalHtmlMin = 0;
+  let totalHtmlFilesCount = 0;
   for (const file of HTML_FILES) {
     const raw = fs.readFileSync(path.join(SRC, file), 'utf8');
     const min = await minifyHTML(raw, htmlOptions);
     fs.writeFileSync(path.join(DIST, file), min);
     totalHtmlRaw += raw.length;
     totalHtmlMin += min.length;
+    totalHtmlFilesCount++;
   }
+
+  // Handle treatments subdirectory
+  const treatmentsSrc = path.join(SRC, 'treatments');
+  const treatmentsDest = path.join(DIST, 'treatments');
+  if (fs.existsSync(treatmentsSrc)) {
+    ensureDir(treatmentsDest);
+    const treatmentFiles = fs.readdirSync(treatmentsSrc).filter(f => f.endsWith('.html'));
+    for (const file of treatmentFiles) {
+      const raw = fs.readFileSync(path.join(treatmentsSrc, file), 'utf8');
+      const min = await minifyHTML(raw, htmlOptions);
+      fs.writeFileSync(path.join(treatmentsDest, file), min);
+      totalHtmlRaw += raw.length;
+      totalHtmlMin += min.length;
+      totalHtmlFilesCount++;
+    }
+  }
+
   const htmlSaving = Math.round((1 - totalHtmlMin / totalHtmlRaw) * 100);
-  console.log(`✓  ${HTML_FILES.length} HTML files     ${formatBytes(totalHtmlRaw)} → ${formatBytes(totalHtmlMin)}  (${htmlSaving}% smaller)`);
+  console.log(`✓  ${totalHtmlFilesCount} HTML files     ${formatBytes(totalHtmlRaw)} → ${formatBytes(totalHtmlMin)}  (${htmlSaving}% smaller)`);
 
   // ── Static dirs ───────────────────────────────────────────
   for (const dir of COPY_DIRS) {

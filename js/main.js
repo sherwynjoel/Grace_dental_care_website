@@ -757,52 +757,7 @@
     }, { passive: true });
   })();
 
-  /* ── Social Proof Toast Notifications ────────────────── */
-  (function () {
-    const entries = [
-      { init: 'MK', name: 'Meena K.',    action: 'booked a Smile Makeover consultation',  ago: '2 mins ago'  },
-      { init: 'SR', name: 'Suresh R.',   action: 'just completed his Dental Implant',     ago: '8 mins ago'  },
-      { init: 'AP', name: 'Anitha P.',   action: 'booked Clear Aligners treatment',       ago: '14 mins ago' },
-      { init: 'VK', name: 'Vijay K.',    action: 'left a ★★★★★ Google review',           ago: '22 mins ago' },
-      { init: 'PL', name: 'Priya L.',    action: 'referred a friend — earned ₹500',       ago: '31 mins ago' },
-      { init: 'RN', name: 'Ravi N.',     action: 'booked a Root Canal appointment',       ago: '45 mins ago' },
-      { init: 'SD', name: 'Sunita D.',   action: 'completed her Teeth Whitening session', ago: '1 hr ago'    },
-      { init: 'AJ', name: 'Arun J.',     action: 'booked a Free Consultation today',      ago: '1.5 hrs ago' },
-    ];
 
-    const stack = document.createElement('div');
-    stack.className = 'toast-stack';
-    stack.setAttribute('aria-live', 'polite');
-    document.body.appendChild(stack);
-
-    let idx = 0;
-
-    function showToast() {
-      const e = entries[idx % entries.length];
-      idx++;
-
-      const t = document.createElement('div');
-      t.className = 'toast';
-      t.setAttribute('role', 'status');
-      t.innerHTML = `
-        <div class="toast__avatar">${e.init}</div>
-        <div class="toast__body">
-          <div class="toast__name">${e.name}</div>
-          <div class="toast__action">${e.action}</div>
-          <span class="toast__time">${e.ago}</span>
-        </div>`;
-      stack.appendChild(t);
-
-      requestAnimationFrame(() => requestAnimationFrame(() => t.classList.add('show')));
-
-      setTimeout(() => {
-        t.classList.remove('show');
-        setTimeout(() => { if (t.parentNode) t.parentNode.removeChild(t); }, 500);
-      }, 5000);
-    }
-
-    setTimeout(() => { showToast(); setInterval(showToast, 12000); }, 6000);
-  })();
 
   /* ── Live Slot Availability Badge ────────────────────── */
   (function () {
