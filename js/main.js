@@ -706,44 +706,6 @@
     });
   })();
 
-  /* ── Treatment Cost Estimator ────────────────────────── */
-  (function () {
-    const select   = document.getElementById('treatmentSelect');
-    const result   = document.getElementById('estimatorResult');
-    const rangeEl  = document.getElementById('estimatorRange');
-    const durEl    = document.getElementById('estimatorDuration');
-    const featEl   = document.getElementById('estimatorFeatures');
-    if (!select || !result) return;
-
-    const data = {
-      implant:   { range: '₹35,000 – ₹60,000',    duration: 'Total treatment: 3–6 months | 3–5 visits',      features: ['Titanium implant post', 'Zirconia crown', 'Digital planning', '5-year warranty', 'Lifetime if well maintained'] },
-      smile:     { range: '₹40,000 – ₹1,20,000',  duration: 'Total treatment: 2–4 weeks | 2–3 visits',       features: ['Per-tooth pricing', 'Digital smile preview', 'E.max or zirconia veneers', 'Minimal tooth reduction', 'Stain-resistant ceramic'] },
-      whitening: { range: '₹8,000 – ₹15,000',     duration: 'Total treatment: 1 session | 60–90 mins',       features: ['In-clinic laser whitening', 'Up to 8 shades brighter', 'Take-home maintenance kit', 'Sensitivity protection', 'Lasts 12–18 months'] },
-      rct:       { range: '₹4,000 – ₹12,000',     duration: 'Total treatment: 1–3 visits | over 1–2 weeks',  features: ['Single or multi-canal', 'Digital X-ray guided', 'Rotary endodontics', 'Crown recommended post-RCT', 'Pain-free procedure'] },
-      braces:    { range: '₹25,000 – ₹45,000',    duration: 'Total treatment: 12–24 months | monthly visits', features: ['Metal or ceramic brackets', 'Fixed or removable retainer', 'Free mid-treatment adjustments', 'Comprehensive case planning', 'IDA-certified orthodontist'] },
-      aligners:  { range: '₹60,000 – ₹1,50,000',  duration: 'Total treatment: 8–18 months | 6-week check-ins', features: ['Removable & virtually invisible', 'Digital 3D treatment preview', '20–22 hrs/day wear required', 'Free refinements included', 'Retainer included in cost'] },
-      crown:     { range: '₹8,000 – ₹18,000',     duration: 'Total treatment: 1–2 weeks | 2 visits',         features: ['Zirconia or E.max ceramic', 'CAD/CAM precision fit', 'Colour-matched to natural teeth', 'Highly durable & stain-resistant', '5-year warranty'] },
-      scaling:   { range: '₹800 – ₹2,500',        duration: 'Total treatment: 1 visit | 30–45 mins',         features: ['Ultrasonic scaling', 'Stain removal & polishing', 'Gum health assessment', 'Fluoride application option', 'Recommended every 6 months'] },
-      extraction: { range: '₹500 – ₹4,000',       duration: 'Total treatment: 1 visit | 20–60 mins',         features: ['Simple or surgical extraction', 'Local anaesthesia', 'Wisdom tooth removal available', 'Post-op care instructions', 'Implant or bridge to follow'] },
-      filling:   { range: '₹1,200 – ₹3,500',      duration: 'Total treatment: 1 visit | 30–45 mins',         features: ['Tooth-coloured composite', 'Bonding in single visit', 'No mercury (amalgam-free)', 'Stain-resistant finish', 'Covers chips, cracks & decay'] },
-      laser:     { range: '₹5,000 – ₹15,000',     duration: 'Total treatment: 1–3 visits | 45 mins each',    features: ['Painless laser gum therapy', 'No incisions or sutures', 'Minimal bleeding & swelling', 'Faster healing than traditional surgery', 'Treats early & advanced gum disease'] },
-      fmr:       { range: '₹1,50,000 – ₹5,00,000', duration: 'Total treatment: 3–12 months | custom plan',  features: ['Complete oral reconstruction', 'Implants, crowns & veneers', 'Personalised treatment sequencing', 'Aesthetic & functional goals', 'One clinic — full coordination'] }
-    };
-
-    select.addEventListener('change', () => {
-      const key = select.value;
-      if (!key || !data[key]) {
-        result.classList.remove('visible');
-        return;
-      }
-      const d = data[key];
-      rangeEl.textContent  = d.range;
-      durEl.textContent    = d.duration;
-      featEl.innerHTML     = d.features.map(f => `<span class="cost-estimator__pill">${f}</span>`).join('');
-      result.classList.add('visible');
-    });
-  })();
-
   /* ── Scroll Progress Bar ─────────────────────────────── */
   (function () {
     const bar = document.createElement('div');
