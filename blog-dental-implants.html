@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="css/style.css?v=5" />
   <style>
     .blog-post-layout { display: grid; grid-template-columns: 1fr 340px; gap: 48px; align-items: start; }
-    .blog-post-content {}
+    .blog-post-content { min-width: 0; }
     .blog-post-header { margin-bottom: 32px; }
     .blog-post-meta { display: flex; align-items: center; gap: 10px; font-size: 0.78rem; color: var(--gray); margin-bottom: 16px; flex-wrap: wrap; }
     .blog-post-cat { background: var(--gold-glass); border: 1px solid var(--gold-border); color: var(--gold); padding: 3px 12px; border-radius: 100px; font-weight: 600; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; }
@@ -90,7 +90,6 @@
   <a href="results.html" class="navbar__mobile-link">Results</a>
   <a href="blog.html" class="navbar__mobile-link active">Blog</a>
   <a href="contact.html" class="navbar__mobile-link">Contact</a>
-  <a href="offers.html" class="navbar__mobile-link" style="color:var(--gold);font-weight:600;">Offers &amp; Deals</a>
   <div class="navbar__mobile-cta">
     <a href="contact.html" class="btn btn--gold" style="width:100%;justify-content:center;">Book Appointment</a>
   </div>
@@ -218,6 +217,7 @@
           </ul>
 
           <h2>Side-by-Side Comparison</h2>
+          <div class="compare-table-wrap">
           <table>
             <thead>
               <tr>
@@ -284,6 +284,7 @@
               </tr>
             </tbody>
           </table>
+          </div>
 
           <h2>When to Choose Each Option</h2>
 

@@ -51,7 +51,7 @@
 
 /* ============ 2. RESET ============ */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; font-size: 16px; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; font-size: 16px; -webkit-text-size-adjust: 100%; overflow-x: hidden; }
 body {
   font-family: var(--font-body);
   background: var(--black);
@@ -791,6 +791,19 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); line-height: 1.75; color: var(--
 .why-card h4 { margin-bottom: 6px; font-size: 1rem; }
 .why-card p  { font-size: 0.875rem; }
 
+.doctor-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+@media (max-width: 480px) {
+  .doctor-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
 /* ============ 13. DOCTOR CARDS ============ */
 .doctor-card {
   background: var(--black-3);
@@ -1132,6 +1145,7 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); line-height: 1.75; color: var(--
   margin-bottom: 20px;
   font-size: 0.8rem;
   color: var(--gray);
+  flex-wrap: wrap;
 }
 .page-hero__breadcrumb a { transition: color 0.2s; }
 .page-hero__breadcrumb a:hover { color: var(--gold); }
@@ -1320,8 +1334,8 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); line-height: 1.75; color: var(--
   margin-bottom: 6px;
   display: block;
 }
-.contact-card__value { font-size: 0.95rem; color: var(--white); font-weight: 500; }
-.contact-card__value a { color: var(--white); transition: color 0.2s; }
+.contact-card__value { font-size: 0.95rem; color: var(--white); font-weight: 500; word-wrap: break-word; overflow-wrap: break-word; word-break: break-word; }
+.contact-card__value a { color: var(--white); transition: color 0.2s; word-wrap: break-word; overflow-wrap: break-word; word-break: break-word; }
 .contact-card__value a:hover { color: var(--gold); }
 
 /* Contact Form */
@@ -2716,7 +2730,6 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); line-height: 1.75; color: var(--
   .treat-row__tag { display: none; }
 
   .hero > .container { grid-template-columns: 1fr; }
-  .hero__visual { display: none; }
   .bento-grid { grid-template-columns: 1fr; }
   .bento-grid > .treatment-card:nth-child(n) {
     grid-column: auto; grid-row: auto; display: block;
@@ -3373,13 +3386,13 @@ body.emergency-active .page-hero { padding-top: calc(var(--nav-height) + 44px + 
   .navbar__logo-sub { display: none; }
 
   /* Grids */
-  .grid-2, .grid-3 { grid-template-columns: 1fr; gap: 24px; }
+  .grid-2, .grid-3 { grid-template-columns: 1fr; gap: 24px !important; }
   .stats-bar__inner { grid-template-columns: repeat(2, 1fr); }
   .stats-bar__item:nth-child(2) { border-right: none; }
 
   /* Hero */
   .hero > .container { grid-template-columns: 1fr; }
-  .hero__visual { display: none; }
+  .hero__visual { margin-top: 40px; }
   .hero__ring { width: 240px; right: -60px; opacity: 0.25; }
   .hero__content { max-width: 100%; }
 
@@ -3426,6 +3439,12 @@ body.emergency-active .page-hero { padding-top: calc(var(--nav-height) + 44px + 
   .hero__stats { gap: 16px; flex-wrap: wrap; }
   .hero__actions { flex-direction: column; }
   .hero__actions .btn { width: 100%; justify-content: center; }
+  .hero__float--1 { right: 0; top: 0; }
+  .hero__float--2 { left: 0; bottom: 6%; }
+  .hero__visual-blob {
+    width: 200px;
+    height: 200px;
+  }
 
   /* Stats bar */
   .stats-bar__inner { grid-template-columns: 1fr 1fr; }
@@ -3535,9 +3554,10 @@ body.emergency-active .page-hero { padding-top: calc(var(--nav-height) + 44px + 
   /* Reduce section padding */
   :root { --section-pad: clamp(40px, 7vw, 72px); }
 
-  /* Disable hero background photo on mobile — saves data, prevents clutter */
-  .hero { background-image: none; }
-  .hero__bg::before, .hero__bg::after { display: none; }
+  /* Keep hero background photo on mobile but keep it subtle for readability */
+  .hero__bg::before {
+    background: rgba(250, 250, 248, 0.91);
+  }
 
   /* Hero trust signal — compact */
   .hero__reviews { gap: 8px; margin-bottom: 10px; }
