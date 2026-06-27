@@ -10,6 +10,12 @@
   if (navbar) {
     window.addEventListener('scroll', () => {
       navbar.classList.toggle('scrolled', window.scrollY > 40);
+      
+      // Calculate scroll progress percentage
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+      navbar.style.setProperty('--scroll-percent', scrolled + '%');
     }, { passive: true });
 
     /* Active link highlight */
