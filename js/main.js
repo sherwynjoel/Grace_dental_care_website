@@ -118,7 +118,7 @@
   }
 
   /* ── Before / After slider ───────────────────────────── */
-  document.querySelectorAll('.compare-container').forEach(container => {
+  document.querySelectorAll('.compare-container:not(.auto-toggle-slider)').forEach(container => {
     const afterEl = container.querySelector('.compare-after');
     const handleBar = container.querySelector('.compare-handle-bar');
     const handleBtn = container.querySelector('.compare-handle-btn');
@@ -143,6 +143,36 @@
     window.addEventListener('touchmove', (e) => { if (dragging) updateSlider(e.touches[0].clientX); }, { passive: true });
     window.addEventListener('touchend', () => { dragging = false; });
   });
+
+  /* ── Pediatric Auto-Toggle Slider ──────────────────────── */
+  document.querySelectorAll('.compare-container.auto-toggle-slider').forEach(container => {
+    const parent = container.closest('.result-item');
+    const beforeTag = parent.querySelector('.compare-tag-label--before');
+    const afterTag = parent.querySelector('.compare-tag-label--after');
+    const afterImg = container.querySelector('.compare-after-img');
+    
+    function toggleState() {
+      const isShowingAfter = container.classList.toggle('show-after');
+      if (isShowingAfter) {
+        if (afterImg) afterImg.style.opacity = '1';
+        if (beforeTag) beforeTag.classList.remove('active');
+        if (afterTag) afterTag.classList.add('active');
+      } else {
+        if (afterImg) afterImg.style.opacity = '0';
+        if (beforeTag) beforeTag.classList.add('active');
+        if (afterTag) afterTag.classList.remove('active');
+      }
+    }
+    
+    let intervalId = setInterval(toggleState, 3000);
+    
+    container.addEventListener('click', () => {
+      clearInterval(intervalId);
+      toggleState();
+      intervalId = setInterval(toggleState, 3000);
+    });
+  });
+
 
   /* ── FAQ accordion ───────────────────────────────────── */
   document.querySelectorAll('.faq-question').forEach(btn => {
