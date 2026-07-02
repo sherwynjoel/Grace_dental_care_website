@@ -319,11 +319,12 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); line-height: 1.75; color: var(--
 }
 .navbar__logo-text { display: flex; flex-direction: column; line-height: 1.1; }
 .navbar__logo-name {
-  font-family: var(--font-heading);
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   color: var(--white);
-  letter-spacing: 0.01em;
 }
 .navbar__logo-name span { color: var(--gold); }
 .navbar__logo-sub {
@@ -2784,7 +2785,7 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); line-height: 1.75; color: var(--
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 32px;
-  max-width: 760px;
+  max-width: 1120px;
   margin: 0 auto;
 }
 
