@@ -970,6 +970,9 @@
     function close() { lightbox.classList.remove('open'); document.body.style.overflow = ''; }
 
     document.addEventListener('click', (e) => {
+      if (e.target.closest('.compare-container') || e.target.closest('.result-card__badge') || e.target.closest('.result-card__link')) {
+        return;
+      }
       const item = e.target.closest('.result-item');
       if (!item) return;
       open(Array.from(document.querySelectorAll('.result-item')).indexOf(item));
