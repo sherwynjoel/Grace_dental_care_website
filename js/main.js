@@ -19,10 +19,11 @@
     }, { passive: true });
 
     /* Active link highlight */
-    const page = location.pathname.split('/').pop() || 'index.html';
+    const page = (location.pathname.split('/').pop() || '').replace(/\.html$/, '');
     document.querySelectorAll('.navbar__link').forEach(link => {
-      const href = link.getAttribute('href') || '';
-      if (href === page || (page === '' && href === 'index.html')) {
+      let href = link.getAttribute('href') || '';
+      href = href.replace(/\.html$/, '').replace(/^\.\/$/, '');
+      if (href === page || (page === '' && href === '')) {
         link.classList.add('active');
       }
     });

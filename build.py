@@ -29,7 +29,7 @@ EXCLUDE_FILES = {
 def should_skip(path: Path) -> bool:
     if path.is_dir():
         return path.name in EXCLUDE_DIRS
-    if path.name.startswith("."):
+    if path.name.startswith(".") and path.name != ".htaccess":
         return True
     for pat in EXCLUDE_FILES:
         if path.match(pat):

@@ -3,14 +3,14 @@ const path = require('path');
 const cheerio = require('cheerio');
 
 const treatments = [
-  { name: 'Dental Implants', file: 'dental-implants.html' },
-  { name: 'Smile Makeover', file: 'smile-makeover.html' },
-  { name: 'Root Canal', file: 'root-canal.html' },
-  { name: 'Braces & Aligners', file: 'braces-aligners.html' },
-  { name: 'Laser Gum Therapy', file: 'laser-gum-therapy.html' },
-  { name: 'Teeth Whitening', file: 'teeth-whitening.html' },
-  { name: 'Pediatric Dentistry', file: 'pediatric-dentistry.html' },
-  { name: 'Wisdom Tooth Removal', file: 'wisdom-tooth-removal.html' }
+  { name: 'Dental Implants', file: 'dental-implants' },
+  { name: 'Smile Makeover', file: 'smile-makeover' },
+  { name: 'Root Canal', file: 'root-canal' },
+  { name: 'Braces & Aligners', file: 'braces-aligners' },
+  { name: 'Laser Gum Therapy', file: 'laser-gum-therapy' },
+  { name: 'Teeth Whitening', file: 'teeth-whitening' },
+  { name: 'Pediatric Dentistry', file: 'pediatric-dentistry' },
+  { name: 'Wisdom Tooth Removal', file: 'wisdom-tooth-removal' }
 ];
 
 const ROOT_DIR = __dirname;

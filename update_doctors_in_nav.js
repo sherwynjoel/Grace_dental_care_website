@@ -31,13 +31,13 @@ for (const filePath of htmlFiles) {
 
   // Update desktop dropdown
   const desktopMenu = $('.navbar__dropdown-menu').filter((i, el) => {
-    return $(el).find('a[href*="dr-sherin.html"]').length > 0;
+    return $(el).find('a[href*="dr-sherin"]').length > 0;
   });
 
   if (desktopMenu.length > 0) {
-    const sherinHref = isInSubdir ? '../dr-sherin.html' : 'dr-sherin.html';
-    const induHref = isInSubdir ? '../dr-indu.html' : 'dr-indu.html';
-    const nandanaHref = isInSubdir ? '../dr-nandana.html' : 'dr-nandana.html';
+    const sherinHref = isInSubdir ? '../dr-sherin' : 'dr-sherin';
+    const induHref = isInSubdir ? '../dr-indu' : 'dr-indu';
+    const nandanaHref = isInSubdir ? '../dr-nandana' : 'dr-nandana';
 
     desktopMenu.html(`
         <a href="${sherinHref}">Dr. Sherin Grace Babu</a>
@@ -48,13 +48,13 @@ for (const filePath of htmlFiles) {
 
   // Update mobile dropdown
   const mobileMenu = $('.navbar__mobile-dropdown-menu').filter((i, el) => {
-    return $(el).find('a[href*="dr-sherin.html"]').length > 0;
+    return $(el).find('a[href*="dr-sherin"]').length > 0;
   });
 
   if (mobileMenu.length > 0) {
-    const sherinHref = isInSubdir ? '../dr-sherin.html' : 'dr-sherin.html';
-    const induHref = isInSubdir ? '../dr-indu.html' : 'dr-indu.html';
-    const nandanaHref = isInSubdir ? '../dr-nandana.html' : 'dr-nandana.html';
+    const sherinHref = isInSubdir ? '../dr-sherin' : 'dr-sherin';
+    const induHref = isInSubdir ? '../dr-indu' : 'dr-indu';
+    const nandanaHref = isInSubdir ? '../dr-nandana' : 'dr-nandana';
 
     mobileMenu.html(`
         <a href="${sherinHref}" class="navbar__mobile-dropdown-link">Dr. Sherin Grace Babu</a>
