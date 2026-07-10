@@ -1,10 +1,85 @@
+Options -Indexes
 RewriteEngine On
 
-# 1. Redirect /page.html to /page (except for actual directories)
+# ── 1. Force HTTPS ────────────────────────────────────────────
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# ── 2. Force www ──────────────────────────────────────────────
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# ── 3. Strip .html extension (301 redirect) ───────────────────
 RewriteCond %{THE_REQUEST} \s/+(.*?)\.html[\s?] [NC]
 RewriteRule ^ /%1 [R=301,L,NE]
 
-# 2. Map /page to /page.html internally if it exists
+# ── 4. Map /page to /page.html internally ────────────────────
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.html -f
 RewriteRule ^(.*)$ $1.html [L]
+
+# ── 5. Custom 404 page ────────────────────────────────────────
+ErrorDocument 404 /404.html
+
+# ── 6. Security Headers ───────────────────────────────────────
+<IfModule mod_headers.c>
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-XSS-Protection "1; mode=block"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(self)"
+</IfModule>
+
+# ── 7. GZIP / Brotli Compression ─────────────────────────────
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml text/xml application/xml
+</IfModule>
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>
+
+# ── 8. Browser Caching ────────────────────────────────────────
+<IfModule mod_expires.c>
+  ExpiresActive On
+  # Images
+  ExpiresByType image/webp        "access plus 1 year"
+  ExpiresByType image/jpeg        "access plus 1 year"
+  ExpiresByType image/png         "access plus 1 year"
+  ExpiresByType image/gif         "access plus 1 year"
+  ExpiresByType image/svg+xml     "access plus 1 year"
+  ExpiresByType image/x-icon      "access plus 1 year"
+  # Fonts
+  ExpiresByType font/woff2        "access plus 1 year"
+  ExpiresByType font/woff         "access plus 1 year"
+  ExpiresByType font/ttf          "access plus 1 year"
+  # CSS & JS (versioned with ?v= query string)
+  ExpiresByType text/css          "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  # HTML
+  ExpiresByType text/html         "access plus 1 hour"
+  # Manifest & XML
+  ExpiresByType application/manifest+json "access plus 1 week"
+  ExpiresByType application/xml   "access plus 1 day"
+  ExpiresByType text/xml          "access plus 1 day"
+</IfModule>
+
+# ── 9. Cache-Control Headers ─────────────────────────────────
+<IfModule mod_headers.c>
+  <FilesMatch "\.(webp|jpeg|jpg|png|gif|svg|ico|woff2|woff|ttf)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "public, max-age=3600, must-revalidate"
+  </FilesMatch>
+  <FilesMatch "sitemap\.xml$">
+    Header set Cache-Control "public, max-age=86400"
+  </FilesMatch>
+</IfModule>
+
+# ── 10. Keep-Alive ────────────────────────────────────────────
+<IfModule mod_headers.c>
+  Header set Connection keep-alive
+</IfModule>

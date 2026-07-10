@@ -5001,4 +5001,136 @@ body.dark-mode .insurance-card p  { color: var(--gray) !important; }
   display: none !important;
 }
 
+/* ============================================================
+   ACCESSIBILITY & WCAG IMPROVEMENTS
+   ============================================================ */
+
+/* ── Skip to main content link ─────────────────────────────── */
+.skip-to-main {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 99999;
+  background: var(--gold);
+  color: var(--black);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 12px 20px;
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+.skip-to-main:focus {
+  top: 0;
+}
+
+/* ── Focus-visible ring (keyboard navigation) ──────────────── */
+*:focus {
+  outline: none;
+}
+*:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Better focus for interactive elements */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: var(--radius-xs);
+}
+
+/* ── Minimum touch target sizes (WCAG 2.5.5) ──────────────── */
+@media (max-width: 768px) {
+  .navbar__hamburger {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .btn {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .fab-wa,
+  .scroll-top {
+    width: 52px !important;
+    height: 52px !important;
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .navbar__mobile-link,
+  .navbar__mobile-dropdown-link {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  .navbar__mobile-dropdown-toggle {
+    min-height: 44px;
+  }
+  /* Form controls */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea,
+  select {
+    min-height: 44px;
+  }
+}
+
+/* ── Screen reader only utility ────────────────────────────── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ── Reduced motion support ────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── High contrast mode support ────────────────────────────── */
+@media (forced-colors: active) {
+  .btn--gold {
+    border: 2px solid ButtonText;
+  }
+  .navbar__link.active {
+    border-bottom: 2px solid ButtonText;
+  }
+}
+
+/* ── Improved form accessibility ───────────────────────────── */
+input::placeholder,
+textarea::placeholder {
+  opacity: 0.65;
+}
+
+label {
+  cursor: pointer;
+}
+
+/* ── Link underline on keyboard focus for body content ──────── */
+main a:not(.btn):not(.navbar__link):not(.navbar__mobile-link):focus-visible {
+  text-decoration: underline;
+}
 

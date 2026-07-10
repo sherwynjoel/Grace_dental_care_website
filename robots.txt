@@ -1,4 +1,28 @@
 User-agent: *
 Allow: /
+Disallow: /dist/
+Disallow: /node_modules/
+Disallow: /*.cjs$
+Disallow: /build.js
+Disallow: /build.py
+Disallow: /deploy_ftp.cjs
+Disallow: /check_ftp.cjs
+Disallow: /screenshot_*.cjs
+Disallow: /verify_*.cjs
+Disallow: /quiz_test.js
+Disallow: /update_*.js
+Disallow: /package*.json
+Disallow: /.gitignore
+Crawl-delay: 1
+
+User-agent: Googlebot
+Allow: /
+Disallow: /dist/
+Disallow: /node_modules/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /dist/
+Disallow: /node_modules/
 
 Sitemap: https://www.gracedentalcarekovai.com/sitemap.xml
