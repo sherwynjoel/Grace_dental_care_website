@@ -4032,11 +4032,13 @@ body.emergency-active .page-hero { padding-top: calc(var(--nav-height) + 44px + 
   .about-preview__img {
     aspect-ratio: unset !important;
     height: auto !important;
+    overflow: visible !important;
   }
   .about-preview__photo {
+    width: 100% !important;
     height: auto !important;
-    object-fit: contain !important;
-    object-position: top center !important;
+    object-fit: unset !important;
+    display: block !important;
   }
   .about-preview__badge { right: 12px; bottom: 12px; padding: 10px 14px; }
   .about-preview__badge-num { font-size: 1.6rem; }
