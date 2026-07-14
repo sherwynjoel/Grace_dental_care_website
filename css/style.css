@@ -960,14 +960,15 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); line-height: 1.75; color: var(--
 /* Badge overlaid on image */
 .about-preview__badge {
   position: absolute;
-  bottom: 28px;
-  right: -24px;
+  bottom: 20px;
+  right: 20px;
   background: var(--gold);
   color: var(--black);
   border-radius: var(--radius-md);
-  padding: 18px 22px;
+  padding: 16px 20px;
   text-align: center;
   box-shadow: var(--shadow-gold);
+  z-index: 2;
 }
 .about-preview__badge-num {
   font-family: var(--font-heading);
@@ -1085,6 +1086,216 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); line-height: 1.75; color: var(--
 .why-card__icon svg { width: 22px; height: 22px; }
 .why-card h4 { margin-bottom: 6px; font-size: 1rem; }
 .why-card p  { font-size: 0.875rem; }
+
+/* ============ REDESIGNED CHOOSE US ============ */
+.choose-us-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 64px;
+  align-items: center;
+}
+@media (max-width: 991px) {
+  .choose-us-layout {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+.choose-us-intro {
+  max-width: 480px;
+}
+.choose-us-intro .section-label {
+  display: inline-block;
+  margin-bottom: 12px;
+}
+.choose-us-intro .section-heading {
+  margin-bottom: 20px;
+  font-size: clamp(2rem, 4.5vw, 2.75rem);
+  line-height: 1.15;
+  text-align: left;
+}
+.choose-us-intro .section-sub {
+  margin-bottom: 32px;
+  text-align: left;
+  font-size: 1.05rem;
+  color: var(--gray-dark);
+  line-height: 1.6;
+}
+.choose-us-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
+.cta-trust-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--gold-dark);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.cta-trust-badge svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--gold);
+}
+
+/* Grid of Cards */
+.choose-us-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+@media (max-width: 600px) {
+  .choose-us-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* Card Styling */
+.choose-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(196, 163, 90, 0.15);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  box-shadow: 0 10px 30px rgba(196, 163, 90, 0.03);
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.choose-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  transition: width 0.4s ease;
+}
+.choose-card:hover::before {
+  width: 100%;
+}
+.choose-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(196, 163, 90, 0.12);
+  border-color: rgba(196, 163, 90, 0.35);
+  background: #ffffff;
+}
+
+/* Card Glow Effect */
+.choose-card__glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle 120px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(196, 163, 90, 0.08) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.choose-card:hover .choose-card__glow {
+  opacity: 1;
+}
+.choose-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.choose-card__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  background: rgba(196, 163, 90, 0.1);
+  color: var(--gold-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(196, 163, 90, 0.2);
+  transition: all 0.4s ease;
+}
+.choose-card:hover .choose-card__icon {
+  background: var(--gold);
+  color: var(--white);
+  border-color: var(--gold);
+  transform: rotate(6deg) scale(1.05);
+}
+.choose-card__icon svg {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.4s ease;
+}
+.choose-card__num {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--gold);
+  background: rgba(196, 163, 90, 0.06);
+  border: 1px solid rgba(196, 163, 90, 0.15);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s ease;
+}
+.choose-card:hover .choose-card__num {
+  background: rgba(196, 163, 90, 0.15);
+  border-color: rgba(196, 163, 90, 0.3);
+  transform: scale(1.08);
+}
+.choose-card__title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--black);
+  margin: 0;
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+.choose-card:hover .choose-card__title {
+  color: var(--black-2);
+}
+.choose-card__desc {
+  font-size: 0.92rem;
+  color: var(--gray-dark);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* Dark Mode support for choose-card */
+body.dark-mode .choose-card {
+  background: rgba(26, 26, 26, 0.75);
+  border-color: rgba(196, 163, 90, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+body.dark-mode .choose-card:hover {
+  background: var(--black-3);
+  border-color: rgba(196, 163, 90, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+body.dark-mode .choose-card__title {
+  color: var(--white);
+}
+body.dark-mode .choose-card__desc {
+  color: var(--white-dim);
+}
+body.dark-mode .choose-card__icon {
+  background: rgba(196, 163, 90, 0.15);
+  color: var(--gold-light);
+}
+body.dark-mode .cta-trust-badge {
+  color: var(--gold-light);
+}
+
 
 .doctor-stats-grid {
   display: grid;
