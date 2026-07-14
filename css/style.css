@@ -930,7 +930,7 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); line-height: 1.75; color: var(--
 .about-preview__img {
   position: relative;
   border-radius: var(--radius-xl);
-  overflow: hidden;
+  overflow: visible;
   aspect-ratio: 4/5;
   background: var(--black-3);
   border: 1px solid var(--gold-border);
@@ -955,6 +955,8 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); line-height: 1.75; color: var(--
   object-fit: cover;
   object-position: center 45%;
   display: block;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
 }
 
 /* Badge overlaid on image */
@@ -5360,6 +5362,8 @@ select:focus-visible,
     align-items: center;
     justify-content: center;
   }
+  /* Keep navbar desktop CTA hidden on phones */
+  .navbar__cta { display: none !important; }
   .fab-wa,
   .scroll-top {
     width: 52px !important;
