@@ -4028,8 +4028,16 @@ body.emergency-active .page-hero { padding-top: calc(var(--nav-height) + 44px + 
   .hero__ring { width: 240px; right: -60px; opacity: 0.25; }
   .hero__content { max-width: 100%; }
 
-  /* About section — keep portrait image on mobile so doc photo looks good */
-  .about-preview__img { aspect-ratio: 3 / 4 !important; }
+  /* About section — show FULL doctor image, no cropping on mobile */
+  .about-preview__img {
+    aspect-ratio: unset !important;
+    height: auto !important;
+  }
+  .about-preview__photo {
+    height: auto !important;
+    object-fit: contain !important;
+    object-position: top center !important;
+  }
   .about-preview__badge { right: 12px; bottom: 12px; padding: 10px 14px; }
   .about-preview__badge-num { font-size: 1.6rem; }
   .about-preview__badge-label { font-size: 0.6rem; }
