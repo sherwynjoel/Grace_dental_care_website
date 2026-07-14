@@ -4006,7 +4006,7 @@ body.emergency-active .page-hero { padding-top: calc(var(--nav-height) + 44px + 
     min-width: auto !important;
     left: 0 !important;
   }
-  .navbar__links, .navbar__cta, .navbar__emergency-pill { display: none; }
+  .navbar__links, .navbar__cta, .navbar__emergency-pill { display: none !important; }
   .navbar__hamburger { display: flex; }
   .navbar__logo-sub { display: none; }
 
@@ -4022,8 +4022,11 @@ body.emergency-active .page-hero { padding-top: calc(var(--nav-height) + 44px + 
   .hero__ring { width: 240px; right: -60px; opacity: 0.25; }
   .hero__content { max-width: 100%; }
 
-  /* About section */
-  .about-preview__badge { right: 16px; bottom: 16px; }
+  /* About section — keep portrait image on mobile so doc photo looks good */
+  .about-preview__img { aspect-ratio: 3 / 4 !important; }
+  .about-preview__badge { right: 12px; bottom: 12px; padding: 10px 14px; }
+  .about-preview__badge-num { font-size: 1.6rem; }
+  .about-preview__badge-label { font-size: 0.6rem; }
   .about-preview__content { padding: 24px 0 0; }
 
   /* Page hero (inner pages) */
@@ -4190,7 +4193,7 @@ body.emergency-active .page-hero { padding-top: calc(var(--nav-height) + 44px + 
   .hero__chips   { gap: 6px; margin-bottom: 12px; }
 
   /* About: loosen aspect ratio when stacked single column */
-  .about-preview__img { aspect-ratio: 4 / 3; }
+  /* aspect-ratio handled in the 820px block above for portrait on phones */
 
   /* Mobile nav links — 44px tap target */
   .navbar__mobile-link { padding: 14px 20px; }
