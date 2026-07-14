@@ -1088,43 +1088,130 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); line-height: 1.75; color: var(--
 .why-card p  { font-size: 0.875rem; }
 
 /* ============ REDESIGNED CHOOSE US ============ */
-.choose-us-layout {
+
+/* Section wrapper */
+.choose-section {
+  padding: 96px 0;
+  background: var(--white);
+}
+body.dark-mode .choose-section {
+  background: var(--black-2);
+}
+
+/* Inner container */
+.choose-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
   display: grid;
   grid-template-columns: 1fr 1.3fr;
   gap: 64px;
   align-items: center;
 }
 @media (max-width: 991px) {
-  .choose-us-layout {
+  .choose-container {
     grid-template-columns: 1fr;
     gap: 48px;
   }
 }
-.choose-us-intro {
+
+/* Left intro panel */
+.choose-intro {
   max-width: 480px;
 }
-.choose-us-intro .section-label {
+.choose-label {
   display: inline-block;
-  margin-bottom: 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  margin-bottom: 14px;
 }
-.choose-us-intro .section-heading {
-  margin-bottom: 20px;
+.choose-title {
+  font-family: var(--font-heading);
   font-size: clamp(2rem, 4.5vw, 2.75rem);
   line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--black);
+  margin-bottom: 18px;
   text-align: left;
 }
-.choose-us-intro .section-sub {
-  margin-bottom: 32px;
-  text-align: left;
-  font-size: 1.05rem;
+body.dark-mode .choose-title {
+  color: var(--white);
+}
+.choose-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+.choose-text {
+  font-size: 1.02rem;
+  line-height: 1.65;
   color: var(--gray-dark);
-  line-height: 1.6;
+  margin-bottom: 28px;
+  text-align: left;
 }
-.choose-us-cta {
+body.dark-mode .choose-text {
+  color: var(--white-dim);
+}
+
+/* Rating badge */
+.choose-badge {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: flex-start;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+  padding: 12px 18px;
+  background: rgba(196,163,90,0.07);
+  border: 1px solid rgba(196,163,90,0.2);
+  border-radius: var(--radius-md);
+  width: fit-content;
+}
+.choose-badge__stars {
+  color: var(--gold);
+  font-size: 1rem;
+  letter-spacing: 2px;
+}
+.choose-badge__text {
+  font-size: 0.88rem;
+  color: var(--gray-dark);
+  line-height: 1.4;
+}
+body.dark-mode .choose-badge__text {
+  color: var(--white-dim);
+}
+.choose-badge__text strong {
+  color: var(--black);
+}
+body.dark-mode .choose-badge__text strong {
+  color: var(--white);
+}
+
+/* Right grid of 4 cards */
+.choose-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+@media (max-width: 600px) {
+  .choose-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+
+/* Legacy aliases kept for backwards compat */
+.choose-us-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 64px;
+  align-items: center;
+}
+.choose-us-intro { max-width: 480px; }
+.choose-us-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
 }
 .cta-trust-badge {
   display: flex;
@@ -1135,24 +1222,7 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); line-height: 1.75; color: var(--
   font-weight: 600;
   letter-spacing: 0.02em;
 }
-.cta-trust-badge svg {
-  width: 18px;
-  height: 18px;
-  stroke: var(--gold);
-}
 
-/* Grid of Cards */
-.choose-us-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-}
-@media (max-width: 600px) {
-  .choose-us-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-}
 
 /* Card Styling */
 .choose-card {
@@ -1270,6 +1340,24 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); line-height: 1.75; color: var(--
   line-height: 1.55;
   margin: 0;
 }
+/* Plain h4/p used inside cards (no BEM modifier) */
+.choose-card h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--black);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+.choose-card p {
+  font-size: 0.9rem;
+  color: var(--gray-dark);
+  line-height: 1.55;
+  margin: 0;
+}
+body.dark-mode .choose-card h4 { color: var(--white); }
+body.dark-mode .choose-card p  { color: var(--white-dim); }
+/* Hide empty border div */
+.choose-card__border { display: none; }
 
 /* Dark Mode support for choose-card */
 body.dark-mode .choose-card {
