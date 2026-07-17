@@ -195,6 +195,15 @@
     });
   </script>
   <link rel="icon" href="assets/logo.png" type="image/png">
+  <style>
+    /* Critical inline CSS — prevent SVG blowout before main stylesheet loads */
+    svg:not([width]):not([height]) { max-width: 48px; max-height: 48px; }
+    .choose-card__icon svg, .tech-card__icon svg, .hero__float-icon svg,
+    .footer__contact-item svg, .footer__social-link svg,
+    .btn svg, .treat-row__icon svg { width: 24px; height: 24px; }
+    .fab-wa svg { width: 28px; height: 28px; }
+    .scroll-top svg { width: 20px; height: 20px; }
+  </style>
   <link rel="stylesheet" href="css/style.css?v=7">
 </head>
 <body>
@@ -1094,7 +1103,7 @@
         <div class="choose-card__glow"></div>
         <div class="choose-card__border"></div>
         <div class="choose-card__icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
         </div>
         <h4>Specialist for Every Procedure</h4>
         <p>Each treatment is performed by the right specialist, not a general dentist doing everything.</p>
@@ -1104,7 +1113,7 @@
         <div class="choose-card__glow"></div>
         <div class="choose-card__border"></div>
         <div class="choose-card__icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
         </div>
         <h4>Latest Technology</h4>
         <p>Digital X-rays, Full Mouth X-Ray, laser dentistry, 3D scanning — precision tools for superior outcomes.</p>
@@ -1114,7 +1123,7 @@
         <div class="choose-card__glow"></div>
         <div class="choose-card__border"></div>
         <div class="choose-card__icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
         </div>
         <h4>Compassionate Care</h4>
         <p>We understand dental anxiety. Every visit feels calm, comfortable, and stress-free.</p>
@@ -1123,7 +1132,7 @@
         <div class="choose-card__glow"></div>
         <div class="choose-card__border"></div>
         <div class="choose-card__icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
         </div>
         <h4>Convenient Timings</h4>
         <p>Mon–Sat, 9 AM–8 PM. Ample parking. Fully accessible ground-floor clinic.</p>
