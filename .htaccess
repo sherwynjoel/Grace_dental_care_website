@@ -1,4 +1,5 @@
 Options -Indexes
+DirectorySlash Off
 RewriteEngine On
 
 # ── 1. Force HTTPS ────────────────────────────────────────────
@@ -13,8 +14,25 @@ RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
 RewriteCond %{THE_REQUEST} \s/+(.*?)\.html[\s?] [NC]
 RewriteRule ^ /%1 [R=301,L,NE]
 
+# ── 3b. Strip trailing slash (301 redirect, except root /) ────
+RewriteCond %{REQUEST_URI} ^/(.+)/$
+RewriteRule ^ /%1 [R=301,L]
+
+# ── 3c. Blog CMS Rewrites ─────────────────────────────────────
+# Route /blog/slug to blog-post.php?id=slug
+RewriteRule ^blog/([a-zA-Z0-9-]+)$ blog-post.php?id=$1 [L,QSA]
+
+# Route /blog to blog.php
+RewriteRule ^blog$ blog.php [L,QSA]
+
+# Route /admin to admin/index.php
+RewriteRule ^admin$ admin/index.php [L]
+
 # ── 4. Map /page to /page.html internally ────────────────────
-RewriteCond %{REQUEST_FILENAME} !-d
+#       Changed !-d to !-f so .html files are preferred over
+#       same-named directories (e.g. /treatments → treatments.html
+#       even though treatments/ directory exists)
+RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME}\.html -f
 RewriteRule ^(.*)$ $1.html [L]
 

@@ -1,12 +1,92 @@
+<?php
+// Load blogs JSON
+$blogs_file = __DIR__ . '/blogs.json';
+$blogs = [];
+if (file_exists($blogs_file)) {
+    $blogs = json_decode(file_get_contents($blogs_file), true);
+}
+
+if (!is_array($blogs)) {
+    $blogs = [];
+}
+
+// Sort blogs by date descending
+usort($blogs, function($a, $b) {
+    return strcmp($b['date'], $a['date']);
+});
+
+// Category filtering
+$selected_category = isset($_GET['category']) ? trim($_GET['category']) : '';
+$filtered_blogs = $blogs;
+if ($selected_category !== '') {
+    $filtered_blogs = array_filter($blogs, function($blog) use ($selected_category) {
+        return strcasecmp($blog['category'], $selected_category) === 0;
+    });
+}
+
+// Dynamic categories counts from ALL blogs
+$categories_count = [];
+foreach ($blogs as $blog) {
+    $cat = $blog['category'];
+    if (!isset($categories_count[$cat])) {
+        $categories_count[$cat] = 0;
+    }
+    $categories_count[$cat]++;
+}
+
+// Identify featured article (either marked featured, or most recent)
+$featured_blog = null;
+if (empty($selected_category)) {
+    // Check if any post is explicitly marked featured
+    foreach ($filtered_blogs as $key => $blog) {
+        if (isset($blog['featured']) && $blog['featured'] === true) {
+            $featured_blog = $blog;
+            unset($filtered_blogs[$key]);
+            break;
+        }
+    }
+    // Fallback: take the most recent post as featured
+    if ($featured_blog === null && !empty($filtered_blogs)) {
+        $featured_blog = array_shift($filtered_blogs);
+    }
+}
+
+// Re-index array after modifications
+$filtered_blogs = array_values($filtered_blogs);
+
+// Pagination
+$posts_per_page = 6;
+$total_posts = count($filtered_blogs);
+$total_pages = max(1, ceil($total_posts / $posts_per_page));
+$current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+if ($current_page < 1) $current_page = 1;
+if ($current_page > $total_pages) $current_page = $total_pages;
+
+$start_index = ($current_page - 1) * $posts_per_page;
+$paginated_blogs = array_slice($filtered_blogs, $start_index, $posts_per_page);
+
+// Recent articles for sidebar (top 3)
+$recent_blogs = array_slice($blogs, 0, 3);
+
+// Helper to format date
+function formatDate($dateStr) {
+    try {
+        $date = new DateTime($dateStr);
+        return $date->format('M d, Y');
+    } catch (Exception $e) {
+        return $dateStr;
+    }
+}
+?>
 <!DOCTYPE html><html lang="en"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dental Health Blog | Tips & Guides | Grace Dental Care Coimbatore</title>
+  <title><?php echo empty($selected_category) ? 'Dental Health Blog | Tips & Guides | Grace Dental Care Coimbatore' : htmlspecialchars($selected_category) . ' Articles | Grace Dental Care Blog'; ?></title>
   <meta name="description" content="Read expert dental health tips, treatment guides, and oral care advice from the dentists at Grace Dental Care, Coimbatore. Stay informed, stay healthy.">
   <meta name="keywords" content="dental blog Coimbatore, oral health tips, dental advice, dentist blog India, dental health guide, Grace Dental Care blog">
   <meta name="author" content="Grace Dental Care">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-  <link rel="canonical" href="https://www.gracedentalcarekovai.com/blog">
+  <link rel="canonical" href="https://www.gracedentalcarekovai.com/blog<?php echo empty($selected_category) ? '' : '?category=' . urlencode($selected_category); ?>">
   <!-- Geo Tags -->
   <meta name="geo.region" content="IN-TN">
   <meta name="geo.placename" content="Kovaipudur, Coimbatore, Tamil Nadu">
@@ -39,7 +119,7 @@
   <link rel="icon" href="assets/logo.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/logo.png">
   <link rel="manifest" href="manifest.json">
-  <!-- Google Analytics 4 — replace G-XXXXXXXXXX with your real Measurement ID -->
+  <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>
     window.dataLayer=window.dataLayer||[];
@@ -55,8 +135,8 @@
       if(form){form.addEventListener('submit',function(){trackEvent('form_submit','conversion','contact_form');});}
     });
   </script>
-  <link rel="preload" href="css/style.css?v=7" as="style">
-  <link rel="stylesheet" href="css/style.css?v=7">
+  <link rel="preload" href="css/style.css?v=8" as="style">
+  <link rel="stylesheet" href="css/style.css?v=8">
 </head>
 <body>
 <!-- Skip to main content (accessibility) -->
@@ -120,7 +200,12 @@
   <div class="container page-hero__inner">
     <div class="page-hero__breadcrumb">
       <a href="./">Home</a><span class="page-hero__breadcrumb-sep">›</span>
-      <span style="color:var(--gold);">Blog</span>
+      <?php if ($selected_category !== ''): ?>
+        <a href="blog">Blog</a><span class="page-hero__breadcrumb-sep">›</span>
+        <span style="color:var(--gold);"><?php echo htmlspecialchars($selected_category); ?></span>
+      <?php else: ?>
+        <span style="color:var(--gold);">Blog</span>
+      <?php endif; ?>
     </div>
     <h1>Dental Health<br><em style="color:var(--gold);font-style:italic;">Insights &amp; Tips</em></h1>
     <p class="page-hero__sub">Expert advice from our specialists on maintaining a healthy smile — from daily habits to understanding complex treatments.</p>
@@ -136,185 +221,113 @@
       <div>
 
         <!-- Featured Post -->
+        <?php if ($featured_blog !== null): ?>
         <div style="background:var(--black-3);border:1px solid var(--gold-border);border-radius:var(--radius-xl);overflow:hidden;margin-bottom:32px;" data-reveal="">
           <div style="aspect-ratio:16/7;position:relative;overflow:hidden;">
-            <img src="assets/blog-dental-implants.webp" alt="Dental Implants vs Bridges" style="width:100%;height:100%;object-fit:cover;display:block;" width="1024" height="1024" decoding="async">
+            <img src="<?php echo htmlspecialchars($featured_blog['image']); ?>" alt="<?php echo htmlspecialchars($featured_blog['title']); ?>" style="width:100%;height:100%;object-fit:cover;display:block;" width="1024" height="1024" decoding="async">
             <div style="position:absolute;top:20px;left:20px;z-index:2;">
               <span style="padding:5px 14px;background:var(--gold);border-radius:var(--radius-pill);font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--black);">Featured</span>
             </div>
             <div style="position:absolute;bottom:20px;left:20px;z-index:2;">
-              <span style="padding:4px 12px;background:rgba(0,0,0,0.6);border:1px solid var(--gold-border);border-radius:var(--radius-pill);font-size:0.7rem;color:var(--gold);font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">Implants</span>
+              <span style="padding:4px 12px;background:rgba(0,0,0,0.6);border:1px solid var(--gold-border);border-radius:var(--radius-pill);font-size:0.7rem;color:var(--gold);font-weight:600;letter-spacing:0.08em;text-transform:uppercase;"><?php echo htmlspecialchars($featured_blog['category']); ?></span>
             </div>
           </div>
           <div style="padding:32px;">
-            <div style="display:flex;gap:12px;margin-bottom:14px;font-size:0.78rem;color:var(--gray);">
-              <span>June 2, 2026</span>
+            <div style="display:flex;gap:12px;margin-bottom:14px;font-size:0.78rem;color:var(--gray);flex-wrap:wrap;">
+              <span><?php echo formatDate($featured_blog['date']); ?></span>
               <span>—</span>
-              <span>Dr. Sherin Grace Babu</span>
+              <span><?php echo htmlspecialchars($featured_blog['author']); ?></span>
               <span>—</span>
-              <span>7 min read</span>
+              <span><?php echo htmlspecialchars($featured_blog['read_time']); ?></span>
             </div>
-            <h2 style="font-size:1.6rem;margin-bottom:14px;line-height:1.3;">Dental Implants vs Bridges: Which Is the Right Choice for You?</h2>
-            <p style="margin-bottom:24px;">When you lose a tooth, two of the most popular replacement options are dental implants and bridges. Both can restore your smile beautifully, but they work very differently and suit different needs. In this comprehensive guide, our specialists break down the pros, cons, cost considerations, and ideal candidates for each treatment.</p>
+            <h2 style="font-size:1.6rem;margin-bottom:14px;line-height:1.3;"><a href="blog/<?php echo htmlspecialchars($featured_blog['id']); ?>" style="color:var(--white);"><?php echo htmlspecialchars($featured_blog['title']); ?></a></h2>
+            <p style="margin-bottom:24px;color:var(--gray);"><?php echo htmlspecialchars($featured_blog['excerpt']); ?></p>
             <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;">
-              <a href="blog-dental-implants" class="btn btn--gold">Read Full Article</a>
-              <span style="font-size:0.8rem;color:var(--gray);">10 minute read</span>
+              <a href="blog/<?php echo htmlspecialchars($featured_blog['id']); ?>" class="btn btn--gold">Read Full Article</a>
             </div>
           </div>
         </div>
+        <?php elseif ($total_posts === 0): ?>
+          <div style="padding:48px;background:var(--black-3);border:1px solid var(--gold-border);border-radius:var(--radius-xl);text-align:center;">
+            <h4 style="margin-bottom:8px;font-size:1.2rem;">No Articles Found</h4>
+            <p style="color:var(--gray);margin-bottom:24px;">There are no articles posted in this category yet.</p>
+            <a href="blog" class="btn btn--gold">View All Articles</a>
+          </div>
+        <?php endif; ?>
 
         <!-- Blog Grid -->
+        <?php if (!empty($paginated_blogs)): ?>
         <div class="grid-2" style="gap:24px;">
-
-          <div class="blog-card" data-reveal="" data-delay="1">
+          <?php $delay = 1; foreach ($paginated_blogs as $blog): ?>
+          <div class="blog-card" data-reveal="" data-delay="<?php echo $delay; ?>">
             <div class="blog-card__thumb">
-              <img src="assets/blog-root-canal.webp" alt="5 Warning Signs You Need a Root Canal" style="width:100%;height:100%;object-fit:cover;display:block;" width="1024" height="1024" loading="lazy" decoding="async">
-              <span class="blog-card__cat">Root Canal</span>
+              <img src="<?php echo htmlspecialchars($blog['image']); ?>" alt="<?php echo htmlspecialchars($blog['title']); ?>" style="width:100%;height:100%;object-fit:cover;display:block;" width="1024" height="1024" loading="lazy" decoding="async">
+              <span class="blog-card__cat"><?php echo htmlspecialchars($blog['category']); ?></span>
             </div>
             <div class="blog-card__body">
               <div class="blog-card__meta">
-                <span>May 25, 2026</span>
+                <span><?php echo formatDate($blog['date']); ?></span>
                 <span class="blog-card__meta-dot"></span>
-                <span>5 min read</span>
+                <span><?php echo htmlspecialchars($blog['read_time']); ?></span>
               </div>
-              <h3><a href="#">5 Warning Signs You Need a Root Canal (Don't Ignore These)</a></h3>
-              <p>Persistent toothache? Sensitivity to heat and cold? These early warning signs could mean your tooth's pulp is infected — and timely treatment can save the tooth completely.</p>
-              <a href="#" class="blog-card__link">Read More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></a>
+              <h3><a href="blog/<?php echo htmlspecialchars($blog['id']); ?>"><?php echo htmlspecialchars($blog['title']); ?></a></h3>
+              <p><?php echo htmlspecialchars($blog['excerpt']); ?></p>
+              <a href="blog/<?php echo htmlspecialchars($blog['id']); ?>" class="blog-card__link">Read More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></a>
             </div>
           </div>
-
-          <div class="blog-card" data-reveal="" data-delay="2">
-            <div class="blog-card__thumb">
-              <img src="assets/blog-invisible-braces.webp" alt="Clear Aligners vs Metal Braces" style="width:100%;height:100%;object-fit:cover;display:block;" width="1024" height="1024" loading="lazy" decoding="async">
-              <span class="blog-card__cat">Orthodontics</span>
-            </div>
-            <div class="blog-card__body">
-              <div class="blog-card__meta">
-                <span>May 18, 2026</span>
-                <span class="blog-card__meta-dot"></span>
-                <span>6 min read</span>
-              </div>
-              <h3><a href="blog-invisible-braces">Clear Aligners vs Metal Braces: A Complete Honest Comparison</a></h3>
-              <p>Choosing between invisible aligners and traditional braces is a big decision. We compare effectiveness, comfort, cost, and treatment time so you can choose confidently.</p>
-              <a href="blog-invisible-braces" class="blog-card__link">Read More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></a>
-            </div>
-          </div>
-
-          <div class="blog-card" data-reveal="" data-delay="3">
-            <div class="blog-card__thumb">
-              <img src="assets/blog-teeth-whitening.webp" alt="Professional Teeth Whitening Guide" style="width:100%;height:100%;object-fit:cover;display:block;" width="1024" height="1024" loading="lazy" decoding="async">
-              <span class="blog-card__cat">Cosmetic</span>
-            </div>
-            <div class="blog-card__body">
-              <div class="blog-card__meta">
-                <span>May 10, 2026</span>
-                <span class="blog-card__meta-dot"></span>
-                <span>4 min read</span>
-              </div>
-              <h3><a href="#">Professional Teeth Whitening: What to Expect Before, During &amp; After</a></h3>
-              <p>In-clinic whitening delivers results that at-home kits simply can't match. Here's everything you need to know about the procedure, aftercare, and how long results last.</p>
-              <a href="#" class="blog-card__link">Read More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></a>
-            </div>
-          </div>
-
-          <div class="blog-card" data-reveal="" data-delay="4">
-            <div class="blog-card__thumb">
-              <img src="assets/blog-pediatric-dentistry.webp" alt="When Should My Child First See a Dentist?" style="width:100%;height:100%;object-fit:cover;display:block;" width="1024" height="1024" loading="lazy" decoding="async">
-              <span class="blog-card__cat">Pediatric</span>
-            </div>
-            <div class="blog-card__body">
-              <div class="blog-card__meta">
-                <span>May 2, 2026</span>
-                <span class="blog-card__meta-dot"></span>
-                <span>5 min read</span>
-              </div>
-              <h3><a href="#">When Should My Child First See a Dentist? A Parent's Complete Guide</a></h3>
-              <p>Many parents wait too long. The right time to start dental visits is earlier than you think — and building good habits now pays lifelong dividends for your child's oral health.</p>
-              <a href="#" class="blog-card__link">Read More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></a>
-            </div>
-          </div>
-
-          <div class="blog-card" data-reveal="" data-delay="1">
-            <div class="blog-card__thumb">
-              <img src="assets/blog-laser-dentistry.webp" alt="What Is Laser Dentistry?" style="width:100%;height:100%;object-fit:cover;display:block;" width="1024" height="1024" loading="lazy" decoding="async">
-              <span class="blog-card__cat">Technology</span>
-            </div>
-            <div class="blog-card__body">
-              <div class="blog-card__meta">
-                <span>Apr 22, 2026</span>
-                <span class="blog-card__meta-dot"></span>
-                <span>4 min read</span>
-              </div>
-              <h3><a href="#">What Is Laser Dentistry? Benefits, Uses, and What to Expect</a></h3>
-              <p>Laser dentistry is revolutionising gum treatment. Less pain, faster healing, no scalpel. Learn exactly how it works and whether it's the right option for your treatment.</p>
-              <a href="#" class="blog-card__link">Read More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></a>
-            </div>
-          </div>
-
-          <div class="blog-card" data-reveal="" data-delay="2">
-            <div class="blog-card__thumb">
-              <img src="assets/blog-cavity-prevention.webp" alt="7 Evidence-Based Ways to Prevent Cavities" style="width:100%;height:100%;object-fit:cover;display:block;" width="1024" height="1024" loading="lazy" decoding="async">
-              <span class="blog-card__cat">Oral Health</span>
-            </div>
-            <div class="blog-card__body">
-              <div class="blog-card__meta">
-                <span>May 28, 2026</span>
-                <span class="blog-card__meta-dot"></span>
-                <span>5 min read</span>
-              </div>
-              <h3><a href="blog-cavity-prevention">7 Evidence-Based Ways to Prevent Cavities — From Our Dentists</a></h3>
-              <p>Dr. Indumathiy R shares 7 clinically proven strategies to prevent cavities, including brushing technique, fluoride use, and diet tips tailored for Indian food.</p>
-              <a href="blog-cavity-prevention" class="blog-card__link">Read More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></a>
-            </div>
-          </div>
-
+          <?php $delay = ($delay % 4) + 1; endforeach; ?>
         </div>
 
         <!-- Pagination -->
+        <?php if ($total_pages > 1): ?>
         <div style="display:flex;gap:8px;margin-top:40px;flex-wrap:wrap;" data-reveal="">
-          <a href="#" style="width:40px;height:40px;border-radius:var(--radius-sm);background:var(--gold);color:var(--black);display:flex;align-items:center;justify-content:center;font-size:0.875rem;font-weight:700;">1</a>
-          <a href="#" style="width:40px;height:40px;border-radius:var(--radius-sm);background:var(--gold-glass);border:1px solid var(--gold-border);color:var(--gray);display:flex;align-items:center;justify-content:center;font-size:0.875rem;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)';" onmouseout="this.style.borderColor='var(--gold-border)';this.style.color='var(--gray)';">2</a>
-          <a href="#" style="width:40px;height:40px;border-radius:var(--radius-sm);background:var(--gold-glass);border:1px solid var(--gold-border);color:var(--gray);display:flex;align-items:center;justify-content:center;font-size:0.875rem;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)';" onmouseout="this.style.borderColor='var(--gold-border)';this.style.color='var(--gray)';">3</a>
-          <a href="#" style="padding:0 16px;height:40px;border-radius:var(--radius-sm);background:var(--gold-glass);border:1px solid var(--gold-border);color:var(--gray);display:flex;align-items:center;gap:4px;font-size:0.875rem;">Next <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></a>
+          <?php for ($i = 1; $i <= $total_pages; $i++): 
+            $page_url = 'blog?page=' . $i . (empty($selected_category) ? '' : '&category=' . urlencode($selected_category));
+            $is_current = ($i === $current_page);
+          ?>
+            <?php if ($is_current): ?>
+              <span style="width:40px;height:40px;border-radius:var(--radius-sm);background:var(--gold);color:var(--black);display:flex;align-items:center;justify-content:center;font-size:0.875rem;font-weight:700;"><?php echo $i; ?></span>
+            <?php else: ?>
+              <a href="<?php echo $page_url; ?>" style="width:40px;height:40px;border-radius:var(--radius-sm);background:var(--gold-glass);border:1px solid var(--gold-border);color:var(--gray);display:flex;align-items:center;justify-content:center;font-size:0.875rem;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)';" onmouseout="this.style.borderColor='var(--gold-border)';this.style.color='var(--gray)';"><?php echo $i; ?></a>
+            <?php endif; ?>
+          <?php endfor; ?>
+          
+          <?php if ($current_page < $total_pages): 
+            $next_url = 'blog?page=' . ($current_page + 1) . (empty($selected_category) ? '' : '&category=' . urlencode($selected_category));
+          ?>
+            <a href="<?php echo $next_url; ?>" style="padding:0 16px;height:40px;border-radius:var(--radius-sm);background:var(--gold-glass);border:1px solid var(--gold-border);color:var(--gray);display:flex;align-items:center;gap:4px;font-size:0.875rem;">Next <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></a>
+          <?php endif; ?>
         </div>
+        <?php endif; ?>
+        <?php endif; ?>
       </div>
 
       <!-- Sidebar -->
       <aside style="position:sticky;top:100px;">
         <div class="blog-sidebar" style="margin-bottom:24px;" data-reveal="">
           <h4>Categories</h4>
-          <a href="#" class="blog-category-link">Dental Implants <span class="blog-category-count">4</span></a>
-          <a href="#" class="blog-category-link">Orthodontics <span class="blog-category-count">3</span></a>
-          <a href="#" class="blog-category-link">Cosmetic Dentistry <span class="blog-category-count">5</span></a>
-          <a href="#" class="blog-category-link">Oral Health <span class="blog-category-count">6</span></a>
-          <a href="#" class="blog-category-link">Pediatric Dentistry <span class="blog-category-count">3</span></a>
-          <a href="#" class="blog-category-link">Technology <span class="blog-category-count">2</span></a>
-          <a href="#" class="blog-category-link">Root Canal <span class="blog-category-count">2</span></a>
+          <a href="blog" class="blog-category-link <?php echo empty($selected_category) ? 'active' : ''; ?>">All Articles <span class="blog-category-count"><?php echo count($blogs); ?></span></a>
+          <?php foreach ($categories_count as $cat => $count): 
+            $cat_url = 'blog?category=' . urlencode($cat);
+            $is_active = (strcasecmp($selected_category, $cat) === 0);
+          ?>
+            <a href="<?php echo $cat_url; ?>" class="blog-category-link <?php echo $is_active ? 'active' : ''; ?>"><?php echo htmlspecialchars($cat); ?> <span class="blog-category-count"><?php echo $count; ?></span></a>
+          <?php endforeach; ?>
         </div>
 
         <div class="blog-sidebar" style="margin-bottom:24px;" data-reveal="">
           <h4>Recent Articles</h4>
-          <a href="blog-dental-implants" class="blog-recent-item">
-            <div class="blog-recent-thumb"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle></svg></div>
+          <?php foreach ($recent_blogs as $recent): ?>
+          <a href="blog/<?php echo htmlspecialchars($recent['id']); ?>" class="blog-recent-item">
+            <div class="blog-recent-thumb">
+              <img src="<?php echo htmlspecialchars($recent['image']); ?>" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:4px;">
+            </div>
             <div>
-              <p class="blog-recent-title">Implants vs Bridges: Which Is Right for You?</p>
-              <p class="blog-recent-date">June 2, 2026</p>
+              <p class="blog-recent-title"><?php echo htmlspecialchars($recent['title']); ?></p>
+              <p class="blog-recent-date"><?php echo formatDate($recent['date']); ?></p>
             </div>
           </a>
-          <a href="blog-cavity-prevention" class="blog-recent-item">
-            <div class="blog-recent-thumb"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4"></path><circle cx="12" cy="12" r="10"></circle></svg></div>
-            <div>
-              <p class="blog-recent-title">7 Evidence-Based Ways to Prevent Cavities</p>
-              <p class="blog-recent-date">May 28, 2026</p>
-            </div>
-          </a>
-          <a href="blog-invisible-braces" class="blog-recent-item">
-            <div class="blog-recent-thumb"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h18M3 12h18M3 18h18"></path></svg></div>
-            <div>
-              <p class="blog-recent-title">Clear Aligners vs Metal Braces: Honest Comparison</p>
-              <p class="blog-recent-date">May 18, 2026</p>
-            </div>
-          </a>
+          <?php endforeach; ?>
         </div>
 
         <div class="blog-sidebar" style="margin-bottom:24px;" data-reveal="">
@@ -374,7 +387,5 @@
   }
 </style>
 
-<script src="js/main.js?v=7"></script>
-
-
+<script src="js/main.js?v=8"></script>
 </body></html>

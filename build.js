@@ -19,8 +19,8 @@ const DIST = path.join(__dirname, 'dist');
 const ZIP  = path.join(__dirname, 'dist.zip');
 
 const HTML_FILES = fs.readdirSync(SRC).filter(f => f.endsWith('.html'));
-const COPY_DIRS  = ['assets'];
-const COPY_FILES = ['robots.txt', 'sitemap.xml', 'manifest.json', '.htaccess'];
+const COPY_DIRS  = ['assets', 'admin'];
+const COPY_FILES = ['robots.txt', 'sitemap.xml', 'manifest.json', '.htaccess', 'blog.php', 'blog-post.php', 'blogs.json'];
 
 // ── Helpers ────────────────────────────────────────────────
 function ensureDir(dir) {

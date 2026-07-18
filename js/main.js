@@ -502,8 +502,24 @@
       const opts   = { weekday:'long', year:'numeric', month:'long', day:'numeric' };
       const dStr   = selDate.toLocaleDateString('en-IN', opts);
       confirmTxt.textContent = dStr + ' at ' + selTime;
-      const msg    = encodeURIComponent('Hi, I\'d like to book an appointment at Grace Dental Care on ' + dStr + ' at ' + selTime + '. Please confirm my slot. Thank you!');
-      waBtn.href   = 'https://wa.me/918015329529?text=' + msg;
+      
+      const updateWALink = () => {
+        const isChange = document.getElementById('calIsChange')?.checked;
+        let text = '';
+        if (isChange) {
+          text = "Hi. I'd like to change my appointment to " + dStr + " at " + selTime + ". Please confirm my changed time slot. Thank you again!";
+        } else {
+          text = "Hi, I'd like to book an appointment at Grace Dental Care on " + dStr + " at " + selTime + ". Please confirm my slot. Thank you!";
+        }
+        waBtn.href = 'https://wa.me/918015329529?text=' + encodeURIComponent(text);
+      };
+      
+      const changeCheckbox = document.getElementById('calIsChange');
+      if (changeCheckbox) {
+        changeCheckbox.checked = false;
+        changeCheckbox.onchange = updateWALink;
+      }
+      updateWALink();
       showPanel(3);
     }
 
@@ -801,7 +817,7 @@
     const hero = document.querySelector('.hero__content, .hero__ctas, .hero-inner');
     if (hero) {
       const firstBtn = hero.querySelector('.btn');
-      if (firstBtn) hero.insertBefore(badge, firstBtn);
+      if (firstBtn) firstBtn.parentNode.insertBefore(badge, firstBtn);
       else hero.appendChild(badge);
     }
   })();
@@ -1130,5 +1146,24 @@
       card.style.setProperty('--mouse-y', `${y}px`);
     });
   });
+
+  /* ── Credentials & Certifications Flip (Touch & Keyboard accessibility) ── */
+  (function () {
+    const cards = document.querySelectorAll('.cert-card');
+    cards.forEach(card => {
+      const toggleFlip = (e) => {
+        // Prevent default click behaviors
+        const isFlipped = card.classList.toggle('flipped');
+        card.setAttribute('aria-expanded', isFlipped ? 'true' : 'false');
+      };
+      card.addEventListener('click', toggleFlip);
+      card.addEventListener('keydown', e => {
+        if (e.key === ' ' || e.key === 'Enter') {
+          e.preventDefault();
+          toggleFlip();
+        }
+      });
+    });
+  })();
 
 })();

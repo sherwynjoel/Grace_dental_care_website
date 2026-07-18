@@ -166,7 +166,7 @@
   <link rel="apple-touch-icon" href="assets/logo.png">
   <link rel="manifest" href="manifest.json">
   <!-- Preload critical assets -->
-  <link rel="preload" href="css/style.css?v=7" as="style">
+  <link rel="preload" href="css/style.css?v=8" as="style">
   <link rel="preload" href="assets/logo.png" as="image">
   <!-- Google Analytics 4 — replace G-XXXXXXXXXX with your real Measurement ID -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
@@ -204,7 +204,7 @@
     .fab-wa svg { width: 28px; height: 28px; }
     .scroll-top svg { width: 20px; height: 20px; }
   </style>
-  <link rel="stylesheet" href="css/style.css?v=7">
+  <link rel="stylesheet" href="css/style.css?v=8">
 </head>
 <body>
 
@@ -672,11 +672,11 @@
         <div style="display:flex;flex-direction:column;gap:16px;">
           <div class="why-card">
             <div class="why-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
-            <div><h4>Ground Floor — Fully Accessible</h4><p style="font-size:0.85rem;">Designed specifically for senior patients and those with mobility challenges. No stairs, no barriers.</p></div>
+            <div><h4>Ground Floor — Fully Accessible</h4><p style="font-size:0.85rem;">Designed for senior patients and those with mobility challenges. Fully wheelchair accessible, with no stairs or barriers.</p></div>
           </div>
           <div class="why-card">
             <div class="why-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div>
-            <div><h4>Ample Parking</h4><p style="font-size:0.85rem;">Convenient, stress-free parking right outside our clinic on 100 Feet Road — so your visit starts easily.</p></div>
+            <div><h4>Ample Parking</h4><p style="font-size:0.85rem;">Convenient, stress-free parking, allowing your visit to start easily.</p></div>
           </div>
           <div class="why-card">
             <div class="why-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
@@ -1242,12 +1242,12 @@
           <p style="font-size:0.875rem;margin-bottom:0;">Dedicated to providing gentle, patient-first care. Specialises in restorative and preventive dentistry with a focus on long-term oral health.</p>
           <div class="doctor-card__stats">
             <div class="doctor-card__stat">
-              <span class="doctor-card__stat-num">1000+</span>
-              <span class="doctor-card__stat-label">Patients</span>
-            </div>
-            <div class="doctor-card__stat">
               <span class="doctor-card__stat-num">100%</span>
               <span class="doctor-card__stat-label">Satisfaction</span>
+            </div>
+            <div class="doctor-card__stat">
+              <span class="doctor-card__stat-num">2500+</span>
+              <span class="doctor-card__stat-label">Patients</span>
             </div>
           </div>
         </div>
@@ -1489,7 +1489,7 @@
 
       <!-- Result card -->
       <div class="dhs__result" id="dhsResult">
-        <svg class="dhs__ring" viewBox="0 0 140 140" aria-hidden="true">
+        <svg class="dhs__ring" width="240" height="240" viewBox="0 0 140 140" aria-hidden="true" style="width: 240px; height: 240px; display: block; margin: 0 auto 24px;">
           <defs>
             <linearGradient id="dhsGrad" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#C4A35A"></stop>
@@ -1498,8 +1498,8 @@
           </defs>
           <circle cx="70" cy="70" r="58" fill="none" stroke="rgba(196,163,90,0.12)" stroke-width="12"></circle>
           <circle id="dhsCircle" cx="70" cy="70" r="58" fill="none" stroke="url(#dhsGrad)" stroke-width="12" stroke-dasharray="364" stroke-dashoffset="364" stroke-linecap="round" transform="rotate(-90 70 70)"></circle>
-          <text x="70" y="63" text-anchor="middle" font-family="'Playfair Display',serif" font-size="32" font-weight="700" fill="#C4A35A" id="dhsNum">0</text>
-          <text x="70" y="82" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" fill="rgba(255,255,255,0.4)">out of 100</text>
+          <text x="70" y="74" text-anchor="middle" font-family="'Playfair Display',serif" font-size="48" font-weight="700" fill="#C4A35A" id="dhsNum">0</text>
+          <text x="70" y="96" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="14" fill="rgba(255,255,255,0.4)">out of 100</text>
         </svg>
         <h3 class="dhs__score-title" id="dhsTitle"></h3>
         <p class="dhs__score-rec" id="dhsRec"></p>
@@ -1576,10 +1576,10 @@
     <div class="center" data-reveal="">
       <span class="section-label">Verified Excellence</span>
       <h2 class="section-heading" id="cert-heading">Credentials &amp;<br><em>Certifications</em></h2>
-      <p class="section-sub">Hover over each card to learn more about our accreditations and why they matter for your safety and care.</p>
+      <p class="section-sub">Tap or hover over each card to learn more about our accreditations and why they matter for your safety and care.</p>
     </div>
     <div class="cert-grid">
-      <div class="cert-card" data-reveal="" data-delay="1">
+      <div class="cert-card" tabindex="0" role="button" aria-expanded="false" data-reveal="" data-delay="1">
         <div class="cert-card__inner">
           <div class="cert-card__front">
             <div class="cert-card__icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg></div>
@@ -1591,19 +1591,7 @@
           </div>
         </div>
       </div>
-      <div class="cert-card" data-reveal="" data-delay="2">
-        <div class="cert-card__inner">
-          <div class="cert-card__front">
-            <div class="cert-card__icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4l3 3"></path></svg></div>
-            <span class="cert-card__title">ISO 9001</span>
-            <span style="font-size:0.68rem;color:var(--gray);">Quality Management</span>
-          </div>
-          <div class="cert-card__back">
-            <p>ISO 9001 certified quality management system. Every process — from sterilisation to patient records — is audited and documented to international standards.</p>
-          </div>
-        </div>
-      </div>
-      <div class="cert-card" data-reveal="" data-delay="3">
+      <div class="cert-card" tabindex="0" role="button" aria-expanded="false" data-reveal="" data-delay="2">
         <div class="cert-card__inner">
           <div class="cert-card__front">
             <div class="cert-card__icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>
@@ -1615,7 +1603,7 @@
           </div>
         </div>
       </div>
-      <div class="cert-card" data-reveal="" data-delay="4">
+      <div class="cert-card" tabindex="0" role="button" aria-expanded="false" data-reveal="" data-delay="3">
         <div class="cert-card__inner">
           <div class="cert-card__front">
             <div class="cert-card__icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg></div>
@@ -1811,7 +1799,7 @@
   </div>
 </div>
 
-<script src="js/main.js?v=7"></script>
+<script src="js/main.js?v=8"></script>
 
 
 </body></html>
