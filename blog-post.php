@@ -82,12 +82,12 @@ function formatDate($dateStr) {
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": "<?php echo addslashes($post['title']); ?>",
-    "image": "https://www.gracedentalcarekovai.com/<?php echo addslashes($post['image']); ?>",
+    "headline": <?php echo json_encode($post['title'], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE); ?>,
+    "image": "https://www.gracedentalcarekovai.com/<?php echo htmlspecialchars($post['image']); ?>",
     "datePublished": "<?php echo $post['date']; ?>",
     "author": {
       "@type": "Person",
-      "name": "<?php echo addslashes($post['author']); ?>"
+      "name": <?php echo json_encode($post['author'], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE); ?>
     },
     "publisher": {
       "@type": "Organization",
@@ -97,15 +97,15 @@ function formatDate($dateStr) {
         "url": "https://www.gracedentalcarekovai.com/assets/logo.png"
       }
     },
-    "description": "<?php echo addslashes($post['excerpt']); ?>"
+    "description": <?php echo json_encode($post['excerpt'], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE); ?>
   }
   </script>
   
-  <link rel="icon" href="assets/logo.png" type="image/png">
-  <link rel="manifest" href="manifest.json">
-  <link rel="preload" href="css/style.css?v=8" as="style">
-  <link rel="stylesheet" href="css/style.css?v=8">
-  <link rel="stylesheet" href="css/treatment-page.css?v=8">
+  <link rel="icon" href="/assets/logo.png" type="image/png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="preload" href="/css/style.css?v=8" as="style">
+  <link rel="stylesheet" href="/css/style.css?v=8">
+  <link rel="stylesheet" href="/css/treatment-page.css?v=8">
   <style>
     .blog-post-layout { display: grid; grid-template-columns: 1fr 320px; gap: 48px; align-items: start; }
     .blog-post-content { background: var(--black-3); border: 1px solid var(--gold-border); border-radius: var(--radius-xl); padding: 48px; overflow: hidden; }
@@ -128,6 +128,13 @@ function formatDate($dateStr) {
     .blog-post-body blockquote { border-left: 3px solid var(--gold); padding-left: 20px; margin: 32px 0; font-style: italic; color: var(--white-dim); }
     .blog-post-lead { font-size: 1.2rem !important; line-height: 1.8 !important; color: var(--white-dim) !important; margin-bottom: 32px !important; }
     
+    /* Table Styling for TinyMCE */
+    .blog-post-body table { width: 100%; border-collapse: collapse; margin: 30px 0; font-size: 0.95rem; }
+    .blog-post-body table, .blog-post-body th, .blog-post-body td { border: 1px solid var(--gold-border); }
+    .blog-post-body th, .blog-post-body td { padding: 12px 16px; text-align: left; }
+    .blog-post-body th { background: rgba(196, 163, 90, 0.1); color: var(--gold); font-weight: 600; }
+    .blog-post-body td { color: var(--white-dim); }
+    
     /* Highlight tips in articles */
     .tip-heading { display: flex; align-items: center; gap: 16px; margin: 40px 0 20px 0; }
     .tip-number { width: 36px; height: 36px; border-radius: 50%; background: var(--gold-glass); border: 1px solid var(--gold-border); color: var(--gold); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; flex-shrink: 0; }
@@ -145,35 +152,35 @@ function formatDate($dateStr) {
 
 <header class="navbar" id="navbar">
   <div class="container navbar__inner">
-    <a href="./" class="navbar__logo">
-      <img src="assets/logo.png" alt="Grace Dental Care" class="navbar__logo-img" width="500" height="500">
+    <a href="/" class="navbar__logo">
+      <img src="/assets/logo.png" alt="Grace Dental Care" class="navbar__logo-img" width="500" height="500">
       <div class="navbar__logo-text">
         <span class="navbar__logo-name"><span>Grace</span> Dental Care</span>
         <span class="navbar__logo-sub">Kovaipudur · Coimbatore</span>
       </div>
     </a>
-    <nav class="navbar__links" aria-label="Main navigation"><a href="./" class="navbar__link">Home</a>
+    <nav class="navbar__links" aria-label="Main navigation"><a href="/" class="navbar__link">Home</a>
     <div class="navbar__item-dropdown">
-      <a href="treatments" class="navbar__link">Treatments <svg class="dropdown-arrow" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
-      <div class="navbar__dropdown-menu"><a href="treatments/dental-implants">Dental Implants</a><a href="treatments/smile-makeover">Smile Makeover</a><a href="treatments/root-canal">Root Canal</a><a href="treatments/braces-aligners">Braces &amp; Aligners</a><a href="treatments/laser-gum-therapy">Laser Gum Therapy</a><a href="treatments/teeth-whitening">Teeth Whitening</a><a href="treatments/pediatric-dentistry">Pediatric Dentistry</a><a href="treatments/wisdom-tooth-removal">Wisdom Tooth Removal</a></div>
+      <a href="/treatments" class="navbar__link">Treatments <svg class="dropdown-arrow" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
+      <div class="navbar__dropdown-menu"><a href="/treatments/dental-implants">Dental Implants</a><a href="/treatments/smile-makeover">Smile Makeover</a><a href="/treatments/root-canal">Root Canal</a><a href="/treatments/braces-aligners">Braces &amp; Aligners</a><a href="/treatments/laser-gum-therapy">Laser Gum Therapy</a><a href="/treatments/teeth-whitening">Teeth Whitening</a><a href="/treatments/pediatric-dentistry">Pediatric Dentistry</a><a href="/treatments/wisdom-tooth-removal">Wisdom Tooth Removal</a></div>
     </div>
     <div class="navbar__item-dropdown">
-      <a href="doctors" class="navbar__link">Doctors <svg class="dropdown-arrow" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
+      <a href="/#doctors" class="navbar__link">Doctors <svg class="dropdown-arrow" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
       <div class="navbar__dropdown-menu">
-        <a href="dr-sherin">Dr. Sherin Grace Babu</a>
-        <a href="dr-indu">Dr. Indu S.</a>
-        <a href="dr-nandana">Dr. Nandana Jayachandran</a>
+        <a href="/#doctors">Dr. Sherin Grace Babu</a>
+        <a href="/#doctors">Dr. Indu S.</a>
+        <a href="/#doctors">Dr. Nandana Jayachandran</a>
     </div>
     </div>
-    <a href="technologies" class="navbar__link">Technology</a>
-    <a href="results" class="navbar__link">Results</a>
-    <a href="blog" class="navbar__link active">Blog</a>
-    <a href="contact" class="navbar__link">Contact</a></nav>
-    <a href="contact" class="btn btn--gold btn--sm navbar__cta">Book Appointment</a>
+    <a href="/#technology" class="navbar__link">Technology</a>
+    <a href="/#results" class="navbar__link">Results</a>
+    <a href="/blog" class="navbar__link active">Blog</a>
+    <a href="/contact" class="navbar__link">Contact</a></nav>
+    <a href="/contact" class="btn btn--gold btn--sm navbar__cta">Book Appointment</a>
     <button class="navbar__hamburger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </header>
-<nav class="navbar__mobile" aria-label="Mobile navigation"><div class="navbar__mobile-links"><a href="./" class="navbar__mobile-link">Home</a>
+<nav class="navbar__mobile" aria-label="Mobile navigation"><div class="navbar__mobile-links"><a href="/" class="navbar__mobile-link">Home</a>
     <div class="navbar__mobile-dropdown">
       <button class="navbar__mobile-dropdown-toggle" type="button">Treatments <svg class="dropdown-arrow" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
       <div class="navbar__mobile-dropdown-menu"><a href="treatments/dental-implants" class="navbar__mobile-dropdown-link">Dental Implants</a><a href="treatments/smile-makeover" class="navbar__mobile-dropdown-link">Smile Makeover</a><a href="treatments/root-canal" class="navbar__mobile-dropdown-link">Root Canal</a><a href="treatments/braces-aligners" class="navbar__mobile-dropdown-link">Braces &amp; Aligners</a><a href="treatments/laser-gum-therapy" class="navbar__mobile-dropdown-link">Laser Gum Therapy</a><a href="treatments/teeth-whitening" class="navbar__mobile-dropdown-link">Teeth Whitening</a><a href="treatments/pediatric-dentistry" class="navbar__mobile-dropdown-link">Pediatric Dentistry</a><a href="treatments/wisdom-tooth-removal" class="navbar__mobile-dropdown-link">Wisdom Tooth Removal</a></div>

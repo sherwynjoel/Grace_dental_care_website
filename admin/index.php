@@ -6,7 +6,7 @@ session_start();
 
 // Enforce authentication
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
-    header('Location: login.php');
+    header('Location: /admin/login.php');
     exit;
 }
 
@@ -14,7 +14,7 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > SESSION_TIMEOUT)) {
     session_unset();
     session_destroy();
-    header('Location: login.php');
+    header('Location: /admin/login.php');
     exit;
 }
 $_SESSION['last_activity'] = time();
@@ -43,6 +43,16 @@ function generateSlug($string) {
     return trim($slug, '-');
 }
 
+// Helper to format date
+function formatDate($dateStr) {
+    try {
+        $date = new DateTime($dateStr);
+        return $date->format('M d, Y');
+    } catch (Exception $e) {
+        return $dateStr;
+    }
+}
+
 $blogs = loadBlogs();
 $message = '';
 $action = isset($_GET['action']) ? $_GET['action'] : 'list';
@@ -58,7 +68,7 @@ if ($action === 'delete' && isset($_GET['id'])) {
     
     if (count($blogs) < $original_count) {
         saveBlogs(array_values($blogs));
-        header('Location: index.php?msg=deleted');
+        header('Location: /admin/index.php?msg=deleted');
         exit;
     }
 }
@@ -70,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_post'])) {
     $category = isset($_POST['category']) ? trim($_POST['category']) : '';
     $date = isset($_POST['date']) ? trim($_POST['date']) : date('Y-m-d');
     $read_time = isset($_POST['read_time']) ? trim($_POST['read_time']) : '5 min read';
-    $image = isset($_POST['image']) ? trim($_POST['image']) : 'assets/blog-placeholder.webp';
+    $image = isset($_POST['image']) ? trim($_POST['image']) : 'assets/og-image.jpg';
     
     // Author selection
     $author_preset = isset($_POST['author_preset']) ? $_POST['author_preset'] : 'custom';
@@ -97,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_post'])) {
     }
 
     $excerpt = isset($_POST['excerpt']) ? trim($_POST['excerpt']) : '';
-    $content = isset($_POST['content']) ? trim($_POST['content']) : '';
+    $content = isset($_POST['content']) ? $_POST['content'] : '';
     $featured = isset($_POST['featured']) && $_POST['featured'] == '1';
 
     if ($title !== '') {
@@ -157,7 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_post'])) {
         }
 
         saveBlogs($blogs);
-        header('Location: index.php?msg=saved');
+        header('Location: /admin/index.php?msg=saved');
         exit;
     }
 }
@@ -188,8 +198,6 @@ if ($msg_type === 'saved') {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Dashboard | Grace Dental Care CMS</title>
   <link rel="icon" href="../assets/logo.png" type="image/png">
-  <!-- Quill Rich Text Editor Stylesheet -->
-  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
   <style>
     :root {
       --black: #090909;
@@ -384,26 +392,6 @@ if ($msg_type === 'saved') {
       cursor: pointer;
       font-size: 0.9rem;
     }
-    /* Quill custom styles to match dark mode */
-    #editor-container {
-      height: 350px;
-      background: var(--black-3);
-      color: var(--white);
-      border: 1px solid var(--gold-border);
-      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
-      font-size: 1rem;
-    }
-    .ql-toolbar {
-      background: var(--black-4);
-      border-color: var(--gold-border) !important;
-      border-radius: var(--radius-sm) var(--radius-sm) 0 0;
-    }
-    .ql-container {
-      border-color: var(--gold-border) !important;
-    }
-    .ql-editor p {
-      color: var(--white) !important;
-    }
     
     @media (max-width: 768px) {
       .form-row { grid-template-columns: 1fr; gap: 0; }
@@ -437,7 +425,7 @@ if ($msg_type === 'saved') {
     <div class="panel">
       <div class="panel-header">
         <h2 class="panel-title">Manage Articles</h2>
-        <a class="btn btn--gold" href="index.php?action=add">+ Write Article</a>
+        <a class="btn btn--gold" href="/admin/index.php?action=add">+ Write Article</a>
       </div>
 
       <?php if (empty($blogs)): ?>
@@ -468,8 +456,8 @@ if ($msg_type === 'saved') {
                   <td><span class="badge badge--cat"><?php echo htmlspecialchars($b['category']); ?></span></td>
                   <td><?php echo htmlspecialchars($b['author']); ?></td>
                   <td style="text-align:right;white-space:nowrap;">
-                    <a class="btn btn--outline" href="index.php?action=edit&id=<?php echo urlencode($b['id']); ?>" style="padding:6px 12px;font-size:0.8rem;margin-right:6px;">Edit</a>
-                    <a class="btn btn--danger" href="index.php?action=delete&id=<?php echo urlencode($b['id']); ?>" onclick="return confirm('Are you sure you want to delete this article?');" style="padding:6px 12px;font-size:0.8rem;">Delete</a>
+                    <a class="btn btn--outline" href="/admin/index.php?action=edit&id=<?php echo urlencode($b['id']); ?>" style="padding:6px 12px;font-size:0.8rem;margin-right:6px;">Edit</a>
+                    <a class="btn btn--danger" href="/admin/index.php?action=delete&id=<?php echo urlencode($b['id']); ?>" onclick="return confirm('Are you sure you want to delete this article?');" style="padding:6px 12px;font-size:0.8rem;">Delete</a>
                   </td>
                 </tr>
               <?php endforeach; ?>
@@ -487,13 +475,12 @@ if ($msg_type === 'saved') {
     <div class="panel">
       <div class="panel-header">
         <h2 class="panel-title"><?php echo $form_title; ?></h2>
-        <a class="btn btn--outline" href="index.php">← Back to List</a>
+        <a class="btn btn--outline" href="/admin/index.php">← Back to List</a>
       </div>
 
-      <form id="post-form" method="POST" action="index.php?action=<?php echo $action; ?>">
+      <form id="post-form" method="POST" action="/admin/index.php?action=<?php echo $action; ?>">
         <input type="hidden" name="original_id" value="<?php echo $is_edit ? htmlspecialchars($edit_post['id']) : ''; ?>">
         <input type="hidden" name="save_post" value="1">
-        <input type="hidden" id="content-input" name="content" value="">
 
         <div class="form-group">
           <label class="form-label" for="title">Title</label>
@@ -526,7 +513,7 @@ if ($msg_type === 'saved') {
           </div>
           <div class="form-group">
             <label class="form-label" for="image">Featured Image URL</label>
-            <input class="form-control" type="text" id="image" name="image" required value="<?php echo $is_edit ? htmlspecialchars($edit_post['image']) : 'assets/blog-placeholder.webp'; ?>" placeholder="e.g. assets/blog-image.webp">
+            <input class="form-control" type="text" id="image" name="image" required value="<?php echo $is_edit ? htmlspecialchars($edit_post['image']) : 'assets/og-image.jpg'; ?>" placeholder="e.g. assets/blog-image.webp">
           </div>
         </div>
 
@@ -588,14 +575,12 @@ if ($msg_type === 'saved') {
 
         <div class="form-group">
           <label class="form-label">Article Content</label>
-          <div id="editor-container">
-            <?php echo $is_edit ? $edit_post['content'] : ''; ?>
-          </div>
+          <textarea id="editor" name="content"><?php echo $is_edit ? htmlspecialchars($edit_post['content']) : ''; ?></textarea>
         </div>
 
         <div style="margin-top:30px;display:flex;gap:15px;">
           <button class="btn btn--gold" type="submit" style="padding:12px 30px;">Save Article</button>
-          <a class="btn btn--outline" href="index.php">Cancel</a>
+          <a class="btn btn--outline" href="/admin/index.php">Cancel</a>
         </div>
       </form>
     </div>
@@ -610,30 +595,18 @@ if ($msg_type === 'saved') {
 </script>
 
 <?php if ($action === 'add' || $action === 'edit'): ?>
-<!-- Quill.js Rich Text Editor library -->
-<script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+<!-- TinyMCE Rich Text Editor library (Open Source via CDNJS) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.3/tinymce.min.js"></script>
 <script>
-  var quill = new Quill('#editor-container', {
-    modules: {
-      toolbar: [
-        [{ header: [2, 3, false] }],
-        ['bold', 'italic', 'underline'],
-        ['blockquote'],
-        [{ list: 'ordered' }, { list: 'bullet' }],
-        ['clean']
-      ]
-    },
-    placeholder: 'Write your dental health article content here...',
-    theme: 'snow'
+  tinymce.init({
+    selector: '#editor',
+    plugins: 'lists link image table code help wordcount',
+    toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist | link image | table | removeformat | code | help',
+    menubar: false,
+    height: 500,
+    branding: false,
+    content_style: "body { font-family: 'Inter', sans-serif; font-size: 16px; }"
   });
-
-  // Intercept form submit to copy Quill HTML to hidden input
-  var form = document.getElementById('post-form');
-  form.onsubmit = function() {
-    var contentInput = document.getElementById('content-input');
-    contentInput.value = quill.root.innerHTML;
-    return true;
-  };
 </script>
 <?php endif; ?>
 

@@ -6,7 +6,7 @@ session_start();
 
 // Redirect if already logged in
 if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
-    header('Location: index.php');
+    header('Location: /admin/index.php');
     exit;
 }
 
@@ -16,10 +16,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = isset($_POST['username']) ? trim($_POST['username']) : '';
     $password = isset($_POST['password']) ? trim($_POST['password']) : '';
 
-    if ($username === ADMIN_USER && password_verify($password, ADMIN_PASS_HASH)) {
+    if ($username === ADMIN_USER && hash('sha256', $password) === ADMIN_PASS_HASH) {
         $_SESSION['admin_logged_in'] = true;
         $_SESSION['last_activity'] = time();
-        header('Location: index.php');
+        header('Location: /admin/index.php');
         exit;
     } else {
         $error = 'Invalid username or password.';
@@ -165,7 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="error-msg"><?php echo htmlspecialchars($error); ?></div>
   <?php endif; ?>
 
-  <form method="POST" action="login.php">
+  <form method="POST" action="/admin/login.php">
     <div class="form-group">
       <label class="form-label" for="username">Username</label>
       <input class="form-control" type="text" id="username" name="username" required autofocus>
