@@ -790,38 +790,6 @@
 
 
 
-  /* ── Live Slot Availability Badge ────────────────────── */
-  (function () {
-    const now  = new Date();
-    const day  = now.getDay();
-    const hour = now.getHours();
-    const isOpen = day >= 1 && day <= 6 && hour >= 9 && hour < 20;
-    if (!isOpen) return;
-
-    const slots = hour < 11 ? 5 : hour < 14 ? 3 : hour < 17 ? 4 : 2;
-    const times = ['9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM',
-                   '12:00 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM',
-                   '4:00 PM','5:00 PM','5:30 PM','6:00 PM','6:30 PM','7:00 PM'];
-    const nextSlot = times.find(t => {
-      const parts = t.split(':');
-      let h = parseInt(parts[0], 10);
-      const period = parts[1].split(' ')[1];
-      if (period === 'PM' && h !== 12) h += 12;
-      return h > hour;
-    }) || '—';
-
-    const badge = document.createElement('div');
-    badge.className = 'slot-badge';
-    badge.innerHTML = `<span class="slot-dot"></span>${slots} slot${slots !== 1 ? 's' : ''} open today · Next: ${nextSlot}`;
-
-    const hero = document.querySelector('.hero__content, .hero__ctas, .hero-inner');
-    if (hero) {
-      const firstBtn = hero.querySelector('.btn');
-      if (firstBtn) firstBtn.parentNode.insertBefore(badge, firstBtn);
-      else hero.appendChild(badge);
-    }
-  })();
-
   /* ── Page Transitions ────────────────────────────────── */
   (function () {
     const overlay = document.createElement('div');

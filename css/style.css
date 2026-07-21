@@ -4252,8 +4252,6 @@ body.emergency-active .page-hero { padding-top: calc(var(--nav-height) + 44px + 
 
   /* Equipment cards — single column */
   .equip-grid { grid-template-columns: 1fr !important; }
-  .equip-card { flex-direction: row; align-items: center; gap: 16px; }
-  .equip-card__visual { width: 64px; height: 64px; flex-shrink: 0; }
 
   /* Compare slider — taller on narrow screens */
   .compare-container { aspect-ratio: 3 / 2; }
