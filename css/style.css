@@ -734,7 +734,7 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); line-height: 1.75; color: var(--
   padding-top: var(--nav-height);
   padding-bottom: 40px;
   background: var(--white);
-  background-image: url('../assets/hero-bg.jpg');
+  background-image: url('../assets/hero-bg.webp');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -1090,7 +1090,7 @@ p  { font-size: clamp(0.95rem, 1.5vw, 1.05rem); line-height: 1.75; color: var(--
   flex-shrink: 0;
 }
 .why-card__icon svg { width: 22px; height: 22px; }
-.why-card h4 { margin-bottom: 6px; font-size: 1rem; }
+.why-card h3 { margin-bottom: 6px; font-size: 1rem; }
 .why-card p  { font-size: 0.875rem; }
 
 /* ============ REDESIGNED CHOOSE US ============ */
@@ -1347,7 +1347,7 @@ body.dark-mode .choose-badge__text strong {
   margin: 0;
 }
 /* Plain h4/p used inside cards (no BEM modifier) */
-.choose-card h4 {
+.choose-card h3 {
   font-size: 1.05rem;
   font-weight: 700;
   color: var(--black);
@@ -1360,7 +1360,7 @@ body.dark-mode .choose-badge__text strong {
   line-height: 1.55;
   margin: 0;
 }
-body.dark-mode .choose-card h4 { color: var(--white); }
+body.dark-mode .choose-card h3 { color: var(--white); }
 body.dark-mode .choose-card p  { color: var(--white-dim); }
 /* Hide empty border div */
 .choose-card__border { display: none; }
@@ -1724,7 +1724,7 @@ body.dark-mode .cta-trust-badge {
   text-align: center;
 }
 .page-hero--doctors {
-  background-image: linear-gradient(rgba(10, 10, 10, 0.75), rgba(10, 10, 10, 0.75)), url('../assets/doctors-hero.jpg');
+  background-image: linear-gradient(rgba(10, 10, 10, 0.75), rgba(10, 10, 10, 0.75)), url('../assets/doctors-hero.webp');
   background-size: cover;
   background-position: center 25%;
   background-repeat: no-repeat;
@@ -2090,10 +2090,10 @@ body.dark-mode .cta-trust-badge {
   gap: 16px;
   flex-wrap: wrap;
 }
-.footer__copy { font-size: 0.8rem; color: var(--gray-mid); }
+.footer__copy { font-size: 0.8rem; color: var(--gray); }
 .footer__copy a { color: var(--gold); }
 .footer__bottom-links { display: flex; gap: 20px; }
-.footer__bottom-link { font-size: 0.8rem; color: var(--gray-mid); transition: color 0.2s; }
+.footer__bottom-link { font-size: 0.8rem; color: var(--gray); transition: color 0.2s; }
 .footer__bottom-link:hover { color: var(--gold); }
 
 /* ============ 23. FLOATING BUTTONS ============ */
@@ -2374,8 +2374,8 @@ body.dark-mode .cta-trust-badge {
 }
 .section--light .why-card:hover,
 .section--light-alt .why-card:hover { background: rgba(196,163,90,0.1); }
-.section--light .why-card h4,
-.section--light-alt .why-card h4 { color: var(--black); }
+.section--light .why-card h3,
+.section--light-alt .why-card h3 { color: var(--black); }
 .section--light .why-card p,
 .section--light-alt .why-card p { color: #555; }
 
@@ -2712,7 +2712,7 @@ body.dark-mode .cta-trust-badge {
 }
 .hero__float-label {
   font-size: 0.65rem;
-  color: #888;
+  color: var(--gray-mid);
   text-transform: uppercase;
   letter-spacing: 0.06em;
   display: block;
@@ -4422,7 +4422,7 @@ body.dark-mode .section--light p,
 body.dark-mode .section--light-alt p { color: var(--gray) !important; }
 body.dark-mode .section--light h2, body.dark-mode .section--light h3, body.dark-mode .section--light h4,
 body.dark-mode .section--light-alt h2, body.dark-mode .section--light-alt h3, body.dark-mode .section--light-alt h4 { color: var(--white) !important; }
-body.dark-mode .why-card h4, body.dark-mode .why-card p { color: var(--white) !important; }
+body.dark-mode .why-card h3, body.dark-mode .why-card p { color: var(--white) !important; }
 body.dark-mode .section--light .treatment-card { background: var(--black-3) !important; border-color: var(--gold-border) !important; }
 body.dark-mode .section--light .treatment-card h3 { color: var(--white) !important; }
 body.dark-mode .section--light .treatment-card p  { color: var(--gray)  !important; }
@@ -4699,8 +4699,8 @@ body.dark-mode .insurance-card p  { color: var(--gray) !important; }
   .timeline::before { left: 22px; }
   .timeline-item { grid-template-columns: 44px 1fr; }
   .timeline-item__node { width: 36px; height: 36px; font-size: 0.78rem; }
-  .timeline-item:nth-child(even) .timeline-item__content { grid-column: 2; }
-  .timeline-item:nth-child(even) .timeline-item__node    { grid-column: 1; }
+  .timeline-item__node    { grid-column: 1; }
+  .timeline-item__content { grid-column: 2; }
 }
 
 /* ============ 49. EMI / PAYMENT PLANS ============ */

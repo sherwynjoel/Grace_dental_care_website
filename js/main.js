@@ -371,12 +371,14 @@
     fab.addEventListener('click', () => {
       const isOpen = popup.classList.toggle('open');
       popup.setAttribute('aria-hidden', String(!isOpen));
+      popup.toggleAttribute('inert', !isOpen);
       fab.setAttribute('aria-expanded', String(isOpen));
     });
 
     function closeWa() {
       popup.classList.remove('open');
       popup.setAttribute('aria-hidden', 'true');
+      popup.setAttribute('inert', '');
       fab.setAttribute('aria-expanded', 'false');
     }
     if (closeBtn) closeBtn.addEventListener('click', closeWa);
